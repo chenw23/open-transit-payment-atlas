@@ -1,6 +1,13 @@
 ---
 import PaymentCell from "@components/PaymentCell.astro";
+import SeoHead from "@components/SeoHead.astro";
 import { loadSystems, statusLabels } from "@lib/data";
+import {
+  siteUrl,
+  systemDescription,
+  systemModifiedDate,
+  systemTitle,
+} from "@lib/seo";
 
 export function getStaticPaths() {
   return loadSystems().map((system) => ({
@@ -10,35 +17,106 @@ export function getStaticPaths() {
 }
 
 const { system } = Astro.props;
+const homePath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const title = systemTitle(system);
+const description = systemDescription(system);
+const pageUrl = siteUrl(`/systems/${system.id}/`).href;
+const detailJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      name: title,
+      description,
+      url: pageUrl,
+      inLanguage: "en",
+      dateModified: systemModifiedDate(system),
+      isPartOf: {
+        "@id": `${siteUrl("/").href}#website`,
+      },
+      about: {
+        "@type": "Service",
+        name: system.system,
+        serviceType: `${system.modes.join(", ")} public transport`,
+        url: system.official_website,
+        areaServed: {
+          "@type": "City",
+          name: system.city,
+          containedInPlace: {
+            "@type": "Country",
+            name: system.country,
+          },
+        },
+        provider: {
+          "@type": "Organization",
+          name: system.operator,
+          url: system.official_website,
+        },
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Payment atlas",
+          item: siteUrl("/").href,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: system.system,
+          item: pageUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{system.system} - Open Transit Payment Atlas</title>
+    <SeoHead
+      title={title}
+      description={description}
+      path={`/systems/${system.id}/`}
+      imageAlt={`${system.system} payment methods in ${system.city}, ${system.country}`}
+      jsonLd={detailJsonLd}
+    />
     <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
   </head>
   <body>
     <header class="site-header">
       <div class="nav-shell">
-        <a class="brand" href={import.meta.env.BASE_URL}>
+        <a class="brand" href={homePath}>
           <span class="brand-mark" aria-hidden="true">T</span>
           <span>Open Transit Payment Atlas</span>
         </a>
         <nav>
-          <a href={`${import.meta.env.BASE_URL}#matrix`}>Matrix</a>
+          <a href={`${homePath}#passing-gate`}>Passing Gate</a>
           <a href={system.official_website}>Official website</a>
-          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GitHub repository">
+          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GH: GitHub repository">
             GH
           </a>
         </nav>
       </div>
     </header>
     <main class="page-shell detail-page">
-      <a class="back-link" href={`${import.meta.env.BASE_URL}#matrix`}>
-        ← Back to matrix
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href={homePath}>Payment atlas</a></li>
+          <li aria-current="page"><span>{system.system}</span></li>
+        </ol>
+      </nav>
+      <a class="back-link" href={`${homePath}#passing-gate`}>
+        ← Back to payment tables
       </a>
       <section class="detail-intro">
         <div>
@@ -67,22 +145,22 @@ const { system } = Astro.props;
         <article class="detail-panel">
           <p class="eyebrow">Passenger access</p>
           <h2>Gate entry</h2>
-          <PaymentCell method={system.payment.gate_entry.local_transit_card} system={system} />
-          <PaymentCell method={system.payment.gate_entry.contactless_bank_card} system={system} />
-          <PaymentCell method={system.payment.gate_entry.mobile_wallet} system={system} />
-          <PaymentCell method={system.payment.gate_entry.qr_code} system={system} />
-          <PaymentCell method={system.payment.gate_entry.official_app} system={system} />
-          <PaymentCell method={system.payment.gate_entry.paper_or_token} system={system} />
-          <PaymentCell method={system.payment.gate_entry.tourist_pass} system={system} />
+          <PaymentCell label="Transit card" method={system.payment.gate_entry.local_transit_card} system={system} />
+          <PaymentCell label="Contactless bank card" method={system.payment.gate_entry.contactless_bank_card} system={system} />
+          <PaymentCell label="Mobile wallet" method={system.payment.gate_entry.mobile_wallet} system={system} />
+          <PaymentCell label="QR gate entry" method={system.payment.gate_entry.qr_code} system={system} />
+          <PaymentCell label="Official app" method={system.payment.gate_entry.official_app} system={system} />
+          <PaymentCell label="Paper ticket or token" method={system.payment.gate_entry.paper_or_token} system={system} />
+          <PaymentCell label="Visitor pass" method={system.payment.gate_entry.tourist_pass} system={system} />
         </article>
         <article class="detail-panel">
           <p class="eyebrow">Purchase and top-up</p>
           <h2>Ticket purchase</h2>
-          <PaymentCell method={system.payment.ticket_machine.cash} system={system} />
-          <PaymentCell method={system.payment.ticket_machine.bank_card} system={system} />
-          <PaymentCell method={system.payment.ticket_machine.contactless_card} system={system} />
-          <PaymentCell method={system.payment.ticket_machine.mobile_wallet} system={system} />
-          <PaymentCell method={system.payment.ticket_machine.qr_payment} system={system} />
+          <PaymentCell label="Cash" method={system.payment.ticket_machine.cash} system={system} />
+          <PaymentCell label="Bank card" method={system.payment.ticket_machine.bank_card} system={system} />
+          <PaymentCell label="Contactless card" method={system.payment.ticket_machine.contactless_card} system={system} />
+          <PaymentCell label="Mobile wallet" method={system.payment.ticket_machine.mobile_wallet} system={system} />
+          <PaymentCell label="QR payment" method={system.payment.ticket_machine.qr_payment} system={system} />
         </article>
         <article class="detail-panel">
           <p class="eyebrow">Evidence</p>

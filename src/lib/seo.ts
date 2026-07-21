@@ -1,0 +1,36 @@
+import type { TransitSystem } from "./schema";
+
+export const SITE_NAME = "Open Transit Payment Atlas";
+export const SITE_ORIGIN = "https://chenw23.github.io";
+export const SITE_BASE_PATH = "/ICS1";
+
+export const HOME_TITLE =
+  "Rail Transit Payment Methods Worldwide | Open Transit Atlas";
+
+export const HOME_DESCRIPTION =
+  "Compare fare-gate and ticket-machine payment methods for metro and urban rail systems worldwide, including cards, mobile wallets, QR tickets and cash.";
+
+export function systemTitle(system: TransitSystem): string {
+  const locationPrefix = system.system
+    .toLocaleLowerCase("en")
+    .includes(system.city.toLocaleLowerCase("en"))
+    ? ""
+    : `${system.city} `;
+  return `${locationPrefix}${system.system} Payment Methods | Transit Payment Atlas`;
+}
+
+export function systemDescription(system: TransitSystem): string {
+  return `Payment methods for ${system.system} in ${system.city}: transit cards, contactless bank cards, mobile wallets, QR gate entry, cash and ticket-machine cards.`;
+}
+
+export function systemModifiedDate(system: TransitSystem): string {
+  return [system.last_verified, ...system.sources.map((source) => source.accessed)]
+    .sort()
+    .at(-1) as string;
+}
+
+export function siteUrl(path = "/"): URL {
+  const siteOrigin = new URL(SITE_ORIGIN);
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return new URL(`${SITE_BASE_PATH}${normalizedPath}`, siteOrigin);
+}

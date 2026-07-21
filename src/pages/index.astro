@@ -1,8 +1,16 @@
 ---
 import PaymentMatrix from "@components/PaymentMatrix.astro";
+import SeoHead from "@components/SeoHead.astro";
 import { loadSystems } from "@lib/data";
+import {
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  siteUrl,
+  systemModifiedDate,
+} from "@lib/seo";
 
 const systems = loadSystems();
+const homePath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const countries = new Set(systems.map((system) => system.country)).size;
 const openLoop = systems.filter(
   (system) => system.interoperability.open_loop === "yes",
@@ -14,6 +22,10 @@ const latestVerified = systems
   .map((system) => system.last_verified)
   .sort()
   .at(-1);
+const latestModified = systems
+  .map(systemModifiedDate)
+  .sort()
+  .at(-1);
 const latestVerifiedLabel = latestVerified
   ? new Intl.DateTimeFormat("en", {
       day: "numeric",
@@ -22,6 +34,50 @@ const latestVerifiedLabel = latestVerified
       timeZone: "UTC",
     }).format(new Date(`${latestVerified}T00:00:00Z`))
   : "Not available";
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl("/").href}#website`,
+      name: "Open Transit Payment Atlas",
+      url: siteUrl("/").href,
+      description: HOME_DESCRIPTION,
+      inLanguage: "en",
+    },
+    {
+      "@type": "Dataset",
+      "@id": `${siteUrl("/").href}#dataset`,
+      name: "Open Transit Payment Atlas",
+      description: HOME_DESCRIPTION,
+      url: siteUrl("/").href,
+      inLanguage: "en",
+      isAccessibleForFree: true,
+      spatialCoverage: "Worldwide, excluding mainland China",
+      dateModified: latestModified,
+      keywords: [
+        "rail transit payment methods",
+        "metro payment methods",
+        "contactless bank card",
+        "mobile wallet",
+        "ticket vending machine",
+        "fare gate",
+      ],
+      distribution: [
+        {
+          "@type": "DataDownload",
+          encodingFormat: "application/json",
+          contentUrl: siteUrl("/data/systems.json").href,
+        },
+        {
+          "@type": "DataDownload",
+          encodingFormat: "text/csv",
+          contentUrl: siteUrl("/data/systems.csv").href,
+        },
+      ],
+    },
+  ],
+};
 
 function joinValues(values: string[]): string {
   return values.length ? values.join(", ") : "not listed";
@@ -31,19 +87,18 @@ function joinValues(values: string[]): string {
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Rail transit gate-entry and ticket-purchase payment methods around the world."
+    <SeoHead
+      title={HOME_TITLE}
+      description={HOME_DESCRIPTION}
+      path="/"
+      jsonLd={homeJsonLd}
     />
-    <title>Open Transit Payment Atlas</title>
     <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
   </head>
   <body>
     <header class="site-header">
       <div class="nav-shell">
-        <a class="brand" href={import.meta.env.BASE_URL}>
+        <a class="brand" href={homePath}>
           <span class="brand-mark" aria-hidden="true">T</span>
           <span>Open Transit Payment Atlas</span>
         </a>
@@ -51,7 +106,7 @@ function joinValues(values: string[]): string {
           <a href="#passing-gate">Passing Gate</a>
           <a href="#tickets">Tickets</a>
           <a href="#legend">Legend</a>
-          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GitHub repository">
+          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GH: GitHub repository">
             GH
           </a>
         </nav>
@@ -120,7 +175,7 @@ function joinValues(values: string[]): string {
         </a>
       </nav>
 
-      <section class="matrix-section">
+      <section id="matrix" class="matrix-section">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Rail transit payment reference</p>

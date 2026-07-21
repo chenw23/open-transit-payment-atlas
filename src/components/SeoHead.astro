@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  type?: "website" | "article";
+  imageAlt?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  path,
+  type = "website",
+  imageAlt = "Open Transit Payment Atlas payment-method comparison table",
+  jsonLd,
+} = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+const canonicalUrl = new URL(`${basePath}${normalizedPath}`, siteOrigin);
+const imageUrl = new URL(`${basePath}/og-image.png`, siteOrigin);
+const sitemapUrl = new URL(`${basePath}/sitemap.xml`, siteOrigin);
+const faviconUrl = `${basePath}/favicon.svg`;
+const serializedJsonLd = jsonLd
+  ? JSON.stringify(jsonLd).replaceAll("<", "\\u003c")
+  : undefined;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<meta
+  name="robots"
+  content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+/>
+<meta name="theme-color" content="#087f70" />
+
+<title>{title}</title>
+<link rel="canonical" href={canonicalUrl} />
+<link rel="sitemap" type="application/xml" href={sitemapUrl} />
+<link rel="icon" type="image/svg+xml" href={faviconUrl} />
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content="Open Transit Payment Atlas" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+{
+  serializedJsonLd && (
+    <script is:inline type="application/ld+json" set:html={serializedJsonLd} />
+  )
+}

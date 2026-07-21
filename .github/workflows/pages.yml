@@ -39,6 +39,9 @@ jobs:
         env:
           ASTRO_TELEMETRY_DISABLED: "1"
 
+      - name: Audit SEO
+        run: npm run audit:seo
+
       - name: Upload artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3

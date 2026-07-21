@@ -64,8 +64,8 @@
       url: https://tfl.gov.uk/fares/
       accessed: "2026-07-21"
     - title: TfL contactless
-      url: https://tfl.gov.uk/fares/contactless-and-oyster-account
-      accessed: "2026-07-21"
+      url: https://contactless.tfl.gov.uk/
+      accessed: "2026-07-22"
   notes: Treat London as the reference implementation for mature open-loop urban rail payment.
 
 - id: new-york-subway
@@ -75,7 +75,7 @@
   system: New York City Subway
   operator: Metropolitan Transportation Authority
   modes: [subway]
-  official_website: https://new.mta.info/fares
+  official_website: https://www.mta.info/fares-tolls
   last_verified: "2026-07-21"
   payment:
     gate_entry:
@@ -126,8 +126,8 @@
     notes: OMNY fare capping applies within supported MTA services.
   sources:
     - title: MTA fares
-      url: https://new.mta.info/fares
-      accessed: "2026-07-21"
+      url: https://www.mta.info/fares-tolls
+      accessed: "2026-07-22"
     - title: OMNY
       url: https://omny.info/
       accessed: "2026-07-21"
@@ -266,7 +266,7 @@
   system: Sydney Trains and Metro
   operator: Transport for NSW
   modes: [suburban rail, metro]
-  official_website: https://transportnsw.info/tickets-opal/opal/contactless-payments
+  official_website: https://transportnsw.info/tickets-fares/contactless-payments
   last_verified: "2026-07-21"
   payment:
     gate_entry:
@@ -315,11 +315,11 @@
     notes: Opal and contactless payments work across multiple Transport for NSW modes with fare rules.
   sources:
     - title: Contactless payments
-      url: https://transportnsw.info/tickets-opal/opal/contactless-payments
-      accessed: "2026-07-21"
+      url: https://transportnsw.info/tickets-fares/contactless-payments
+      accessed: "2026-07-22"
     - title: Opal
-      url: https://transportnsw.info/tickets-opal/opal
-      accessed: "2026-07-21"
+      url: https://transportnsw.info/tickets-fares
+      accessed: "2026-07-22"
 
 - id: dubai-metro
   country: United Arab Emirates
@@ -327,7 +327,7 @@
   system: Dubai Metro
   operator: Roads and Transport Authority
   modes: [metro, tram]
-  official_website: https://www.rta.ae/wps/portal/rta/ae/public-transport/nol
+  official_website: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
   last_verified: "2026-07-21"
   payment:
     gate_entry:
@@ -375,8 +375,8 @@
     notes: nol is the shared stored-value product for Dubai public transport.
   sources:
     - title: RTA nol
-      url: https://www.rta.ae/wps/portal/rta/ae/public-transport/nol
-      accessed: "2026-07-21"
+      url: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
+      accessed: "2026-07-22"
 
 - id: paris-metro
   country: France
