@@ -1,5 +1,5 @@
 ---
-import { compactMethod } from "@lib/data";
+import { compactMethod, compactSchemes } from "@lib/data";
 import type { TransitSystem } from "@lib/schema";
 
 interface Props {
@@ -23,7 +23,7 @@ function extraNotes(system: TransitSystem): string {
   <table class="matrix">
     <thead>
       <tr>
-        <th>System</th>
+        <th>System / Area</th>
         <th>Mode</th>
         <th title="Local transit card">💳</th>
         <th title="Contactless bank card at gate">💳↗</th>
@@ -62,14 +62,14 @@ function extraNotes(system: TransitSystem): string {
               <small>{system.city} / {system.country}</small>
             </th>
             <td>{system.modes.join("/")}</td>
-            <td>{compactMethod(system.payment.gate_entry.local_transit_card.status, system.payment.gate_entry.local_transit_card.methods)}</td>
-            <td>{compactMethod(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</td>
+            <td>{compactMethod(system.payment.gate_entry.local_transit_card.status)}</td>
+            <td>{compactSchemes(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</td>
             <td>{compactMethod(system.payment.gate_entry.mobile_wallet.status)}</td>
             <td>{compactMethod(system.payment.gate_entry.qr_code.status)}</td>
             <td>{compactMethod(system.payment.gate_entry.official_app.status)}</td>
             <td>{compactMethod(system.payment.gate_entry.tourist_pass.status)}</td>
             <td>{compactMethod(system.payment.ticket_machine.cash.status)}</td>
-            <td>{compactMethod(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</td>
+            <td>{compactSchemes(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</td>
             <td>{compactMethod(system.interoperability.open_loop)}</td>
             <td class="notes">{extraNotes(system) ? "ⓘ" : ""}</td>
           </tr>

@@ -3,6 +3,10 @@ import PaymentMatrix from "@components/PaymentMatrix.astro";
 import { loadSystems } from "@lib/data";
 
 const systems = loadSystems();
+
+function joinValues(values: string[]): string {
+  return values.length ? values.join(", ") : "not listed";
+}
 ---
 
 <!doctype html>
@@ -92,7 +96,11 @@ const systems = loadSystems();
         <ol class="notes-list">
           {systems.map((system) => (
             <li>
-              <strong>{system.system}</strong>: {system.notes || system.interoperability.notes || "See system detail page for source-backed limitations."}
+              <strong>{system.system}</strong>:
+              transit card {joinValues(system.payment.gate_entry.local_transit_card.methods)};
+              bank card {joinValues(system.payment.gate_entry.contactless_bank_card.schemes)};
+              mobile wallet {joinValues(system.payment.gate_entry.mobile_wallet.methods)}.
+              {system.notes || system.interoperability.notes || "See system detail page for source-backed limitations."}
             </li>
           ))}
         </ol>

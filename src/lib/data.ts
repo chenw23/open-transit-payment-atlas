@@ -47,11 +47,23 @@ export function methodText(status: PaymentStatus, values: string[] = []): string
   return values.length ? `${label}: ${values.join(", ")}` : label;
 }
 
-export function compactMethod(status: PaymentStatus, values: string[] = []): string {
-  const mark = statusMarks[status];
-  if (!mark && !values.length) return "";
-  if (values.length) return `${mark}${values.join("/")}`;
-  return mark;
+const schemeShortNames: Record<string, string> = {
+  Visa: "V",
+  Mastercard: "M",
+  "American Express": "AE",
+  Discover: "D",
+  JCB: "J",
+  UnionPay: "UP",
+};
+
+export function compactMethod(status: PaymentStatus): string {
+  return statusMarks[status];
+}
+
+export function compactSchemes(status: PaymentStatus, schemes: string[] = []): string {
+  const prefix = statusMarks[status];
+  if (!prefix || !schemes.length) return prefix;
+  return `${prefix}${schemes.map((scheme) => schemeShortNames[scheme] ?? scheme).join("/")}`;
 }
 
 export function sourceByTitle(system: TransitSystem, title?: string) {
