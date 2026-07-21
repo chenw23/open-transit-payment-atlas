@@ -3,6 +3,10 @@ import PaymentMatrix from "@components/PaymentMatrix.astro";
 import { loadSystems } from "@lib/data";
 
 const systems = loadSystems();
+const countries = new Set(systems.map((system) => system.country)).size;
+const openLoop = systems.filter(
+  (system) => system.interoperability.open_loop === "yes",
+).length;
 
 function joinValues(values: string[]): string {
   return values.length ? values.join(", ") : "not listed";
@@ -22,112 +26,204 @@ function joinValues(values: string[]): string {
     <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
   </head>
   <body>
-    <div class="wrapper">
-      <aside class="sidebar">
-        <h1><a href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a></h1>
-        <p>Another view of rail transit payment.</p>
-        <p class="view">
-          <a href="https://github.com/chenw23/ICS1">View the Project on GitHub <small>chenw23/ICS1</small></a>
-        </p>
-        <nav class="side-nav">
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href={import.meta.env.BASE_URL}>
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>Open Transit Payment Atlas</span>
+        </a>
+        <nav>
+          <a href="#matrix">Matrix</a>
           <a href="#legend">Legend</a>
-          <a href="#passing">Passing Gate</a>
-          <a href="#tickets">Tickets</a>
-          <a href="#data">Data</a>
           <a href="#contribute">Contribute</a>
+          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GitHub repository">
+            GH
+          </a>
         </nav>
-      </aside>
+      </div>
+    </header>
 
-      <main>
-        <h1>Rail Transit Payment Methods</h1>
-        <p><code>Which payment methods can I actually use on this metro?</code></p>
-        <p>
-          A passenger-facing payment matrix for metro, urban rail, airport rail, and
-          comparable rail transit systems outside mainland China. The project records
-          gate entry, ticket purchase, cards, QR/app tickets, mobile wallets, and
-          practical limitations with source-backed data.
-        </p>
+    <main class="page-shell">
+      <section class="intro-band">
+        <div class="intro-copy">
+          <p class="eyebrow">Evidence-backed public transit data</p>
+          <h1>How can I pay for this metro?</h1>
+          <p class="lede">
+            A global reference for fare-gate and ticket-purchase payment methods across
+            metro, urban rail, suburban rail, and airport rail systems outside mainland
+            China.
+          </p>
+          <div class="intro-actions">
+            <a class="button primary" href="#matrix">
+              Browse the matrix
+            </a>
+            <a class="button secondary" href="https://github.com/chenw23/ICS1">
+              View source
+            </a>
+          </div>
+        </div>
+        <dl class="summary-grid">
+          <div>
+            <dt>{systems.length}</dt>
+            <dd>rail systems</dd>
+          </div>
+          <div>
+            <dt>{countries}</dt>
+            <dd>countries</dd>
+          </div>
+          <div>
+            <dt>{openLoop}</dt>
+            <dd>full open-loop</dd>
+          </div>
+          <div>
+            <dt>3</dt>
+            <dd>export formats</dd>
+          </div>
+        </dl>
+      </section>
 
-        <p class="links">
-          <a href="data/systems.json">JSON</a> |
-          <a href="data/systems.csv">CSV</a> |
-          <a href="https://github.com/chenw23/ICS1/blob/master/data/systems/core-sample.yaml">Source YAML</a>
-        </p>
+      <section class="feature-strip" aria-label="Project principles">
+        <article>
+          <span class="feature-icon">PAY</span>
+          <div>
+            <strong>Passenger-facing</strong>
+            <span>Gate entry, wallets, transit cards, TVMs, and visitor products.</span>
+          </div>
+        </article>
+        <article>
+          <span class="feature-icon">DB</span>
+          <div>
+            <strong>Structured</strong>
+            <span>Validated YAML generates the site, JSON, and CSV.</span>
+          </div>
+        </article>
+        <article>
+          <span class="feature-icon">PR</span>
+          <div>
+            <strong>Open to correction</strong>
+            <span>Every non-obvious claim should link to an official source.</span>
+          </div>
+        </article>
+      </section>
 
-        <h2>Content</h2>
-        <ul>
-          <li><a href="#legend">Legend</a></li>
-          <li><a href="#passing">Passing Gate</a></li>
-          <li><a href="#tickets">Tickets</a></li>
-          <li><a href="#data">Data Exports</a></li>
-          <li><a href="#contribute">Contribute</a></li>
-        </ul>
+      <section id="matrix" class="matrix-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Gate and ticketing coverage</p>
+            <h2>Payment matrix</h2>
+          </div>
+          <div class="export-links" id="data">
+            <a href="data/systems.json">JSON ↗</a>
+            <a href="data/systems.csv">CSV ↗</a>
+            <a href="https://github.com/chenw23/ICS1/blob/master/data/systems/core-sample.yaml">
+              YAML ↗
+            </a>
+          </div>
+        </div>
 
-        <h2 id="legend">Legend</h2>
-        <table class="legend-table">
-          <thead>
-            <tr>
-              <th>Mark</th>
-              <th>Meaning</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>💳</td><td>Local or regional closed-loop transit card</td></tr>
-            <tr><td>💳↗</td><td>Open-loop contactless bank card at fare gate</td></tr>
-            <tr><td>📱</td><td>Mobile wallet or mobile transit card at fare gate</td></tr>
-            <tr><td>QR</td><td>QR ticket or QR gate-entry product</td></tr>
-            <tr><td>APP</td><td>Official app ticket or app-based gate entry</td></tr>
-            <tr><td>🎫</td><td>Tourist pass or visitor product</td></tr>
-            <tr><td>TVM</td><td>Ticket vending machine bank-card purchase/top-up</td></tr>
-            <tr><td>OL</td><td>Open-loop tap-to-ride model</td></tr>
-            <tr><td>✅</td><td>Fully supported / generally usable</td></tr>
-            <tr><td>⭕</td><td>Limited support / selected channels, stations, products, or cards</td></tr>
-            <tr><td>⏳</td><td>Officially announced or planned</td></tr>
-            <tr><td>❌</td><td>Deprecated or discontinued</td></tr>
-            <tr><td>?</td><td>Unknown or not yet verified</td></tr>
-            <tr><td>V/M/AE/J</td><td>Visa / Mastercard / American Express / JCB</td></tr>
-          </tbody>
-        </table>
+        <div class="matrix-toolbar">
+          <label class="search-field">
+            <span aria-hidden="true">⌕</span>
+            <input id="matrix-search" type="search" placeholder="Filter by system, city, or country" />
+          </label>
+          <select id="payment-filter" aria-label="Filter payment support">
+            <option value="all">All systems</option>
+            <option value="bank-card">Bank card at gate</option>
+            <option value="open-loop">Full open-loop</option>
+            <option value="mobile-wallet">Mobile wallet</option>
+          </select>
+        </div>
 
-        <h2 id="passing">Passing Gate</h2>
         <PaymentMatrix systems={systems} />
+      </section>
 
-        <h3>Notes</h3>
-        <ol class="notes-list">
+      <section id="legend" class="reference-grid">
+        <article class="reference-panel">
+          <p class="eyebrow">Column reference</p>
+          <h2>Payment channels</h2>
+          <dl class="legend-list">
+            <div><dt>TC</dt><dd>Local or regional transit card</dd></div>
+            <div><dt>BC</dt><dd>Contactless bank card at the fare gate</dd></div>
+            <div><dt>MW</dt><dd>Mobile wallet or mobile transit card</dd></div>
+            <div><dt>QR</dt><dd>QR ticket or QR gate entry</dd></div>
+            <div><dt>APP</dt><dd>Official app ticket or gate entry</dd></div>
+            <div><dt>PASS</dt><dd>Tourist or visitor pass</dd></div>
+            <div><dt>TVM</dt><dd>Ticket vending machine bank-card payment</dd></div>
+            <div><dt>OL</dt><dd>Open-loop tap-to-ride</dd></div>
+          </dl>
+        </article>
+        <article class="reference-panel">
+          <p class="eyebrow">Status reference</p>
+          <h2>Support states</h2>
+          <dl class="status-list">
+            <div><dt><span class="dot dot-yes"></span>Yes</dt><dd>Generally usable</dd></div>
+            <div><dt><span class="dot dot-partial"></span>Partial</dt><dd>Limited rollout or conditions</dd></div>
+            <div><dt><span class="dot dot-planned"></span>Planned</dt><dd>Officially announced</dd></div>
+            <div><dt><span class="dot dot-no"></span>No</dt><dd>Not supported</dd></div>
+            <div><dt><span class="dot dot-unknown"></span>Unknown</dt><dd>Not yet verified</dd></div>
+          </dl>
+          <p class="scheme-key"><strong>Card schemes:</strong> V Visa · M Mastercard · AE American Express · J JCB · D Discover</p>
+        </article>
+      </section>
+
+      <section class="notes-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Source-backed context</p>
+            <h2>System notes</h2>
+          </div>
+        </div>
+        <div class="notes-grid">
           {systems.map((system) => (
-            <li>
-              <strong>{system.system}</strong>:
-              transit card {joinValues(system.payment.gate_entry.local_transit_card.methods)};
-              bank card {joinValues(system.payment.gate_entry.contactless_bank_card.schemes)};
-              mobile wallet {joinValues(system.payment.gate_entry.mobile_wallet.methods)}.
-              {system.notes || system.interoperability.notes || "See system detail page for source-backed limitations."}
-            </li>
+            <article>
+              <a href={`systems/${system.id}/`}>{system.system}</a>
+              <p>{system.city}, {system.country}</p>
+              <dl>
+                <div><dt>Transit card</dt><dd>{joinValues(system.payment.gate_entry.local_transit_card.methods)}</dd></div>
+                <div><dt>Bank card</dt><dd>{joinValues(system.payment.gate_entry.contactless_bank_card.schemes)}</dd></div>
+                <div><dt>Mobile wallet</dt><dd>{joinValues(system.payment.gate_entry.mobile_wallet.methods)}</dd></div>
+              </dl>
+            </article>
           ))}
-        </ol>
+        </div>
+      </section>
 
-        <h2 id="tickets">Tickets</h2>
-        <p>
-          The current table includes a compact view of ticket vending machine cash and
-          bank-card support. Detailed ticket machine fields are available in the JSON
-          and CSV exports.
-        </p>
+      <section id="contribute" class="contribute-band">
+        <div>
+          <p class="eyebrow">Open data, carefully sourced</p>
+          <h2>Help verify the next city</h2>
+          <p>
+            Add an official operator, transport authority, or payment-network source.
+            Separate gate entry from ticket purchase and document partial rollouts.
+          </p>
+        </div>
+        <a class="button primary" href="https://github.com/chenw23/ICS1/blob/master/CONTRIBUTING.md">
+          Contribution guide ↗
+        </a>
+      </section>
+    </main>
 
-        <h2 id="data">Data Exports</h2>
-        <p>
-          The YAML files under <code>data/systems/</code> are the source of truth. The
-          website, JSON endpoint, and CSV endpoint are generated from the same validated
-          records.
-        </p>
+    <script is:inline>
+      const search = document.querySelector("#matrix-search");
+      const filter = document.querySelector("#payment-filter");
+      const rows = [...document.querySelectorAll(".matrix tbody tr[data-system]")];
 
-        <h2 id="contribute">Contribute</h2>
-        <ol>
-          <li>Find the official fare, ticketing, or contactless-payment page.</li>
-          <li>Separate gate entry from ticket purchase and ticket vending machines.</li>
-          <li>Use explicit status values: yes, partial, planned, no, unknown, deprecated.</li>
-          <li>Record limitations such as selected stations, selected gates, app-region locks, or local-card requirements.</li>
-          <li>Run the validator before opening a pull request.</li>
-        </ol>
-      </main>
-    </div>
+      function applyFilters() {
+        const query = search.value.trim().toLowerCase();
+        const mode = filter.value;
+        rows.forEach((row) => {
+          const matchesQuery = row.dataset.search.includes(query);
+          const matchesMode =
+            mode === "all" ||
+            (mode === "bank-card" && row.dataset.bankCard === "yes") ||
+            (mode === "open-loop" && row.dataset.openLoop === "yes") ||
+            (mode === "mobile-wallet" && row.dataset.mobileWallet === "yes");
+          row.hidden = !(matchesQuery && matchesMode);
+        });
+      }
+
+      search.addEventListener("input", applyFilters);
+      filter.addEventListener("change", applyFilters);
+    </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-import { compactMethod, compactSchemes } from "@lib/data";
+import type { PaymentStatus } from "@lib/schema";
 import type { TransitSystem } from "@lib/schema";
 
 interface Props {
@@ -8,14 +8,22 @@ interface Props {
 
 const { systems } = Astro.props;
 
-function extraNotes(system: TransitSystem): string {
-  const notes = [
-    system.payment.gate_entry.contactless_bank_card.notes,
-    system.payment.gate_entry.official_app.notes,
-    system.payment.ticket_machine.contactless_card.notes,
-    system.interoperability.notes,
-  ].filter(Boolean);
-  return notes.join(" ");
+const schemeShortNames: Record<string, string> = {
+  Visa: "V",
+  Mastercard: "M",
+  "American Express": "AE",
+  Discover: "D",
+  JCB: "J",
+  UnionPay: "UP",
+};
+
+function statusCell(status: PaymentStatus, schemes: string[] = []): string {
+  if (status === "no") return "No";
+  if (status === "unknown") return "?";
+  const suffix = schemes.length
+    ? schemes.map((scheme) => schemeShortNames[scheme] ?? scheme).join("/")
+    : "";
+  return suffix;
 }
 ---
 
@@ -23,57 +31,43 @@ function extraNotes(system: TransitSystem): string {
   <table class="matrix">
     <thead>
       <tr>
-        <th>System / Area</th>
+        <th>System</th>
         <th>Mode</th>
-        <th title="Local transit card">💳</th>
-        <th title="Contactless bank card at gate">💳↗</th>
-        <th title="Mobile wallet at gate">📱</th>
+        <th title="Local transit card">TC</th>
+        <th title="Contactless bank card at gate">BC</th>
+        <th title="Mobile wallet at gate">MW</th>
         <th title="QR ticket or QR gate entry">QR</th>
-        <th title="Official app gate entry">APP</th>
-        <th title="Tourist pass">🎫</th>
-        <th title="Ticket machine cash">💴</th>
+        <th title="Official app gate entry">App</th>
+        <th title="Tourist pass">Pass</th>
+        <th title="Ticket machine cash">Cash</th>
         <th title="Ticket machine bank card">TVM</th>
         <th title="Open-loop payment">OL</th>
-        <th title="Extra notes">+</th>
       </tr>
     </thead>
     <tbody>
-      {systems.map((system, index) => (
-        <>
-          {index > 0 && index % 5 === 0 && (
-            <tr class="repeat-head">
-              <th></th>
-              <th></th>
-              <th>💳</th>
-              <th>💳↗</th>
-              <th>📱</th>
-              <th>QR</th>
-              <th>APP</th>
-              <th>🎫</th>
-              <th>💴</th>
-              <th>TVM</th>
-              <th>OL</th>
-              <th>+</th>
-            </tr>
-          )}
-          <tr>
-            <th scope="row">
-              <a href={`systems/${system.id}/`}>{system.system}</a>
-              <small>{system.city} / {system.country}</small>
-            </th>
-            <td>{system.modes.join("/")}</td>
-            <td>{compactMethod(system.payment.gate_entry.local_transit_card.status)}</td>
-            <td>{compactSchemes(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</td>
-            <td>{compactMethod(system.payment.gate_entry.mobile_wallet.status)}</td>
-            <td>{compactMethod(system.payment.gate_entry.qr_code.status)}</td>
-            <td>{compactMethod(system.payment.gate_entry.official_app.status)}</td>
-            <td>{compactMethod(system.payment.gate_entry.tourist_pass.status)}</td>
-            <td>{compactMethod(system.payment.ticket_machine.cash.status)}</td>
-            <td>{compactSchemes(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</td>
-            <td>{compactMethod(system.interoperability.open_loop)}</td>
-            <td class="notes">{extraNotes(system) ? "ⓘ" : ""}</td>
-          </tr>
-        </>
+      {systems.map((system) => (
+        <tr
+          data-system
+          data-search={`${system.system} ${system.city} ${system.country}`.toLowerCase()}
+          data-bank-card={system.payment.gate_entry.contactless_bank_card.status}
+          data-mobile-wallet={system.payment.gate_entry.mobile_wallet.status}
+          data-open-loop={system.interoperability.open_loop}
+        >
+          <th scope="row">
+            <a href={`systems/${system.id}/`}>{system.system}</a>
+            <small>{system.city}, {system.country}</small>
+          </th>
+          <td class="mode-cell">{system.modes.join(" / ")}</td>
+          <td><span class={`support support-${system.payment.gate_entry.local_transit_card.status}`} title={system.payment.gate_entry.local_transit_card.status}>{statusCell(system.payment.gate_entry.local_transit_card.status)}</span></td>
+          <td><span class={`support support-${system.payment.gate_entry.contactless_bank_card.status}`} title={system.payment.gate_entry.contactless_bank_card.status}>{statusCell(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</span></td>
+          <td><span class={`support support-${system.payment.gate_entry.mobile_wallet.status}`} title={system.payment.gate_entry.mobile_wallet.status}>{statusCell(system.payment.gate_entry.mobile_wallet.status)}</span></td>
+          <td><span class={`support support-${system.payment.gate_entry.qr_code.status}`} title={system.payment.gate_entry.qr_code.status}>{statusCell(system.payment.gate_entry.qr_code.status)}</span></td>
+          <td><span class={`support support-${system.payment.gate_entry.official_app.status}`} title={system.payment.gate_entry.official_app.status}>{statusCell(system.payment.gate_entry.official_app.status)}</span></td>
+          <td><span class={`support support-${system.payment.gate_entry.tourist_pass.status}`} title={system.payment.gate_entry.tourist_pass.status}>{statusCell(system.payment.gate_entry.tourist_pass.status)}</span></td>
+          <td><span class={`support support-${system.payment.ticket_machine.cash.status}`} title={system.payment.ticket_machine.cash.status}>{statusCell(system.payment.ticket_machine.cash.status)}</span></td>
+          <td><span class={`support support-${system.payment.ticket_machine.bank_card.status}`} title={system.payment.ticket_machine.bank_card.status}>{statusCell(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</span></td>
+          <td><span class={`support support-${system.interoperability.open_loop}`} title={system.interoperability.open_loop}>{statusCell(system.interoperability.open_loop)}</span></td>
+        </tr>
       ))}
     </tbody>
   </table>

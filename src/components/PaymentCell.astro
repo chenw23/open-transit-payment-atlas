@@ -1,6 +1,5 @@
 ---
-import StatusBadge from "./StatusBadge.astro";
-import { methodText, sourceByTitle } from "@lib/data";
+import { sourceByTitle, statusLabels } from "@lib/data";
 import type { PaymentMethod, TransitSystem } from "@lib/schema";
 
 interface Props {
@@ -14,8 +13,10 @@ const source = sourceByTitle(system, method.source);
 ---
 
 <div class="payment-cell">
-  <StatusBadge status={method.status} />
-  <span>{methodText(method.status, values)}</span>
+  <div class="payment-cell-heading">
+    <span class={`support support-${method.status}`}>{statusLabels[method.status]}</span>
+    {values.length > 0 && <strong>{values.join(", ")}</strong>}
+  </div>
   {source && (
     <a class="source-link" href={source.url} aria-label={`Source: ${source.title}`}>
       Source

@@ -22,22 +22,36 @@ const { system } = Astro.props;
   </head>
   <body>
     <header class="site-header">
-      <nav>
-        <a class="brand" href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a>
-        <a href={`${import.meta.env.BASE_URL}#matrix`}>Payment matrix</a>
-        <a href={system.official_website}>Official website</a>
-      </nav>
+      <div class="nav-shell">
+        <a class="brand" href={import.meta.env.BASE_URL}>
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>Open Transit Payment Atlas</span>
+        </a>
+        <nav>
+          <a href={`${import.meta.env.BASE_URL}#matrix`}>Matrix</a>
+          <a href={system.official_website}>Official website</a>
+          <a class="icon-link" href="https://github.com/chenw23/ICS1" aria-label="GitHub repository">
+            GH
+          </a>
+        </nav>
+      </div>
     </header>
-    <main>
-      <section class="intro">
+    <main class="page-shell detail-page">
+      <a class="back-link" href={`${import.meta.env.BASE_URL}#matrix`}>
+        ← Back to matrix
+      </a>
+      <section class="detail-intro">
         <div>
           <p class="eyebrow">{system.city}, {system.country}</p>
           <h1>{system.system}</h1>
-          <p>
+          <p class="lede">
             Operated by {system.operator}. Last verified on {system.last_verified}.
           </p>
+          <a class="button secondary" href={system.official_website}>
+            Official website ↗
+          </a>
         </div>
-        <dl class="stats">
+        <dl class="detail-summary">
           <div>
             <dt>{statusLabels[system.payment.gate_entry.contactless_bank_card.status]}</dt>
             <dd>bank card at gate</dd>
@@ -49,8 +63,9 @@ const { system } = Astro.props;
         </dl>
       </section>
 
-      <section class="principles">
-        <article>
+      <section class="detail-grid">
+        <article class="detail-panel">
+          <p class="eyebrow">Passenger access</p>
           <h2>Gate entry</h2>
           <PaymentCell method={system.payment.gate_entry.local_transit_card} system={system} />
           <PaymentCell method={system.payment.gate_entry.contactless_bank_card} system={system} />
@@ -60,7 +75,8 @@ const { system } = Astro.props;
           <PaymentCell method={system.payment.gate_entry.paper_or_token} system={system} />
           <PaymentCell method={system.payment.gate_entry.tourist_pass} system={system} />
         </article>
-        <article>
+        <article class="detail-panel">
+          <p class="eyebrow">Purchase and top-up</p>
           <h2>Ticket purchase</h2>
           <PaymentCell method={system.payment.ticket_machine.cash} system={system} />
           <PaymentCell method={system.payment.ticket_machine.bank_card} system={system} />
@@ -68,7 +84,8 @@ const { system } = Astro.props;
           <PaymentCell method={system.payment.ticket_machine.mobile_wallet} system={system} />
           <PaymentCell method={system.payment.ticket_machine.qr_payment} system={system} />
         </article>
-        <article>
+        <article class="detail-panel">
+          <p class="eyebrow">Evidence</p>
           <h2>Sources</h2>
           <ul class="source-list">
             {system.sources.map((source) => (
