@@ -226,7 +226,7 @@ h2 {
   font-size: 13px;
 }
 
-.feature-strip {
+.data-paths {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   overflow: hidden;
@@ -235,43 +235,47 @@ h2 {
   background: var(--surface);
 }
 
-.feature-strip article {
+.data-paths > a {
   display: flex;
-  min-height: 92px;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 20px;
+  min-height: 96px;
+  align-items: center;
+  gap: 15px;
+  padding: 19px 20px;
+  color: var(--text);
 }
 
-.feature-strip article + article {
+.data-paths > a + a {
   border-left: 1px solid var(--line);
 }
 
-.feature-icon {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  flex: none;
-  place-items: center;
-  border-radius: 6px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.04em;
+.data-paths > a:hover {
+  background: #f3f7f5;
 }
 
-.feature-strip strong,
-.feature-strip span {
+.path-index {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.data-paths strong,
+.data-paths small {
   display: block;
 }
 
-.feature-strip strong {
+.data-paths strong {
   color: var(--heading);
   font-size: 14px;
 }
 
-.feature-strip span {
+.data-paths small {
   margin-top: 3px;
   color: var(--muted);
   font-size: 13px;
@@ -289,6 +293,12 @@ h2 {
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 16px;
+}
+
+.section-summary {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .export-links {
@@ -347,6 +357,35 @@ h2 {
   padding: 0 10px;
 }
 
+.matrix-block {
+  scroll-margin-top: 84px;
+}
+
+.matrix-block + .matrix-block {
+  margin-top: 42px;
+}
+
+.matrix-heading {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.7fr) minmax(360px, 1fr);
+  gap: 32px;
+  align-items: end;
+  margin: 18px 0 13px;
+}
+
+.matrix-heading h2 {
+  font-size: 24px;
+}
+
+.matrix-heading p:last-child {
+  max-width: 680px;
+  justify-self: end;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .table-wrap {
   position: relative;
   width: 100%;
@@ -362,48 +401,103 @@ h2 {
 
 .matrix {
   width: 100%;
-  min-width: 920px;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 13px;
+  table-layout: fixed;
+}
+
+.matrix-gate {
+  min-width: 1500px;
+}
+
+.matrix-tickets {
+  min-width: 1240px;
 }
 
 .matrix th,
 .matrix td {
-  height: 62px;
+  height: 72px;
   border-bottom: 1px solid var(--line);
-  padding: 10px 12px;
+  border-right: 1px solid #e9eeeb;
+  padding: 10px;
   text-align: center;
   vertical-align: middle;
+}
+
+.matrix tr > :last-child {
+  border-right: 0;
 }
 
 .matrix thead th {
   position: sticky;
   top: 0;
   z-index: 5;
-  height: 44px;
+  height: 54px;
   background: #e9efec;
   color: #42514b;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
   text-transform: uppercase;
 }
 
-.matrix thead th:first-child,
-.matrix tbody th {
-  position: sticky;
-  left: 0;
-  z-index: 4;
-  min-width: 196px;
-  max-width: 230px;
-  background: var(--surface);
+.matrix .location-column,
+.matrix .location-cell {
+  width: 162px;
+  min-width: 162px;
   text-align: left;
 }
 
-.matrix thead th:first-child {
+.matrix .location-column:nth-child(2),
+.matrix .location-cell:nth-child(2) {
+  width: 128px;
+  min-width: 128px;
+}
+
+.matrix .system-column,
+.matrix .system-cell {
+  width: 206px;
+  min-width: 206px;
+  text-align: left;
+}
+
+.matrix thead th:nth-child(1),
+.matrix tbody td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+}
+
+.matrix thead th:nth-child(2),
+.matrix tbody td:nth-child(2) {
+  position: sticky;
+  left: 162px;
+  z-index: 3;
+}
+
+.matrix thead th:nth-child(3),
+.matrix tbody th:nth-child(3) {
+  position: sticky;
+  left: 290px;
+  z-index: 3;
+}
+
+.matrix tbody td:nth-child(1),
+.matrix tbody td:nth-child(2),
+.matrix tbody th:nth-child(3) {
+  background: var(--surface);
+}
+
+.matrix thead th:nth-child(-n + 3) {
   z-index: 8;
   background: #e9efec;
+}
+
+.matrix thead th:nth-child(3),
+.matrix tbody th:nth-child(3) {
+  box-shadow: 8px 0 12px -12px rgba(23, 32, 29, 0.65);
 }
 
 .matrix tbody tr:hover td,
@@ -416,24 +510,85 @@ h2 {
   border-bottom: 0;
 }
 
-.matrix th a {
+.matrix .system-cell a {
   color: var(--heading);
   font-weight: 760;
 }
 
-.matrix small {
+.matrix .location-cell strong,
+.matrix .system-cell a {
   display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
-.mode-cell {
-  max-width: 115px;
+.matrix .location-cell small,
+.matrix .system-cell small {
+  display: block;
+  margin-top: 4px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 500;
   line-height: 1.35;
+}
+
+.matrix-value {
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+}
+
+.matrix-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 760;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.matrix-status .status-dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.matrix-status.status-yes {
+  color: #087263;
+}
+
+.matrix-status.status-partial {
+  color: var(--amber);
+}
+
+.matrix-status.status-planned {
+  color: var(--blue);
+}
+
+.matrix-status.status-no,
+.matrix-status.status-deprecated {
+  color: var(--red);
+}
+
+.matrix-status.status-unknown {
+  color: #7b8581;
+}
+
+.matrix-value small {
+  display: -webkit-box;
+  max-width: 150px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .support {
@@ -510,29 +665,29 @@ h2 {
   font-size: 22px;
 }
 
-.legend-list,
+.scope-list,
 .status-list {
   margin: 0;
 }
 
-.legend-list div,
+.scope-list div,
 .status-list div {
   display: grid;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 92px 1fr;
   gap: 10px;
   align-items: center;
   border-top: 1px solid var(--line);
   padding: 9px 0;
 }
 
-.legend-list dt,
+.scope-list dt,
 .status-list dt {
   color: var(--heading);
   font-size: 12px;
   font-weight: 800;
 }
 
-.legend-list dd,
+.scope-list dd,
 .status-list dd {
   margin: 0;
   color: var(--muted);
@@ -561,6 +716,11 @@ h2 {
 
 .dot-no {
   background: var(--red);
+}
+
+.dot-deprecated {
+  border: 2px solid var(--red);
+  background: transparent;
 }
 
 .dot-unknown {
@@ -774,14 +934,23 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .feature-strip,
+  .data-paths,
   .notes-grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  .feature-strip article:nth-child(3) {
+  .data-paths > a:nth-child(3) {
     border-top: 1px solid var(--line);
     border-left: 0;
+  }
+
+  .matrix-heading {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .matrix-heading p:last-child {
+    justify-self: start;
   }
 }
 
@@ -823,12 +992,12 @@ h2 {
     font-size: 29px;
   }
 
-  .feature-strip,
+  .data-paths,
   .notes-grid {
     grid-template-columns: 1fr;
   }
 
-  .feature-strip article + article {
+  .data-paths > a + a {
     border-top: 1px solid var(--line);
     border-left: 0;
   }
@@ -841,6 +1010,44 @@ h2 {
 
   .matrix-toolbar {
     grid-template-columns: 1fr;
+  }
+
+  .matrix .location-column,
+  .matrix .location-cell {
+    width: 118px;
+    min-width: 118px;
+  }
+
+  .matrix .location-column:nth-child(2),
+  .matrix .location-cell:nth-child(2) {
+    width: 94px;
+    min-width: 94px;
+  }
+
+  .matrix .system-column,
+  .matrix .system-cell {
+    width: 166px;
+    min-width: 166px;
+  }
+
+  .matrix thead th:nth-child(2),
+  .matrix tbody td:nth-child(2) {
+    left: 118px;
+  }
+
+  .matrix thead th:nth-child(3),
+  .matrix tbody th:nth-child(3) {
+    left: auto;
+  }
+
+  .matrix tbody th:nth-child(3) {
+    position: static;
+    box-shadow: none;
+  }
+
+  .matrix thead th:nth-child(3) {
+    z-index: 5;
+    box-shadow: none;
   }
 
   .reference-panel {

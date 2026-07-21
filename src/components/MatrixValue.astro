@@ -1,0 +1,19 @@
+---
+import { statusLabels } from "@lib/data";
+import type { PaymentMethod } from "@lib/schema";
+
+interface Props {
+  method: PaymentMethod;
+}
+
+const { method } = Astro.props;
+const details = [...method.methods, ...method.schemes];
+---
+
+<div class="matrix-value">
+  <span class={`matrix-status status-${method.status}`}>
+    <span class="status-dot" aria-hidden="true"></span>
+    {statusLabels[method.status]}
+  </span>
+  {details.length > 0 && <small>{details.join(", ")}</small>}
+</div>
