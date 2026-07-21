@@ -3,13 +3,6 @@ import PaymentMatrix from "@components/PaymentMatrix.astro";
 import { loadSystems } from "@lib/data";
 
 const systems = loadSystems();
-const countries = [...new Set(systems.map((system) => system.country))].sort();
-const openLoopCount = systems.filter(
-  (system) => system.payment.gate_entry.contactless_bank_card.status === "yes",
-).length;
-const partialOpenLoopCount = systems.filter(
-  (system) => system.payment.gate_entry.contactless_bank_card.status === "partial",
-).length;
 ---
 
 <!doctype html>
@@ -22,88 +15,86 @@ const partialOpenLoopCount = systems.filter(
       content="An evidence-backed atlas of rail transit payment methods around the world."
     />
     <title>Open Transit Payment Atlas</title>
-    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles.css`} />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
   </head>
   <body>
-    <header class="site-header">
-      <nav>
-        <a class="brand" href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a>
-        <a href="#matrix">Payment matrix</a>
-        <a href="#contribute">Contribute</a>
-        <a href="data/systems.json">JSON</a>
-        <a href="data/systems.csv">CSV</a>
-      </nav>
-    </header>
+    <div class="wrapper">
+      <aside class="sidebar">
+        <h1><a href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a></h1>
+        <p>Another view of rail transit payment.</p>
+        <p class="view">
+          <a href="https://github.com/chenw23/ICS1">View the Project on GitHub <small>chenw23/ICS1</small></a>
+        </p>
+        <nav class="side-nav">
+          <a href="#legend">Legend</a>
+          <a href="#passing">Passing Gate</a>
+          <a href="#tickets">Tickets</a>
+          <a href="#data">Data</a>
+          <a href="#contribute">Contribute</a>
+        </nav>
+      </aside>
 
-    <main>
-      <section class="intro">
-        <div>
-          <p class="eyebrow">Rail transit payment information</p>
-          <h1>Passenger-facing payment methods for metro, urban rail, and airport rail.</h1>
-          <p>
-            This project records what passengers can actually use: local transit cards,
-            contactless bank cards, mobile wallets, QR tickets, official apps, ticket
-            vending machine payments, and important limitations, backed by official
-            sources wherever possible.
-          </p>
-        </div>
-        <dl class="stats">
-          <div>
-            <dt>{systems.length}</dt>
-            <dd>systems tracked</dd>
-          </div>
-          <div>
-            <dt>{countries.length}</dt>
-            <dd>countries / regions</dd>
-          </div>
-          <div>
-            <dt>{openLoopCount}</dt>
-            <dd>full open-loop systems</dd>
-          </div>
-          <div>
-            <dt>{partialOpenLoopCount}</dt>
-            <dd>partial open-loop systems</dd>
-          </div>
-        </dl>
-      </section>
+      <main>
+        <h1>Rail Transit Payment Methods</h1>
+        <p><code>Which payment methods can I actually use on this metro?</code></p>
+        <p>
+          A passenger-facing payment matrix for metro, urban rail, airport rail, and
+          comparable rail transit systems outside mainland China. The project records
+          gate entry, ticket purchase, cards, QR/app tickets, mobile wallets, and
+          practical limitations with source-backed data.
+        </p>
 
-      <section class="principles">
-        <article>
-          <h2>Passenger first</h2>
-          <p>
-            The atlas answers practical questions: can I tap a bank card, use a local
-            transit card, scan a QR ticket, buy at a machine, or rely on an official app?
-          </p>
-        </article>
-        <article>
-          <h2>Evidence required</h2>
-          <p>
-            Each non-obvious payment claim should have an official source from the
-            operator, city, transport authority, or payment provider.
-          </p>
-        </article>
-        <article>
-          <h2>Structured data</h2>
-          <p>
-            YAML is the source of truth. The web matrix, JSON export, and CSV export are
-            generated from the same validated records.
-          </p>
-        </article>
-      </section>
+        <p class="links">
+          <a href="data/systems.json">JSON</a> |
+          <a href="data/systems.csv">CSV</a> |
+          <a href="https://github.com/chenw23/ICS1/blob/master/data/systems/core-sample.yaml">Source YAML</a>
+        </p>
 
-      <section id="matrix" class="matrix-section">
-        <div class="section-heading">
-          <p class="eyebrow">Current sample data</p>
-          <h2>Payment matrix</h2>
-        </div>
+        <h2>Content</h2>
+        <ul>
+          <li><a href="#legend">Legend</a></li>
+          <li><a href="#passing">Passing Gate</a></li>
+          <li><a href="#tickets">Tickets</a></li>
+          <li><a href="#data">Data Exports</a></li>
+          <li><a href="#contribute">Contribute</a></li>
+        </ul>
+
+        <h2 id="legend">Legend</h2>
+        <table class="legend-table">
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>✅</td><td>Fully supported / generally usable</td></tr>
+            <tr><td>⭕</td><td>Limited support / selected channels, stations, products, or cards</td></tr>
+            <tr><td>⏳</td><td>Officially announced or planned</td></tr>
+            <tr><td>❌</td><td>Deprecated or discontinued</td></tr>
+            <tr><td>?</td><td>Unknown or not yet verified</td></tr>
+            <tr><td>V/M/AE/J</td><td>Visa / Mastercard / American Express / JCB</td></tr>
+          </tbody>
+        </table>
+
+        <h2 id="passing">Passing Gate</h2>
         <PaymentMatrix systems={systems} />
-      </section>
 
-      <section id="contribute" class="contribute">
-        <div>
-          <p class="eyebrow">Contribution model</p>
-          <h2>Start with official sources, then encode the passenger rule.</h2>
-        </div>
+        <h2 id="tickets">Tickets</h2>
+        <p>
+          The current table includes a compact view of ticket vending machine cash and
+          bank-card support. Detailed ticket machine fields are available in the JSON
+          and CSV exports.
+        </p>
+
+        <h2 id="data">Data Exports</h2>
+        <p>
+          The YAML files under <code>data/systems/</code> are the source of truth. The
+          website, JSON endpoint, and CSV endpoint are generated from the same validated
+          records.
+        </p>
+
+        <h2 id="contribute">Contribute</h2>
         <ol>
           <li>Find the official fare, ticketing, or contactless-payment page.</li>
           <li>Separate gate entry from ticket purchase and ticket vending machines.</li>
@@ -111,7 +102,7 @@ const partialOpenLoopCount = systems.filter(
           <li>Record limitations such as selected stations, selected gates, app-region locks, or local-card requirements.</li>
           <li>Run the validator before opening a pull request.</li>
         </ol>
-      </section>
-    </main>
+      </main>
+    </div>
   </body>
 </html>

@@ -34,17 +34,24 @@ export const statusLabels: Record<PaymentStatus, string> = {
 };
 
 export const statusMarks: Record<PaymentStatus, string> = {
-  yes: "YES",
-  partial: "PART",
-  planned: "PLAN",
-  no: "NO",
-  unknown: "UNK",
-  deprecated: "OLD",
+  yes: "✅",
+  partial: "⭕",
+  planned: "⏳",
+  no: "",
+  unknown: "?",
+  deprecated: "❌",
 };
 
 export function methodText(status: PaymentStatus, values: string[] = []): string {
   const label = statusLabels[status];
   return values.length ? `${label}: ${values.join(", ")}` : label;
+}
+
+export function compactMethod(status: PaymentStatus, values: string[] = []): string {
+  const mark = statusMarks[status];
+  if (!mark && !values.length) return "";
+  if (values.length) return `${mark}${values.join("/")}`;
+  return mark;
 }
 
 export function sourceByTitle(system: TransitSystem, title?: string) {
