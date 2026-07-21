@@ -282,6 +282,48 @@ h2 {
   line-height: 1.45;
 }
 
+.coverage-notice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 16px 18px;
+}
+
+.coverage-code {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--surface-muted);
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.coverage-notice h2 {
+  font-size: 15px;
+}
+
+.coverage-notice p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.coverage-notice > a {
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 760;
+}
+
 .matrix-section,
 .notes-section {
   margin-top: 52px;
@@ -1044,6 +1086,15 @@ h2 {
   .data-paths > a + a {
     border-top: 1px solid var(--line);
     border-left: 0;
+  }
+
+  .coverage-notice {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .coverage-notice > a {
+    grid-column: 2;
+    white-space: normal;
   }
 
   .section-heading,

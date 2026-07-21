@@ -25,22 +25,28 @@ export const methodSchema = z.object({
   source: z.string().optional(),
 });
 
+const unknownMethodSchema = methodSchema.default({
+  status: "unknown",
+  methods: [],
+  schemes: [],
+});
+
 export const paymentSchema = z.object({
   gate_entry: z.object({
-    local_transit_card: methodSchema,
-    contactless_bank_card: methodSchema,
-    mobile_wallet: methodSchema,
-    qr_code: methodSchema,
-    official_app: methodSchema,
-    paper_or_token: methodSchema,
-    tourist_pass: methodSchema,
+    local_transit_card: unknownMethodSchema,
+    contactless_bank_card: unknownMethodSchema,
+    mobile_wallet: unknownMethodSchema,
+    qr_code: unknownMethodSchema,
+    official_app: unknownMethodSchema,
+    paper_or_token: unknownMethodSchema,
+    tourist_pass: unknownMethodSchema,
   }),
   ticket_machine: z.object({
-    cash: methodSchema,
-    bank_card: methodSchema,
-    contactless_card: methodSchema,
-    mobile_wallet: methodSchema,
-    qr_payment: methodSchema,
+    cash: unknownMethodSchema,
+    bank_card: unknownMethodSchema,
+    contactless_card: unknownMethodSchema,
+    mobile_wallet: unknownMethodSchema,
+    qr_payment: unknownMethodSchema,
   }),
 });
 
@@ -56,10 +62,10 @@ export const systemSchema = z.object({
   last_verified: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   payment: paymentSchema,
   interoperability: z.object({
-    open_loop: paymentStatusSchema,
-    fare_capping: paymentStatusSchema,
-    regional_card: paymentStatusSchema,
-    national_card: paymentStatusSchema,
+    open_loop: paymentStatusSchema.default("unknown"),
+    fare_capping: paymentStatusSchema.default("unknown"),
+    regional_card: paymentStatusSchema.default("unknown"),
+    national_card: paymentStatusSchema.default("unknown"),
     notes: z.string().optional(),
   }),
   sources: z.array(sourceSchema).min(1),

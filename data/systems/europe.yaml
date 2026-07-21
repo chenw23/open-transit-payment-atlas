@@ -1,0 +1,905 @@
+- id: amsterdam-gvb
+  country: Netherlands
+  city: Amsterdam
+  system: GVB Metro
+  operator: GVB
+  modes: [metro, tram, bus]
+  official_website: https://www.gvb.nl/en/Payment-options
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [OV-chipkaart, OV-pas]
+        source: GVB payment options
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, Maestro, V PAY]
+        source: GVB OVpay
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Wallet, contactless bank-card wallet]
+        source: GVB OVpay
+      qr_code:
+        status: yes
+        methods: [GVB barcode e-ticket]
+        source: GVB payment options
+      official_app:
+        status: yes
+        methods: [GVB app e-ticket]
+        source: GVB payment options
+      paper_or_token:
+        status: partial
+        methods: [Paper chip card]
+        source: GVB payment options
+      tourist_pass:
+        status: yes
+        methods: [GVB day ticket, Amsterdam Travel Ticket]
+        source: GVB payment options
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Machine payment differs by metro line; some machines are cash-only and Line 52 machines differ.
+        source: GVB machines
+      bank_card:
+        status: partial
+        notes: PIN capability has been discontinued at several older-line machines.
+        source: GVB machines
+      contactless_card:
+        status: partial
+        notes: Direct OVpay gate entry is the more consistent bank-card channel.
+        source: GVB machines
+  interoperability:
+    open_loop: yes
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: OVpay and OV-chipkaart operate across Dutch public transport with product-specific rules.
+  sources:
+    - title: GVB payment options
+      url: https://www.gvb.nl/en/Payment-options
+      accessed: "2026-07-22"
+    - title: GVB OVpay
+      url: https://www.gvb.nl/en/customer-service/how-does-ovpay-work
+      accessed: "2026-07-22"
+    - title: GVB machines
+      url: https://www.gvb.nl/en/machines
+      accessed: "2026-07-22"
+
+- id: berlin-u-bahn
+  country: Germany
+  city: Berlin
+  system: Berlin U-Bahn
+  operator: Berliner Verkehrsbetriebe
+  modes: [metro, tram, bus]
+  official_website: https://www.bvg.de/en/tourists/tickets
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: partial
+        methods: [VBB-fahrCard]
+        notes: Smartcards are primarily used for subscriptions; occasional riders usually use paper or app tickets.
+      contactless_bank_card:
+        status: no
+        notes: Automatic charging by tapping a bank card for a ride is not available network-wide.
+        source: BVG tourist tickets
+      mobile_wallet:
+        status: no
+        notes: Apple Pay and Google Pay can purchase tickets but are not direct gate-entry media.
+        source: BVG tourist tickets
+      qr_code:
+        status: yes
+        methods: [BVG mobile ticket]
+        source: BVG tourist tickets
+      official_app:
+        status: yes
+        methods: [BVG Tickets app, Jelbi app]
+        source: BVG tourist tickets
+      paper_or_token:
+        status: yes
+        methods: [Paper ticket]
+        source: BVG tourist tickets
+      tourist_pass:
+        status: yes
+        methods: [Berlin WelcomeCard, day ticket]
+        source: BVG tourist tickets
+    ticket_machine:
+      cash:
+        status: yes
+        source: BVG ticket machines
+      bank_card:
+        status: yes
+        source: BVG ticket machines
+      contactless_card:
+        status: yes
+        source: BVG ticket machines
+      mobile_wallet:
+        status: partial
+        methods: [Apple Pay, Google Pay]
+        notes: Available on newer or compatible machines.
+        source: BVG tourist tickets
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: VBB tickets cover participating regional operators; riders must buy and validate a ticket before travel.
+  sources:
+    - title: BVG tourist tickets
+      url: https://www.bvg.de/en/tourists/tickets
+      accessed: "2026-07-22"
+    - title: BVG ticket machines
+      url: https://www.bvg.de/de/service-und-kontakt/verkaufsstellen/ticketkauf-am-automaten
+      accessed: "2026-07-22"
+
+- id: madrid-metro
+  country: Spain
+  city: Madrid
+  region: Community of Madrid
+  system: Metro de Madrid
+  operator: Metro de Madrid
+  modes: [metro, light rail]
+  official_website: https://www.metromadrid.es/en/travel-in-the-metro/card-types
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Multi Card, Personal Public Transport Card]
+        source: Metro Madrid cards
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: Direct bank-card entry began on newly replaced barriers; the rollout is not represented as every gate network-wide.
+        source: Metro Madrid contactless rollout
+      mobile_wallet:
+        status: partial
+        methods: [Contactless bank-card wallet]
+        notes: Phones and smartwatches are supported at upgraded contactless barriers.
+        source: Metro Madrid contactless rollout
+      qr_code:
+        status: no
+        notes: QR is not documented as a general Metro gate-entry medium.
+      official_app:
+        status: partial
+        notes: The transport-card app can reload compatible cards but is not a universal gate ticket.
+      paper_or_token:
+        status: no
+        notes: Fares are loaded onto contactless public transport cards.
+      tourist_pass:
+        status: yes
+        methods: [Tourist Travel Pass on Multi Card]
+        source: Metro Madrid cards
+    ticket_machine:
+      cash:
+        status: yes
+        source: Metro Madrid machine guide
+      bank_card:
+        status: yes
+        source: Metro Madrid machine guide
+      contactless_card:
+        status: partial
+        notes: Machine type determines available payment interfaces.
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Public Transport Cards cover participating Madrid-region services; bank-card gate entry is being rolled out.
+  sources:
+    - title: Metro Madrid cards
+      url: https://www.metromadrid.es/en/travel-in-the-metro/card-types
+      accessed: "2026-07-22"
+    - title: Metro Madrid machine guide
+      url: https://www.metromadrid.es/sites/default/files/documentos/Use_of_transport_cards.pdf
+      accessed: "2026-07-22"
+    - title: Metro Madrid contactless rollout
+      url: https://www.metromadrid.es/en/press-release/2026-06-22/the-community-of-madrid-has-completed-the-first-phase-of-the-metro-networks-ticket-barrier-replacement-programme-installing-419-new-units
+      accessed: "2026-07-22"
+
+- id: lisbon-metro
+  country: Portugal
+  city: Lisbon
+  system: Lisbon Metro
+  operator: Metropolitano de Lisboa
+  modes: [metro]
+  official_website: https://www.metrolisboa.pt/en/buy/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [navegante occasional, navegante personalized]
+        source: Lisbon Metro buy
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, V PAY]
+        source: Lisbon Metro contactless
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay]
+        source: Lisbon Metro contactless
+      qr_code:
+        status: no
+        notes: QR is not documented as a standard gate-entry method.
+      official_app:
+        status: no
+        notes: App payment is not the standard gate-entry channel.
+      paper_or_token:
+        status: no
+        notes: Occasional fares are loaded onto the navegante card or paid by contactless card.
+      tourist_pass:
+        status: yes
+        methods: [24-hour fare products, Lisboa Card]
+        notes: Product validity varies by operator and attraction bundle.
+    ticket_machine:
+      cash:
+        status: yes
+        source: Lisbon Metro buy
+      bank_card:
+        status: yes
+        source: Lisbon Metro buy
+      contactless_card:
+        status: yes
+        source: Lisbon Metro buy
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: navegante covers participating Lisbon-area services; bank cards can also be tapped directly at Metro gates.
+  sources:
+    - title: Lisbon Metro buy
+      url: https://www.metrolisboa.pt/en/buy/
+      accessed: "2026-07-22"
+    - title: Lisbon Metro contactless
+      url: https://www.metrolisboa.pt/en/ride-on-metro-lisboa-with-contactless-payment-card/
+      accessed: "2026-07-22"
+
+- id: milan-metro
+  country: Italy
+  city: Milan
+  region: Milan metropolitan area
+  system: Milan Metro
+  operator: Azienda Trasporti Milanesi
+  modes: [metro, tram, bus]
+  official_website: https://www.atm.it/en/ViaggiaConNoi/Biglietti/Pages/HowtogetaroundMilanbypublictransport.aspx
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [RicaricaMi, ATM travel card]
+        source: ATM ticket sales
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express, Maestro, V PAY]
+        source: ATM contactless
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, contactless bank-card wallet]
+        source: ATM contactless
+      qr_code:
+        status: yes
+        methods: [ATM app ticket QR]
+        source: ATM ticket sales
+      official_app:
+        status: yes
+        methods: [ATM Milano app]
+        source: ATM ticket sales
+      paper_or_token:
+        status: partial
+        notes: Legacy magnetic tickets are being replaced by reloadable or digital media.
+      tourist_pass:
+        status: yes
+        methods: [One-day ticket, three-day ticket]
+        source: ATM ticket sales
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Some M4 machines selling RicaricaMi accept electronic payment only.
+        source: ATM RicaricaMi
+      bank_card:
+        status: yes
+        source: ATM ticket sales
+      contactless_card:
+        status: yes
+        source: ATM ticket sales
+  interoperability:
+    open_loop: yes
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Contactless pay-as-you-go calculates the applicable ATM fare, subject to service boundaries.
+  sources:
+    - title: ATM ticket sales
+      url: https://www.atm.it/en/ViaggiaConNoi/Biglietti/Pages/HowtogetaroundMilanbypublictransport.aspx
+      accessed: "2026-07-22"
+    - title: ATM contactless
+      url: https://www.atm.it/en/ViaggiaConNoi/Biglietti/Pages/contactless_cards_metro.aspx
+      accessed: "2026-07-22"
+    - title: ATM RicaricaMi
+      url: https://www.atm.it/it/ViaggiaConNoi/Biglietti/Pagine/bigliettoricaricabile.aspx
+      accessed: "2026-07-22"
+
+- id: stockholm-metro
+  country: Sweden
+  city: Stockholm
+  region: Stockholm County
+  system: Stockholm Metro
+  operator: Storstockholms Lokaltrafik
+  modes: [metro, commuter rail, tram, bus]
+  official_website: https://sl.se/en/fares-and-tickets
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [SL smart card]
+        source: SL fares and tickets
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express]
+        source: SL travel guide
+      mobile_wallet:
+        status: yes
+        methods: [Contactless bank-card wallet]
+        source: SL fares and tickets
+      qr_code:
+        status: yes
+        methods: [SL app ticket]
+        source: SL app
+      official_app:
+        status: yes
+        methods: [SL app]
+        source: SL app
+      paper_or_token:
+        status: no
+        notes: The regular system uses app tickets, contactless payment or SL smart cards.
+      tourist_pass:
+        status: yes
+        methods: [SL travelcard]
+        source: SL fares and tickets
+    ticket_machine:
+      cash:
+        status: unknown
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: A bank card buys a single journey directly at the reader; longer products use the app or SL card.
+  sources:
+    - title: SL fares and tickets
+      url: https://sl.se/en/fares-and-tickets
+      accessed: "2026-07-22"
+    - title: SL travel guide
+      url: https://sl.se/en/getting-around/how-to-travel-with-sl
+      accessed: "2026-07-22"
+    - title: SL app
+      url: https://sl.se/en/fares-and-tickets/smart-phone-ticket-app
+      accessed: "2026-07-22"
+
+- id: helsinki-metro
+  country: Finland
+  city: Helsinki
+  region: Helsinki region
+  system: Helsinki Metro
+  operator: Helsinki Regional Transport Authority
+  modes: [metro, commuter rail, tram, bus, ferry]
+  official_website: https://www.hsl.fi/en/travelling/visitors
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [HSL card]
+        source: HSL ticketing
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        notes: Select zones before tapping at the card reader; the purchased ticket is stored against the card.
+        source: HSL contactless
+      mobile_wallet:
+        status: yes
+        methods: [Contactless bank-card wallet]
+        source: HSL contactless
+      qr_code:
+        status: yes
+        methods: [HSL app ticket]
+        source: HSL app
+      official_app:
+        status: yes
+        methods: [HSL app]
+        source: HSL app
+      paper_or_token:
+        status: no
+        notes: HSL uses cards, app tickets, contactless payment and machine-issued digital fare products.
+      tourist_pass:
+        status: yes
+        methods: [HSL day ticket]
+        source: HSL visitors
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Ticket-machine availability and payment options vary by location.
+      bank_card:
+        status: yes
+        source: HSL visitors
+      contactless_card:
+        status: yes
+        source: HSL visitors
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Contactless adult single tickets and HSL fare media cover all HSL modes within the selected zones.
+  sources:
+    - title: HSL visitors
+      url: https://www.hsl.fi/en/travelling/visitors
+      accessed: "2026-07-22"
+    - title: HSL contactless
+      url: https://www.hsl.fi/en/travelling/ticket-validity-and-interchanging
+      accessed: "2026-07-22"
+    - title: HSL app
+      url: https://www.hsl.fi/en/tickets-and-fares/hsl-app
+      accessed: "2026-07-22"
+    - title: HSL ticketing
+      url: https://www.hsl.fi/en/tickets-and-fares/ticketing-overhaul
+      accessed: "2026-07-22"
+
+- id: prague-metro
+  country: Czech Republic
+  city: Prague
+  system: Prague Metro
+  operator: Prague Public Transit Company
+  modes: [metro, tram, bus]
+  official_website: https://pid.cz/en/tickets-and-fare/how-to-buy-ticket/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: partial
+        methods: [Litacka card]
+        notes: Long-term fare products can be associated with Litacka; visitors commonly use paper or app tickets.
+      contactless_bank_card:
+        status: no
+        notes: Bank cards buy tickets at terminals or machines; they are not a general direct gate-entry medium.
+      mobile_wallet:
+        status: no
+        notes: Mobile wallets can fund ticket purchase but are not themselves the validated fare.
+      qr_code:
+        status: yes
+        methods: [PID Litacka app ticket QR]
+        source: PID ticket purchase
+      official_app:
+        status: yes
+        methods: [PID Litacka]
+        source: PID ticket purchase
+      paper_or_token:
+        status: yes
+        methods: [Paper ticket]
+        source: PID ticket purchase
+      tourist_pass:
+        status: yes
+        methods: [24-hour ticket, 72-hour ticket]
+        source: PID ticket purchase
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Machines accept coins; payment capability varies by machine.
+        source: PID points of sale
+      bank_card:
+        status: yes
+        source: PID points of sale
+      contactless_card:
+        status: yes
+        source: PID points of sale
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: PID tickets cover Prague integrated transport; a ticket must be purchased and validated before travel.
+  sources:
+    - title: PID ticket purchase
+      url: https://pid.cz/en/tickets-and-fare/how-to-buy-ticket/
+      accessed: "2026-07-22"
+    - title: PID points of sale
+      url: https://pid.cz/en/contacts/points-of-sale/
+      accessed: "2026-07-22"
+
+- id: budapest-metro
+  country: Hungary
+  city: Budapest
+  system: Budapest Metro
+  operator: Budapesti Kozlekedesi Kozpont
+  modes: [metro, tram, bus]
+  official_website: https://bkk.hu/en/tickets-and-passes/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: partial
+        methods: [Paper pass, digital pass]
+        notes: The regular model is a pre-purchased ticket or pass rather than a stored-value tap card.
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: Pay&GO buys and validates a ticket only at supported devices, currently including Metro Line M1.
+        source: BKK Pay and Go
+      mobile_wallet:
+        status: partial
+        notes: Contactless bank-card wallets follow supported Pay&GO devices.
+        source: BKK Pay and Go
+      qr_code:
+        status: yes
+        methods: [BudapestGO mobile ticket]
+        source: BKK mobile ticket
+      official_app:
+        status: yes
+        methods: [BudapestGO]
+        source: BKK mobile ticket
+      paper_or_token:
+        status: yes
+        methods: [Paper ticket]
+        source: BKK tickets
+      tourist_pass:
+        status: yes
+        methods: [24-hour travelcard, 72-hour travelcard]
+        source: BKK tickets
+    ticket_machine:
+      cash:
+        status: yes
+        source: BKK ticket machines
+      bank_card:
+        status: yes
+        source: BKK ticket machines
+      contactless_card:
+        status: yes
+        source: BKK ticket machines
+  interoperability:
+    open_loop: partial
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: Budapest Pay&GO has limited line/device coverage; BudapestGO and paper products cover the broader network.
+  sources:
+    - title: BKK tickets
+      url: https://bkk.hu/en/visiting-budapest/tickets-and-passes/
+      accessed: "2026-07-22"
+    - title: BKK mobile ticket
+      url: https://bkk.hu/en/tickets-and-passes/purchase-information/mobile-ticket/
+      accessed: "2026-07-22"
+    - title: BKK ticket machines
+      url: https://bkk.hu/en/tickets-and-passes/purchase-information/ticket-vending-machines-tvm/
+      accessed: "2026-07-22"
+    - title: BKK Pay and Go
+      url: https://bkk.hu/en/tickets-and-passes/pay-and-go
+      accessed: "2026-07-22"
+
+- id: athens-metro
+  country: Greece
+  city: Athens
+  region: Attica
+  system: Athens Metro
+  operator: STASY
+  modes: [metro, tram, suburban rail, bus]
+  official_website: https://www.oasa.gr/en/visit-athens/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [ATH.ENA Card, ATH.ENA Ticket]
+        source: OASA visit Athens
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        source: OASA contactless
+      mobile_wallet:
+        status: yes
+        methods: [Contactless bank-card wallet]
+        source: OASA contactless
+      qr_code:
+        status: no
+        notes: QR is not documented as the standard Metro validation medium.
+      official_app:
+        status: partial
+        notes: The ATH.ENA Card app supports card purchase or reload functions on compatible NFC devices.
+      paper_or_token:
+        status: yes
+        methods: [ATH.ENA Ticket]
+        source: OASA visit Athens
+      tourist_pass:
+        status: yes
+        methods: [Tourist Ticket, airport fare products]
+        source: OASA visit Athens
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Payment options vary by machine; some tram-station machines are bank-card only.
+        source: OASA points of supply
+      bank_card:
+        status: yes
+        source: OASA points of supply
+      contactless_card:
+        status: yes
+        source: OASA points of supply
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Contactless bank-card payment and ATH.ENA fare media cover OASA services subject to fare rules.
+  sources:
+    - title: OASA visit Athens
+      url: https://www.oasa.gr/en/visit-athens/
+      accessed: "2026-07-22"
+    - title: OASA contactless
+      url: https://www.oasa.gr/en/tickets/products/contactless-payments-with-bank-cards/
+      accessed: "2026-07-22"
+    - title: OASA points of supply
+      url: https://www.oasa.gr/en/tickets/points-of-sale-reloading/points-of-supply-for-tickets-and-cards/
+      accessed: "2026-07-22"
+
+- id: copenhagen-metro
+  country: Denmark
+  city: Copenhagen
+  region: Zealand
+  system: Copenhagen Metro
+  operator: Metro Service
+  modes: [metro]
+  official_website: https://dinoffentligetransport.dk/en/find-tickets
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Rejsekort card, Rejsekort app]
+        source: DOT Rejsekort
+      contactless_bank_card:
+        status: no
+        notes: Bank cards are documented for ticket-machine purchase, not general direct Metro validation.
+      mobile_wallet:
+        status: no
+        notes: Mobile payment may fund ticket purchase; the fare itself is an app ticket or Rejsekort product.
+      qr_code:
+        status: yes
+        methods: [DOT app ticket]
+        source: DOT tickets
+      official_app:
+        status: yes
+        methods: [DOT Tickets app, Rejsekort app]
+        source: DOT tickets
+      paper_or_token:
+        status: yes
+        methods: [Machine-issued single ticket, City Pass]
+        source: DOT ticket machines
+      tourist_pass:
+        status: yes
+        methods: [City Pass]
+        source: DOT ticket machines
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Payment options vary by operator and machine; Metro stations have ticket machines.
+        source: DOT ticket machines
+      bank_card:
+        status: yes
+        source: DOT ticket machines
+      contactless_card:
+        status: partial
+        notes: Card acceptance depends on machine type.
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: Rejsekort and DOT tickets cover multiple public transport operators and modes.
+  sources:
+    - title: DOT tickets
+      url: https://dinoffentligetransport.dk/en/find-tickets
+      accessed: "2026-07-22"
+    - title: DOT ticket machines
+      url: https://dinoffentligetransport.dk/en/find-tickets/find-ticket-machines
+      accessed: "2026-07-22"
+    - title: DOT Rejsekort
+      url: https://dinoffentligetransport.dk/find-billetter/rejsekort-app-og-basiskort
+      accessed: "2026-07-22"
+
+- id: vienna-u-bahn
+  country: Austria
+  city: Vienna
+  system: Vienna U-Bahn
+  operator: Wiener Linien
+  modes: [metro, tram, bus]
+  official_website: https://www.wienerlinien.at/web/wl-en/single-journey
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: partial
+        methods: [WienMobil digital ticket, annual pass]
+        notes: Vienna uses pre-purchased paper or digital tickets rather than a stored-value tap card for occasional travel.
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: Tap+Ride launched as a one-year pilot from May 2026; it should not yet be treated as universal permanent open-loop coverage.
+        source: Wiener Linien Tap and Ride
+      mobile_wallet:
+        status: partial
+        methods: [Contactless bank-card wallet]
+        notes: Phones and smartwatches follow the Tap+Ride pilot.
+        source: Wiener Linien Tap and Ride
+      qr_code:
+        status: yes
+        methods: [WienMobil digital ticket]
+        source: Wiener Linien single journey
+      official_app:
+        status: yes
+        methods: [WienMobil]
+        source: Wiener Linien single journey
+      paper_or_token:
+        status: yes
+        methods: [Paper ticket]
+        source: Wiener Linien single journey
+      tourist_pass:
+        status: yes
+        methods: [24-hour ticket, Vienna City Card]
+        notes: Product inclusions and validation rules vary.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: U-Bahn station machines sell Wiener Linien fare products.
+      bank_card:
+        status: yes
+        notes: Ticket-machine payment methods include bank cards.
+      contactless_card:
+        status: partial
+        notes: Machine generation determines the available card interface.
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Vienna tickets cover Wiener Linien and participating urban services; Tap+Ride is currently a pilot.
+  sources:
+    - title: Wiener Linien single journey
+      url: https://www.wienerlinien.at/web/wl-en/single-journey
+      accessed: "2026-07-22"
+    - title: Wiener Linien Tap and Ride
+      url: https://www.wienerlinien.at/
+      accessed: "2026-07-22"
+
+- id: warsaw-metro
+  country: Poland
+  city: Warsaw
+  system: Warsaw Metro
+  operator: Warszawski Transport Publiczny
+  modes: [metro, tram, bus, suburban rail]
+  official_website: https://www.ztm.waw.pl/en/about-ztm/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Warsaw City Card]
+        source: ZTM overview
+      contactless_bank_card:
+        status: no
+        notes: Bank cards are documented for purchasing tickets at machines, not as a universal direct Metro fare medium.
+      mobile_wallet:
+        status: no
+        notes: Mobile payment buys an app ticket; the wallet itself is not the fare credential.
+      qr_code:
+        status: yes
+        methods: [Mobile app ticket QR]
+        source: ZTM mobile tickets
+      official_app:
+        status: partial
+        methods: [mobiWAWA and approved ticket apps]
+        notes: Tickets are distributed through approved apps rather than one universal ZTM app.
+        source: ZTM mobile tickets
+      paper_or_token:
+        status: yes
+        methods: [Paper ticket]
+        source: ZTM overview
+      tourist_pass:
+        status: yes
+        methods: [24-hour ticket, 3-day ticket]
+        notes: Zone and validation rules apply.
+    ticket_machine:
+      cash:
+        status: yes
+        source: ZTM ticket machines
+      bank_card:
+        status: yes
+        source: ZTM ticket machines
+      contactless_card:
+        status: yes
+        source: ZTM tram machines
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: WTP tickets cover the Warsaw integrated transport network and must be purchased and validated.
+  sources:
+    - title: ZTM overview
+      url: https://www.ztm.waw.pl/en/about-ztm/
+      accessed: "2026-07-22"
+    - title: ZTM ticket machines
+      url: https://www.ztm.waw.pl/informacje-prasowe/2020/05/15/nowe-biletomaty-2/
+      accessed: "2026-07-22"
+    - title: ZTM tram machines
+      url: https://www.ztm.waw.pl/informacje-prasowe/2019/09/26/biletomaty-w-kazdym-tramwaju/
+      accessed: "2026-07-22"
+    - title: ZTM mobile tickets
+      url: https://www.ztm.waw.pl/informacje-prasowe/2021/03/26/bilety-z-aplikacji-po-nowemu/
+      accessed: "2026-07-22"
+
+- id: moscow-metro
+  country: Russia
+  city: Moscow
+  system: Moscow Metro
+  operator: Moscow Metro
+  modes: [metro, monorail, urban rail]
+  official_website: https://transport.mos.ru/metro/faq
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Troika]
+        source: Moscow Metro FAQ
+      contactless_bank_card:
+        status: yes
+        schemes: [MIR]
+        notes: The city documents contactless bank-card fare payment; foreign-issued card usability is constrained by payment-network availability.
+        source: Moscow Metro FAQ
+      mobile_wallet:
+        status: partial
+        notes: Mobile bank-card payment depends on a supported domestic payment credential.
+      qr_code:
+        status: partial
+        notes: QR and biometric channels exist at supported gates but require compatible local services.
+      official_app:
+        status: partial
+        notes: Moscow transport apps can manage fare products; visitor eligibility and payment constraints apply.
+      paper_or_token:
+        status: yes
+        methods: [Single and multi-ride ticket on Troika media]
+        source: Moscow Metro FAQ
+      tourist_pass:
+        status: partial
+        methods: [Unlimited ride products]
+        notes: Fare products can be loaded onto Troika subject to current tariff rules.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Tickets and Troika products are sold at station ticket offices and vending machines.
+        source: Troika terms
+      bank_card:
+        status: partial
+        notes: Payment-network and card-issuer restrictions apply.
+      contactless_card:
+        status: partial
+        notes: Availability depends on machine and supported domestic payment network.
+  interoperability:
+    open_loop: partial
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Troika integrates Moscow Metro and other city transport; international card acceptance is constrained.
+  sources:
+    - title: Moscow Metro FAQ
+      url: https://transport.mos.ru/metro/faq
+      accessed: "2026-07-22"
+    - title: Troika terms
+      url: https://transport.mos.ru/common/upload/docs/oferta.pdf
+      accessed: "2026-07-22"

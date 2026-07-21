@@ -1,0 +1,450 @@
+- id: seoul-metropolitan-subway
+  country: South Korea
+  city: Seoul
+  region: Seoul Capital Area
+  system: Seoul Metropolitan Subway
+  operator: Seoul Metro and partner operators
+  modes: [metro, suburban rail]
+  official_website: http://www.seoulmetro.co.kr/en/page.do?menuIdx=348
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [T-money, Cashbee, Korea Tour Card]
+        source: Seoul Metro fare
+      contactless_bank_card:
+        status: no
+        notes: A general foreign contactless bank card is not documented as a direct gate-entry medium.
+      mobile_wallet:
+        status: partial
+        methods: [Mobile T-money]
+        notes: Device, issuer and local-account requirements apply.
+      qr_code:
+        status: no
+        notes: QR is not the standard metropolitan subway gate-entry channel.
+      official_app:
+        status: no
+      paper_or_token:
+        status: yes
+        methods: [Single-use transportation card]
+        source: Seoul single-use ticket
+      tourist_pass:
+        status: yes
+        methods: [Korea Tour Card, Mpass]
+        notes: Product validity and included operators vary.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Single-use cards are issued after paying the fare and refundable deposit.
+        source: Seoul single-use ticket
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: T-money and compatible transit cards work across many Korean transport networks.
+  sources:
+    - title: Seoul Metro fare
+      url: http://www.seoulmetro.co.kr/en/page.do?menuIdx=348
+      accessed: "2026-07-22"
+    - title: Seoul single-use ticket
+      url: http://www.seoulmetro.co.kr/kr/page.do?menuIdx=440
+      accessed: "2026-07-22"
+
+- id: delhi-metro
+  country: India
+  city: Delhi
+  region: National Capital Region
+  system: Delhi Metro
+  operator: Delhi Metro Rail Corporation
+  modes: [metro, airport rail]
+  official_website: https://delhimetrorail.com/ticket
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Delhi Metro Smart Card, National Common Mobility Card]
+        source: DMRC ticket options
+      contactless_bank_card:
+        status: partial
+        methods: [National Common Mobility Card bank card]
+        notes: Only compatible NCMC products function as fare media; this is not universal acceptance of every bank card.
+        source: DMRC ticket options
+      mobile_wallet:
+        status: partial
+        notes: Wallets can purchase app QR tickets through supported channels.
+      qr_code:
+        status: yes
+        methods: [Paper QR ticket, Mobile QR ticket]
+        source: DMRC QR ticketing
+      official_app:
+        status: yes
+        methods: [Delhi Metro Sarthi QR ticket]
+        source: DMRC app QR
+      paper_or_token:
+        status: yes
+        methods: [Paper QR ticket]
+        source: DMRC QR ticketing
+      tourist_pass:
+        status: yes
+        methods: [Tourist Card]
+        source: DMRC ticket options
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Ticket vending machines issue paper QR tickets; payment availability varies by machine.
+        source: DMRC FAQ
+      bank_card:
+        status: partial
+        notes: Digital and vending channels support several non-cash methods, subject to machine or app.
+      qr_payment:
+        status: partial
+        notes: Supported apps can purchase QR tickets using their available payment methods.
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: NCMC is the national interoperable card standard; QR tickets are separately supported.
+  sources:
+    - title: DMRC ticket options
+      url: https://delhimetrorail.com/ticket
+      accessed: "2026-07-22"
+    - title: DMRC QR ticketing
+      url: https://delhimetrorail.com/pages/en/pressrelease_details/qr-code-based-ticketing-facility-introduced-across
+      accessed: "2026-07-22"
+    - title: DMRC app QR
+      url: https://delhimetrorail.com/qr-based-ticketing-for-travel-on-airport-line
+      accessed: "2026-07-22"
+    - title: DMRC FAQ
+      url: https://delhimetrorail.com/faq-tickets-fare
+      accessed: "2026-07-22"
+
+- id: bangkok-bts
+  country: Thailand
+  city: Bangkok
+  system: BTS Skytrain
+  operator: Bangkok Mass Transit System
+  modes: [metro]
+  official_website: https://www.bts.co.th/eng/tickets/ticket-machine.html
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Rabbit Card]
+        source: BTS fare system
+      contactless_bank_card:
+        status: no
+        notes: Bank cards are not documented as a general direct BTS gate-entry medium.
+      mobile_wallet:
+        status: no
+        notes: Mobile wallets can pay at selected ticket machines via QR but are not the fare medium at the gate.
+      qr_code:
+        status: no
+        notes: The machine payment QR buys a single-journey card; it is not scanned at the gate.
+      official_app:
+        status: no
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: BTS fare system
+      tourist_pass:
+        status: yes
+        methods: [One-Day Pass]
+        source: BTS fare system
+    ticket_machine:
+      cash:
+        status: yes
+        source: BTS fare system
+      bank_card:
+        status: no
+        notes: BTS documents coins, banknotes and QR payment depending on machine, not bank-card insertion or tapping.
+      contactless_card:
+        status: no
+      mobile_wallet:
+        status: yes
+        methods: [LINE Pay, WeChat Pay, Alipay, Thai mobile banking]
+        source: BTS ticket machine
+      qr_payment:
+        status: yes
+        methods: [Thai QR payment]
+        source: BTS ticket machine
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: partial
+    national_card: no
+    notes: Rabbit Card primarily covers BTS and participating services; Bangkok rail systems do not share one universal fare medium.
+  sources:
+    - title: BTS fare system
+      url: https://www.bts.co.th/eng/library/system-tickets.html
+      accessed: "2026-07-22"
+    - title: BTS ticket machine
+      url: https://www.bts.co.th/eng/tickets/ticket-machine.html
+      accessed: "2026-07-22"
+
+- id: kuala-lumpur-rapid-rail
+  country: Malaysia
+  city: Kuala Lumpur
+  region: Klang Valley
+  system: Rapid KL Rail
+  operator: Rapid Rail
+  modes: [metro, light rail, monorail, bus rapid transit]
+  official_website: https://myrapid.com.my/bus-train/rapid-kl/lrt/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Touch 'n Go]
+        source: Rapid KL LRT
+      contactless_bank_card:
+        status: planned
+        notes: Direct credit or debit card tap-in and tap-out has been announced as a future rollout; current bank-card use is for ticket purchase.
+      mobile_wallet:
+        status: no
+        notes: Mobile wallets are not documented as a general current gate-entry medium.
+      qr_code:
+        status: partial
+        notes: QR tickets are documented for the Shah Alam Line, not the full Rapid KL rail network.
+        source: Rapid KL LRT
+      official_app:
+        status: no
+        notes: MyRapid PULSE is a journey-planning app rather than a universal rail gate ticket.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Token]
+        source: Rapid KL LRT
+      tourist_pass:
+        status: yes
+        methods: [MyCity pass]
+        notes: Purchase channel and eligibility conditions apply.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Station vending machines sell single-journey tokens.
+        source: Rapid KL LRT
+      bank_card:
+        status: yes
+        notes: Debit and credit cards are accepted for ticketing transactions at Rapid KL stations.
+      contactless_card:
+        status: partial
+        notes: Card purchase support does not imply direct bank-card gate entry.
+      qr_payment:
+        status: partial
+        notes: QR payment and QR tickets depend on station, counter or line.
+  interoperability:
+    open_loop: planned
+    fare_capping: no
+    regional_card: yes
+    national_card: yes
+    notes: Touch 'n Go is the current interoperable stored-value medium; open-loop gate entry is not yet the established network-wide model.
+  sources:
+    - title: Rapid KL LRT
+      url: https://myrapid.com.my/bus-train/rapid-kl/lrt/
+      accessed: "2026-07-22"
+    - title: Rapid KL
+      url: https://myrapid.com.my/
+      accessed: "2026-07-22"
+
+- id: mrt-jakarta
+  country: Indonesia
+  city: Jakarta
+  system: MRT Jakarta
+  operator: MRT Jakarta
+  modes: [metro]
+  official_website: https://www.jakartamrt.co.id/id/info-terkini/sistem-pembayaran-tiket-perjalanan-mrt-jakarta-1-juli-2023
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [JakLingko card, JakCard, Mandiri e-money, BCA Flazz, BNI TapCash, BRI Brizzi, KMT]
+        source: MRT Jakarta payment system
+      contactless_bank_card:
+        status: partial
+        schemes: [Mastercard]
+        notes: Bank-card acceptance is available through documented MyMRTJ Lite or designated payment channels; verify whether a card is used directly at the gate.
+        source: MRT Jakarta payment channels
+      mobile_wallet:
+        status: partial
+        methods: [AstraPay, i.Saku, blu]
+        source: MRT Jakarta payment system
+      qr_code:
+        status: yes
+        methods: [MRT-J app QR ticket, MyMRTJ Lite QR ticket]
+        source: MRT Jakarta payment system
+      official_app:
+        status: yes
+        methods: [MRT-J app, MyMRTJ Lite]
+        source: MRT Jakarta payment channels
+      paper_or_token:
+        status: deprecated
+        notes: Multi-trip Jelajah cards were withdrawn in favour of app and interoperable card channels.
+      tourist_pass:
+        status: unknown
+    ticket_machine:
+      cash:
+        status: unknown
+      bank_card:
+        status: yes
+        notes: MyMRTJ Lite vending machines accept debit and credit cards.
+        source: MRT Jakarta payment channels
+      contactless_card:
+        status: partial
+        notes: Machine and channel capability varies.
+      qr_payment:
+        status: yes
+        methods: [QRIS]
+        source: MRT Jakarta payment channels
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: Multiple Indonesian electronic-money cards and QR channels are supported; universal bank-card gate entry is not established.
+  sources:
+    - title: MRT Jakarta payment system
+      url: https://www.jakartamrt.co.id/id/info-terkini/sistem-pembayaran-tiket-perjalanan-mrt-jakarta-1-juli-2023
+      accessed: "2026-07-22"
+    - title: MRT Jakarta payment channels
+      url: https://www.jakartamrt.co.id/sites/default/files/2025-01/%5BSiaran%20Pers%5D%20Dorong%20Sistem%20Pembayaran%20berbasis%20Aplikasi%2C%20Kartu%20Jelajah%20Berganda%20Dinonaktifkan.pdf
+      accessed: "2026-07-22"
+
+- id: istanbul-metro
+  country: Turkey
+  city: Istanbul
+  system: Metro Istanbul
+  operator: Metro Istanbul
+  modes: [metro, light rail, tram, funicular, cable car]
+  official_website: https://www.metro.istanbul/en/Home/SikcaSorulanSorular
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Istanbulkart, limited-use pass]
+        source: Metro Istanbul FAQ
+      contactless_bank_card:
+        status: no
+        notes: Metro Istanbul documents Istanbulkart and limited-use cards rather than universal bank-card gate entry.
+      mobile_wallet:
+        status: partial
+        methods: [Digital Istanbulkart]
+        notes: Availability and visitor onboarding depend on the Istanbulkart app and account requirements.
+      qr_code:
+        status: partial
+        methods: [Digital Istanbulkart QR]
+        notes: Supported digital Istanbulkart products may use QR at compatible validators.
+      official_app:
+        status: partial
+        methods: [Istanbulkart Mobile]
+        notes: Digital fare functions depend on product and account eligibility.
+      paper_or_token:
+        status: yes
+        methods: [Limited-use pass]
+        source: Metro Istanbul fares
+      tourist_pass:
+        status: partial
+        methods: [Limited-use multi-ride card]
+        source: Metro Istanbul fares
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Biletmatik machines sell and reload Istanbulkart products.
+        source: Metro Istanbul FAQ
+      bank_card:
+        status: partial
+        notes: Payment capability varies by Biletmatik generation and station.
+      contactless_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: Istanbulkart is shared across Istanbul public transport modes and municipal services.
+  sources:
+    - title: Metro Istanbul FAQ
+      url: https://www.metro.istanbul/en/Home/SikcaSorulanSorular
+      accessed: "2026-07-22"
+    - title: Metro Istanbul fares
+      url: https://metro.istanbul/SeferDurumlari/BiletUcretleri
+      accessed: "2026-07-22"
+
+- id: manila-mrt-3
+  country: Philippines
+  city: Metro Manila
+  system: MRT-3
+  operator: Department of Transportation MRT-3
+  modes: [metro]
+  official_website: https://dotrmrt3.gov.ph/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [beep card]
+        source: beep FAQ
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: The Philippine government announced cashless credit and debit payment; rollout scope and gate availability should be checked at the station.
+        source: Philippine government cashless payment
+      mobile_wallet:
+        status: partial
+        methods: [GCash]
+        notes: Cashless payment was introduced as an alternative to queueing for a single-journey ticket; station rollout may vary.
+        source: Philippine government cashless payment
+      qr_code:
+        status: partial
+        notes: Cashless purchase can produce a journey credential, but universal QR gate coverage is not documented here.
+      official_app:
+        status: no
+        notes: No universal MRT-3 operator app is documented as the standard gate-entry medium.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: Philippine government cashless payment
+      tourist_pass:
+        status: no
+        notes: A dedicated tourist pass is not documented for MRT-3.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Single-journey tickets and beep products are sold through station channels.
+      bank_card:
+        status: partial
+        notes: Credit and debit payment is available through the cashless rollout; exact machine or counter support varies.
+        source: Philippine government cashless payment
+      contactless_card:
+        status: partial
+        notes: Availability follows deployed cashless terminals.
+      mobile_wallet:
+        status: partial
+        methods: [GCash]
+        source: Philippine government cashless payment
+      qr_payment:
+        status: partial
+        notes: Mobile cashless payment availability depends on deployed station terminals.
+  interoperability:
+    open_loop: partial
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: beep is shared across several Metro Manila rail lines; newer cashless methods are still rolling out.
+  sources:
+    - title: Philippine government cashless payment
+      url: https://pia.gov.ph/news/mrt-3-now-accepts-cashless-payment/
+      accessed: "2026-07-22"
+    - title: beep FAQ
+      url: https://beep.com.ph/faqs/
+      accessed: "2026-07-22"
+    - title: MRT-3
+      url: https://dotrmrt3.gov.ph/
+      accessed: "2026-07-22"

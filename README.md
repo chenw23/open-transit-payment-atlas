@@ -21,7 +21,8 @@ but uses structured YAML data, TypeScript validation, and generated static pages
 ## Scope
 
 The initial scope is rail-first and excludes mainland China to avoid duplicating
-CNRT.
+[CNRT's payment-method coverage](https://ivysauro.github.io/CNRT/data/Pay).
+Hong Kong, Macao, and Taiwan records are included in this atlas.
 
 Included:
 
@@ -45,6 +46,17 @@ Not the primary focus:
 - YAML as the human-editable source of truth.
 - Zod for schema validation.
 - GitHub Pages for hosting.
+
+## Coverage
+
+The current dataset starts with representative systems across major metro
+countries and regions rather than claiming exhaustive worldwide coverage. Each
+system is researched independently; a payment method supported in one city is
+not assumed to work elsewhere in the same country.
+
+Mainland China data is maintained by CNRT and should not be duplicated here:
+
+- https://ivysauro.github.io/CNRT/data/Pay
 
 ## Data
 

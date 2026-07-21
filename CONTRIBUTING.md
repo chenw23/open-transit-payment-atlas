@@ -73,6 +73,9 @@ npm run export:csv
 
 ## What Not To Add
 
+- Mainland China records. Contribute those to
+  [CNRT](https://ivysauro.github.io/CNRT/data/Pay); Hong Kong, Macao, and Taiwan
+  remain in scope here.
 - Unsourced claims.
 - Generic tourist advice without official confirmation.
 - Route maps, GTFS feeds, station geometry, or railway infrastructure data.

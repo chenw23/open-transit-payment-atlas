@@ -1,0 +1,265 @@
+- id: panama-metro
+  country: Panama
+  city: Panama City
+  system: Panama Metro
+  operator: Metro de Panama
+  modes: [metro]
+  official_website: https://www.elmetrodepanama.com/guia-del-usuario/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Metrobus card]
+        source: Panama Metro user guide
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        notes: Use turnstiles marked with the relevant card-network logos.
+        source: Panama Metro pocket guide
+      mobile_wallet:
+        status: partial
+        notes: The Metro app and online banking can reload a Metrobus card; direct wallet gate entry is not documented as universal.
+      qr_code:
+        status: no
+        notes: QR is not documented as a standard gate-entry medium.
+      official_app:
+        status: partial
+        notes: The Metro app supports card reload functions rather than replacing the gate credential.
+      paper_or_token:
+        status: no
+        notes: Access uses the Metrobus card or supported contactless bank card.
+      tourist_pass:
+        status: no
+        notes: A dedicated tourist pass is not documented.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Metrobus cards are sold and reloaded at machines in stations.
+        source: Panama Metro user guide
+      bank_card:
+        status: partial
+        notes: Online and app card reload is documented; machine card-payment coverage is not represented as universal.
+      contactless_card:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Metrobus card is shared with city transport; Visa and Mastercard are also accepted at marked Metro gates.
+  sources:
+    - title: Panama Metro user guide
+      url: https://www.elmetrodepanama.com/guia-del-usuario/
+      accessed: "2026-07-22"
+    - title: Panama Metro pocket guide
+      url: https://www.elmetrodepanama.com/wp-content/uploads/2023/03/Guia-de-Bolsillo-Ramal-ES.pdf
+      accessed: "2026-07-22"
+    - title: Panama Metro reload
+      url: https://www.elmetrodepanama.com/nuevo-validador-de-saldo-en-estaciones-del-metro/
+      accessed: "2026-07-22"
+
+- id: santo-domingo-metro
+  country: Dominican Republic
+  city: Santo Domingo
+  system: Santo Domingo Metro
+  operator: Oficina para el Reordenamiento del Transporte
+  modes: [metro, cable car]
+  official_website: https://www.opret.gob.do/Servicios/PasajesIndividuales
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Reloadable Card, Single-Load Card]
+        source: OPRET individual fares
+      contactless_bank_card:
+        status: no
+        notes: OPRET documents validating an OPRET fare card at the turnstile rather than tapping a bank card.
+      mobile_wallet:
+        status: no
+        notes: A mobile-wallet gate-entry method is not documented.
+      qr_code:
+        status: no
+        notes: QR gate entry is not documented.
+      official_app:
+        status: no
+      paper_or_token:
+        status: partial
+        methods: [Single-load fare card]
+        source: OPRET individual fares
+      tourist_pass:
+        status: no
+        notes: A dedicated tourist product is not documented.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Individual fares are purchased with cash at Metro and cable-car ticket offices.
+        source: OPRET individual fares
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: OPRET fare cards are used across the Santo Domingo Metro and cable-car services.
+  sources:
+    - title: OPRET individual fares
+      url: https://www.opret.gob.do/Servicios/PasajesIndividuales
+      accessed: "2026-07-22"
+    - title: OPRET FAQ
+      url: https://www.opret.gob.do/PortalInstitucional/PreguntasFrecuentes
+      accessed: "2026-07-22"
+
+- id: jerusalem-light-rail
+  country: Israel
+  city: Jerusalem
+  system: Jerusalem Light Rail
+  operator: Jerusalem Transportation Master Plan Team
+  modes: [light rail]
+  official_website: https://jet.gov.il/en/information/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Rav-Kav]
+        source: Jerusalem traveler information
+      contactless_bank_card:
+        status: no
+        notes: Bank cards can fund app or Rav-Kav purchase channels but are not documented as direct validators.
+      mobile_wallet:
+        status: partial
+        methods: [Rav-Pass, Moovit, Pango, egg]
+        notes: Approved public-transport payment apps can provide a digital fare; account and validation rules apply.
+        source: Israel public transport apps
+      qr_code:
+        status: partial
+        notes: App-based fare validation is supported through approved public-transport payment apps.
+        source: Israel public transport apps
+      official_app:
+        status: partial
+        methods: [Rav-Kav Online, Rav-Pass, Moovit, Pango, egg]
+        source: Israel public transport apps
+      paper_or_token:
+        status: unknown
+      tourist_pass:
+        status: partial
+        methods: [Anonymous Rav-Kav fare products]
+        notes: Visitor suitability depends on the fare product and registration channel.
+    ticket_machine:
+      cash:
+        status: unknown
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: Rav-Kav is used on buses, Israel Railways and light rail throughout Israel.
+  sources:
+    - title: Jerusalem traveler information
+      url: https://jet.gov.il/en/information/
+      accessed: "2026-07-22"
+    - title: Israel public transport apps
+      url: https://govextra.gov.il/national-digital-agency/rising-lion-info-en/home/new/
+      accessed: "2026-07-22"
+
+- id: algiers-metro
+  country: Algeria
+  city: Algiers
+  system: Algiers Metro
+  operator: Entreprise Metro d'Alger
+  modes: [metro]
+  official_website: https://www.metroalger-dz.com/fr/details_usagers_idAC-10/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: unknown
+      contactless_bank_card:
+        status: no
+        notes: The operator documents buying a transport ticket before entering, not direct bank-card gate payment.
+      mobile_wallet:
+        status: no
+        notes: Mobile-wallet gate entry is not documented.
+      qr_code:
+        status: no
+        notes: QR gate entry is not documented.
+      official_app:
+        status: no
+      paper_or_token:
+        status: yes
+        methods: [Metro ticket]
+        notes: Insert the purchased ticket into the access-control device to open the barrier.
+        source: Algiers Metro passenger information
+      tourist_pass:
+        status: unknown
+    ticket_machine:
+      cash:
+        status: unknown
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: unknown
+    regional_card: unknown
+    national_card: no
+    notes: Tickets are sold at station ticket offices and automatic vending machines before validation.
+  sources:
+    - title: Algiers Metro passenger information
+      url: https://www.metroalger-dz.com/fr/details_usagers_idAC-10/
+      accessed: "2026-07-22"
+
+- id: dhaka-metro-rail
+  country: Bangladesh
+  city: Dhaka
+  system: Dhaka Metro Rail
+  operator: Dhaka Mass Transit Company Limited
+  modes: [metro]
+  official_website: https://dmtcl.gov.bd/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [MRT Pass, Rapid Pass]
+        source: DMTCL fare media
+      contactless_bank_card:
+        status: no
+        notes: A general bank card is not documented as direct gate-entry fare media.
+      mobile_wallet:
+        status: no
+        notes: Mobile-wallet gate entry is not documented.
+      qr_code:
+        status: no
+        notes: QR gate entry is not documented.
+      official_app:
+        status: no
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: DMTCL fare media
+      tourist_pass:
+        status: no
+        notes: A dedicated tourist product is not documented.
+    ticket_machine:
+      cash:
+        status: unknown
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: partial
+    national_card: yes
+    notes: MRT Pass and Single Journey Ticket are the documented Metro fare media; Rapid Pass is intended for multimodal use.
+  sources:
+    - title: DMTCL fare media
+      url: https://dmtcl.gov.bd/pages/policies/%E0%A6%AF%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A7%80%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%8F%E0%A6%AE%E0%A6%86%E0%A6%B0%E0%A6%9F%E0%A6%BF-%E0%A6%AA%E0%A6%BE%E0%A6%B8-mrt-pass-%E0%A6%8F%E0%A6%AC%E0%A6%82-%E0%A6%8F%E0%A6%95%E0%A6%95-%E0%A6%AF%E0%A6%BE%E0%A6%A4%E0%A7%8D%E0%A6%B0%E0%A6%BE-%E0%A6%9F%E0%A6%BF%E0%A6%95%E0%A7%87%E0%A6%9F-sjt-%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A8%E0%A6%BE-%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%A7%E0%A6%A4%E0%A6%BF-630b17-6922d8fbdbfbab28ce047230
+      accessed: "2026-07-22"
+    - title: DMTCL FAQ
+      url: https://dmtcl.gov.bd/pages/static-pages/6922dc72933eb65569e106c8
+      accessed: "2026-07-22"

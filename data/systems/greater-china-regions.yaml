@@ -1,0 +1,414 @@
+- id: hong-kong-mtr
+  country: Hong Kong
+  city: Hong Kong
+  system: MTR
+  operator: MTR Corporation
+  modes: [metro, suburban rail, airport rail, light rail]
+  official_website: https://www.mtr.com.hk/en/customer/tickets/tf_index.html
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Octopus]
+        source: MTR tickets and fares
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, UnionPay]
+        notes: Available for MTR rides including Airport Express; not available for Light Rail or MTR Bus.
+        source: MTR contactless
+      mobile_wallet:
+        status: yes
+        methods: [Octopus on iPhone or Apple Watch, Octopus on Android, contactless bank-card wallet]
+        source: Octopus mobile FAQs
+      qr_code:
+        status: partial
+        methods: [AlipayHK EasyGo, Alipay Transit QR, UnionPay App MTR Transit QR, WeChat Transit QR]
+        notes: QR products and supported lines vary; Airport Express support is explicitly documented.
+        source: MTR tickets and fares
+      official_app:
+        status: partial
+        notes: MTR Mobile supports travel services, while gate payment depends on a supported QR or fare product.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: MTR tickets and fares
+      tourist_pass:
+        status: yes
+        methods: [Tourist Day Pass, Airport Express Travel Pass, Tourist Octopus]
+        source: MTR tickets and fares
+    ticket_machine:
+      cash:
+        status: yes
+        source: MTR tickets and fares
+      bank_card:
+        status: partial
+        notes: Card acceptance depends on the machine and ticket product.
+      contactless_card:
+        status: partial
+        notes: Some ticket machines or self-service points accept contactless cards; this is not universal.
+      mobile_wallet:
+        status: partial
+        notes: Availability follows the payment capability of the relevant machine or product.
+      qr_payment:
+        status: partial
+        notes: CNRT records Alipay and WeChat support only at selected stations for ticket purchase.
+        source: CNRT Pay
+  interoperability:
+    open_loop: partial
+    fare_capping: partial
+    regional_card: yes
+    national_card: partial
+    notes: Octopus is the principal interoperable fare medium. Contactless bank cards have product and mode limitations.
+  sources:
+    - title: MTR tickets and fares
+      url: https://www.mtr.com.hk/en/customer/tickets/tf_index.html
+      accessed: "2026-07-22"
+    - title: MTR contactless
+      url: https://www.mtr.com.hk/en/customer/main/about_contactless.html
+      accessed: "2026-07-22"
+    - title: Octopus mobile FAQs
+      url: https://www.octopus.com.hk/en/consumer/customer-service/faq/apple-pay/use.html
+      accessed: "2026-07-22"
+    - title: Octopus on Android
+      url: https://www.octopus.com.hk/en/consumer/customer-service/faq/android-octopus/get.html
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"
+
+- id: macao-light-rapid-transit
+  country: Macao
+  city: Macao
+  system: Macao Light Rapid Transit
+  operator: Macao Light Rapid Transit Corporation
+  modes: [light rail]
+  official_website: https://www.mlm.com.mo/en/free_ticket.html
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [LRT Card, Macau Pass]
+        source: MLRT tickets and fares
+      contactless_bank_card:
+        status: no
+        notes: Bank cards are accepted at customer service centres for ticket purchase, not documented for direct gate entry.
+      mobile_wallet:
+        status: no
+        notes: Mobile payments are accepted at customer service centres, not documented for direct gate entry.
+      qr_code:
+        status: no
+        notes: QR payment is a purchase channel rather than a direct gate-entry medium.
+      official_app:
+        status: no
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: MLRT tickets and fares
+      tourist_pass:
+        status: unknown
+    ticket_machine:
+      cash:
+        status: yes
+        source: MLRT tickets and fares
+      bank_card:
+        status: no
+        notes: Automatic ticket vending machines accept Macao pataca cash and LRT Card only.
+        source: MLRT tickets and fares
+      contactless_card:
+        status: no
+        notes: Contactless bank-card payment is available at customer service centres, not TVMs.
+        source: MLRT tickets and fares
+      mobile_wallet:
+        status: no
+        notes: Alipay, WeChat Pay and Simple Pay are customer-service-centre methods, not TVM methods.
+        source: MLRT tickets and fares
+      qr_payment:
+        status: no
+        notes: Mobile QR payments are accepted at customer service centres, not TVMs.
+        source: MLRT tickets and fares
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: Macau Pass can be tapped at gates; CNRT also distinguishes counter payment from TVM payment.
+  sources:
+    - title: MLRT tickets and fares
+      url: https://www.mlm.com.mo/en/free_ticket.html
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"
+
+- id: taipei-metro
+  country: Taiwan
+  city: Taipei
+  region: Taipei metropolitan area
+  system: Taipei Metro
+  operator: Taipei Rapid Transit Corporation
+  modes: [metro]
+  official_website: https://english.metro.taipei/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [EasyCard, iPASS, icash 2.0]
+        notes: Stored-value cards remain a standard gate-entry medium.
+      contactless_bank_card:
+        status: planned
+        notes: CNRT records contactless bank-card gate entry as planned; verify launch status before travel.
+        source: CNRT Pay
+      mobile_wallet:
+        status: partial
+        methods: [Easy Wallet transit QR, Taiwan Pay transit QR]
+        source: Taipei Metro multipayment
+      qr_code:
+        status: yes
+        methods: [Easy Wallet transit QR, Taiwan Pay transit QR, TWQR-compatible transit codes]
+        source: Taipei Metro multipayment
+      official_app:
+        status: partial
+        notes: Gate entry depends on a supported transit QR provider rather than the general Taipei Metro app.
+      paper_or_token:
+        status: yes
+        methods: [Single-Journey Ticket]
+        notes: Station-issued single-journey fare media remain available for occasional riders.
+      tourist_pass:
+        status: yes
+        methods: [Taipei Metro one-day pass, 24-hour pass, 48-hour pass, 72-hour pass]
+        notes: Time-based Taipei Metro passes are available subject to each product's validity rules.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Single-journey tickets and pass products can be purchased at station machines.
+      bank_card:
+        status: unknown
+      contactless_card:
+        status: unknown
+      mobile_wallet:
+        status: unknown
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: planned
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: Stored-value cards and TPASS products interoperate across multiple Taipei-area transport services.
+  sources:
+    - title: Taipei Metro multipayment
+      url: https://web.metro.taipei/QRCode/multipayment/
+      accessed: "2026-07-22"
+    - title: Taipei Metro
+      url: https://english.metro.taipei/
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"
+
+- id: kaohsiung-metro
+  country: Taiwan
+  city: Kaohsiung
+  system: Kaohsiung Metro
+  operator: Kaohsiung Rapid Transit Corporation
+  modes: [metro, light rail]
+  official_website: https://www.krtc.com.tw/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [iPASS, EasyCard, icash 2.0]
+        source: KRTC tickets
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, JCB, UnionPay, American Express]
+        notes: Supported cards include contactless credit or debit products subject to KRTC conditions.
+        source: KRTC contactless cards
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay, contactless card wallet]
+        source: KRTC contactless cards
+      qr_code:
+        status: yes
+        methods: [LINE Pay Money, TWQR]
+        source: CNRT Pay
+      official_app:
+        status: partial
+        notes: QR support is provided through participating payment apps rather than one universal KRTC app.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: KRTC tickets
+      tourist_pass:
+        status: partial
+        notes: Day and joint-ticket products are available, subject to product scope.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Station add-value and ticket machines issue or reload fare media.
+      bank_card:
+        status: unknown
+      contactless_card:
+        status: unknown
+      mobile_wallet:
+        status: unknown
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: Multiple Taiwan stored-value cards and contactless bank cards are accepted for gate entry.
+  sources:
+    - title: KRTC contactless cards
+      url: https://www.krtc.com.tw/Ticket/ticket_more?id=9f77e20ca65049bd9ee65ece382844af
+      accessed: "2026-07-22"
+    - title: KRTC tickets
+      url: https://www.krtc.com.tw/Ticket/
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"
+
+- id: taoyuan-airport-mrt
+  country: Taiwan
+  city: Taoyuan
+  region: Taoyuan and Taipei
+  system: Taoyuan Airport MRT
+  operator: Taoyuan Metro Corporation
+  modes: [airport rail, metro]
+  official_website: https://www.tymetro.com.tw/tymetro-new/en/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [EasyCard, iPASS, icash 2.0]
+        source: Taoyuan Metro tickets
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, JCB, UnionPay]
+        source: Taoyuan Metro FAQ
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay, NFC bank-card wallet]
+        source: Taoyuan Metro mobile payment
+      qr_code:
+        status: yes
+        methods: [iPASS MONEY, Alipay, online ticket QR]
+        notes: CNRT marks online-ticket QR as limited to Airport MRT, which is the system represented here.
+        source: Taoyuan Metro tickets
+      official_app:
+        status: partial
+        notes: Online or partner-app QR products are supported; check the exact ticket product before travel.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Token]
+        source: Taoyuan Metro usage
+      tourist_pass:
+        status: partial
+        notes: Joint and visitor products are available through selected sales channels.
+    ticket_machine:
+      cash:
+        status: yes
+        source: Taoyuan Metro usage
+      bank_card:
+        status: unknown
+      contactless_card:
+        status: unknown
+      mobile_wallet:
+        status: unknown
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: Contactless bank cards and stored-value cards work directly at supported gates.
+  sources:
+    - title: Taoyuan Metro FAQ
+      url: https://www.tymetro.com.tw/tymetro-new/en/_pages/service/FAQ.php?page=4
+      accessed: "2026-07-22"
+    - title: Taoyuan Metro tickets
+      url: https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/ticket.html
+      accessed: "2026-07-22"
+    - title: Taoyuan Metro mobile payment
+      url: https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/ticketson05.php
+      accessed: "2026-07-22"
+    - title: Taoyuan Metro usage
+      url: https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/usage.html
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"
+
+- id: taichung-metro
+  country: Taiwan
+  city: Taichung
+  system: Taichung Metro
+  operator: Taichung Mass Rapid Transit Corporation
+  modes: [metro]
+  official_website: https://www.tmrt.com.tw/eng/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [EasyCard, iPASS, icash 2.0]
+        source: TMRT ticket types
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, JCB]
+        source: TMRT ticket types
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay]
+        source: TMRT ticket types
+      qr_code:
+        status: yes
+        methods: [LINE Pay Money, Easy Wallet, iPASS MONEY, icash Pay, TWQR]
+        source: TMRT ride method
+      official_app:
+        status: partial
+        notes: QR gate entry uses participating payment apps.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Ticket]
+        source: TMRT ride method
+      tourist_pass:
+        status: partial
+        notes: Day-pass products are available at selected sales points.
+    ticket_machine:
+      cash:
+        status: yes
+        source: TMRT ride method
+      bank_card:
+        status: unknown
+      contactless_card:
+        status: unknown
+      mobile_wallet:
+        status: unknown
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: Stored-value cards, contactless bank cards, mobile wallets and QR products are separate gate-entry channels.
+  sources:
+    - title: TMRT ticket types
+      url: https://www.tmrt.com.tw/metro-life/ticket-types
+      accessed: "2026-07-22"
+    - title: TMRT ride method
+      url: https://www.tmrt.com.tw/metro-life/ride-method
+      accessed: "2026-07-22"
+    - title: CNRT Pay
+      url: https://ivysauro.github.io/CNRT/data/Pay
+      accessed: "2026-07-22"

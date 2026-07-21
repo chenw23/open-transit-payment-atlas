@@ -1,0 +1,338 @@
+- id: toronto-ttc
+  country: Canada
+  city: Toronto
+  region: Greater Toronto and Hamilton Area
+  system: TTC Subway and Light Rail
+  operator: Toronto Transit Commission
+  modes: [subway, light rail, streetcar]
+  official_website: https://www.ttc.ca/Fares-and-passes/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [PRESTO card, PRESTO Ticket]
+        source: TTC fares and passes
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express, Interac Debit]
+        source: TTC bank card payment
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, PRESTO in mobile wallet]
+        source: TTC bank card payment
+      paper_or_token:
+        status: partial
+        methods: [Paper transfer]
+        notes: Paper transfers are proof of payment for cash fares, not a general reloadable gate medium.
+      tourist_pass:
+        status: partial
+        methods: [PRESTO day pass products]
+        notes: Availability depends on the PRESTO fare product.
+    ticket_machine:
+      cash:
+        status: yes
+        source: TTC fare payment guide
+      bank_card:
+        status: partial
+        notes: Fare vending machine payment capabilities vary by station and product.
+      contactless_card:
+        status: partial
+        notes: Direct gate tapping is separately supported network-wide.
+  interoperability:
+    open_loop: yes
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: PRESTO and contactless payment are accepted across TTC, with transfer and regional integration rules.
+  sources:
+    - title: TTC fares and passes
+      url: https://www.ttc.ca/Fares-and-passes/
+      accessed: "2026-07-22"
+    - title: TTC bank card payment
+      url: https://www.ttc.ca/riding-the-ttc/Updates/Pay-your-fare-with-your-debit-or-credit-card
+      accessed: "2026-07-22"
+    - title: TTC fare payment guide
+      url: https://www.ttc.ca/Fares-and-passes/Fare-Payment-Guide
+      accessed: "2026-07-22"
+
+- id: mexico-city-metro
+  country: Mexico
+  city: Mexico City
+  system: Mexico City Metro
+  operator: Sistema de Transporte Colectivo
+  modes: [metro]
+  official_website: https://www.metro.cdmx.gob.mx/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Tarjeta de Movilidad Integrada]
+        source: Mexico City MI card
+      contactless_bank_card:
+        status: no
+        notes: The MI card is the documented access medium for the Metro; bank-card gate payment documented for Metrobús is not generalized to Metro.
+      mobile_wallet:
+        status: no
+        notes: Phone NFC can reload an MI card, but is not documented as direct Metro gate entry.
+      qr_code:
+        status: no
+        notes: Direct QR gate entry is not documented for the Metro.
+      official_app:
+        status: no
+      paper_or_token:
+        status: deprecated
+        notes: The integrated mobility card replaced the former magnetic ticket for regular access.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: MI cards can be bought or reloaded with cash at Metro ticket offices and other network vending machines.
+        source: Mexico City MI card
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: The MI card is shared across several Mexico City public transport modes.
+  sources:
+    - title: Mexico City MI card
+      url: https://mexicocity.cdmx.gob.mx/e/getting-around/mexico-city-metro-card/
+      accessed: "2026-07-22"
+    - title: Mexico City Metro
+      url: https://www.metro.cdmx.gob.mx/
+      accessed: "2026-07-22"
+
+- id: sao-paulo-metro
+  country: Brazil
+  city: Sao Paulo
+  region: Sao Paulo metropolitan area
+  system: Sao Paulo Metro
+  operator: Companhia do Metropolitano de Sao Paulo
+  modes: [metro, monorail]
+  official_website: https://www.metro.sp.gov.br/sua-viagem/bilhetes-cartoes/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Bilhete Unico, TOP card]
+        source: Sao Paulo tickets and cards
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: Contactless debit or credit cards are accepted at designated gates and stations, not represented as universal at every gate.
+        source: TurisMetro
+      mobile_wallet:
+        status: partial
+        notes: Contactless bank-card wallets follow the designated open-loop gate rollout.
+      qr_code:
+        status: yes
+        methods: [Bilhete Unitario QR Code]
+        source: Sao Paulo QR tickets
+      official_app:
+        status: yes
+        methods: [TOP app QR ticket]
+        source: Sao Paulo QR tickets
+      paper_or_token:
+        status: yes
+        methods: [Printed QR single ticket]
+        source: Sao Paulo QR tickets
+      tourist_pass:
+        status: unknown
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Cash is accepted at ticket offices; self-service QR ticket machines primarily document debit-card payment.
+      bank_card:
+        status: unknown
+        notes: The current official ticket page confirms self-service QR-ticket machines but does not clearly state their current bank-card acceptance.
+      contactless_card:
+        status: unknown
+      qr_payment:
+        status: partial
+        notes: PIX and app channels can purchase QR tickets, but this is separate from a universal machine QR-payment function.
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: The network supports stored-value cards and QR tickets; direct bank-card entry is limited to designated gates.
+  sources:
+    - title: Sao Paulo tickets and cards
+      url: https://www.metro.sp.gov.br/sua-viagem/bilhetes-cartoes/
+      accessed: "2026-07-22"
+    - title: Sao Paulo QR tickets
+      url: https://www.metro.sp.gov.br/sua-viagem/bilhetes-cartoes/
+      accessed: "2026-07-22"
+    - title: TurisMetro
+      url: https://www.metro.sp.gov.br/sua-viagem/turismetro/
+      accessed: "2026-07-22"
+
+- id: santiago-metro
+  country: Chile
+  city: Santiago
+  system: Santiago Metro
+  operator: Metro S.A.
+  modes: [metro]
+  official_website: https://www.metro.cl/
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [bip! card]
+        source: bip card
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa, Mastercard]
+        notes: Contactless bank-card payment is in a rollout or trial phase; verify station coverage before relying on it.
+        source: bip payment FAQ
+      mobile_wallet:
+        status: partial
+        methods: [Apple Pay, Google Pay, Garmin Pay]
+        notes: Supported wallets follow an eligible Visa or Mastercard during the contactless rollout.
+        source: bip payment FAQ
+      qr_code:
+        status: yes
+        methods: [bip! QR in Red app]
+        source: bip card
+      official_app:
+        status: yes
+        methods: [Red app QR fare]
+        source: bip card
+      paper_or_token:
+        status: no
+        notes: The integrated fare system uses cards, QR and supported bank-card media rather than a standard paper ticket.
+    ticket_machine:
+      cash:
+        status: yes
+        notes: Metro stations sell and reload bip! cards through the established sales network.
+        source: bip sales network
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: partial
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: bip! and QR integrate Metro, RED buses and selected rail services.
+  sources:
+    - title: bip payment FAQ
+      url: https://www.tarjetabip.cl/preguntas-frecuentes.php
+      accessed: "2026-07-22"
+    - title: bip card
+      url: https://www.tarjetabip.cl/que-es-tarjeta-bip.php
+      accessed: "2026-07-22"
+    - title: bip sales network
+      url: https://www.tarjetabip.cl/donde-puedo-cargar.php
+      accessed: "2026-07-22"
+
+- id: buenos-aires-subte
+  country: Argentina
+  city: Buenos Aires
+  system: Buenos Aires Subte
+  operator: Emova
+  modes: [metro]
+  official_website: https://buenosaires.gob.ar/gcaba_historico/subte
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [SUBE]
+        source: Buenos Aires transport
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        notes: Contactless credit and debit cards can be used at Subte gates.
+        source: Buenos Aires transport
+      mobile_wallet:
+        status: yes
+        methods: [NFC bank-card wallet]
+        source: Buenos Aires transport
+      qr_code:
+        status: unknown
+      official_app:
+        status: unknown
+      paper_or_token:
+        status: no
+        notes: SUBE and supported contactless payment media are the documented access methods.
+    ticket_machine:
+      cash:
+        status: partial
+        notes: SUBE purchase and reload availability varies by station and sales point.
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: unknown
+    regional_card: yes
+    national_card: yes
+    notes: SUBE is used across Argentine public transport; open-loop bank-card payment is separately available on Subte.
+  sources:
+    - title: Buenos Aires transport
+      url: https://turismo.buenosaires.gob.ar/es/article/moverse-por-la-ciudad
+      accessed: "2026-07-22"
+    - title: Buenos Aires Subte
+      url: https://buenosaires.gob.ar/gcaba_historico/subte
+      accessed: "2026-07-22"
+
+- id: medellin-metro
+  country: Colombia
+  city: Medellin
+  region: Aburra Valley
+  system: Medellin Metro
+  operator: Metro de Medellin
+  modes: [metro, tram, cable car, bus rapid transit]
+  official_website: https://www.metrodemedellin.gov.co/en/users/how-to-travel-in-the-medellin-metro
+  last_verified: "2026-07-22"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Civica card, Civica debit card]
+        source: Metro de Medellin Civica
+      contactless_bank_card:
+        status: partial
+        methods: [Bancolombia Civica debit card]
+        notes: The co-branded Civica debit card is supported; this is not documented as universal open-loop acceptance of any bank card.
+        source: Civica debit card
+      mobile_wallet:
+        status: partial
+        methods: [CivicaPay]
+        source: Civica app
+      qr_code:
+        status: yes
+        methods: [CivicaPay QR]
+        source: Civica app
+      official_app:
+        status: yes
+        methods: [Civica app]
+        source: Civica app
+      paper_or_token:
+        status: unknown
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Civica reload and sales channels vary across the integrated network.
+      bank_card:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Civica is the shared fare medium for the integrated Medellin transport system.
+  sources:
+    - title: Metro de Medellin Civica
+      url: https://www.metrodemedellin.gov.co/en/users/how-to-travel-in-the-medellin-metro
+      accessed: "2026-07-22"
+    - title: Civica debit card
+      url: https://www.metrodemedellin.gov.co/al-dia/noticias/tarjeta-debito-civica-bancolombia-la-llave-de-entrada-al-sistema-metro
+      accessed: "2026-07-22"
+    - title: Civica app
+      url: https://civica.metrodemedellin.gov.co/civica-app
+      accessed: "2026-07-22"
