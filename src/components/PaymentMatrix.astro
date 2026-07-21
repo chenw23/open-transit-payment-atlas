@@ -24,38 +24,56 @@ function extraNotes(system: TransitSystem): string {
     <thead>
       <tr>
         <th>System</th>
-        <th>Opened</th>
-        <th>Transit Card</th>
-        <th>Bank Card</th>
-        <th>Mobile Wallet</th>
-        <th>QR</th>
-        <th>Official App</th>
-        <th>Tourist Pass</th>
-        <th>TVM Cash</th>
-        <th>TVM Card</th>
-        <th>Open Loop</th>
-        <th>Notes</th>
+        <th>Mode</th>
+        <th title="Local transit card">💳</th>
+        <th title="Contactless bank card at gate">💳↗</th>
+        <th title="Mobile wallet at gate">📱</th>
+        <th title="QR ticket or QR gate entry">QR</th>
+        <th title="Official app gate entry">APP</th>
+        <th title="Tourist pass">🎫</th>
+        <th title="Ticket machine cash">💴</th>
+        <th title="Ticket machine bank card">TVM</th>
+        <th title="Open-loop payment">OL</th>
+        <th title="Extra notes">+</th>
       </tr>
     </thead>
     <tbody>
-      {systems.map((system) => (
-        <tr>
-          <th scope="row">
-            <a href={`systems/${system.id}/`}>{system.system}</a>
-            <small>{system.city} / {system.country}</small>
-          </th>
-          <td>{system.modes.join("/")}</td>
-          <td>{compactMethod(system.payment.gate_entry.local_transit_card.status, system.payment.gate_entry.local_transit_card.methods)}</td>
-          <td>{compactMethod(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</td>
-          <td>{compactMethod(system.payment.gate_entry.mobile_wallet.status, system.payment.gate_entry.mobile_wallet.methods)}</td>
-          <td>{compactMethod(system.payment.gate_entry.qr_code.status, system.payment.gate_entry.qr_code.methods)}</td>
-          <td>{compactMethod(system.payment.gate_entry.official_app.status, system.payment.gate_entry.official_app.methods)}</td>
-          <td>{compactMethod(system.payment.gate_entry.tourist_pass.status, system.payment.gate_entry.tourist_pass.methods)}</td>
-          <td>{compactMethod(system.payment.ticket_machine.cash.status)}</td>
-          <td>{compactMethod(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</td>
-          <td>{compactMethod(system.interoperability.open_loop)}</td>
-          <td class="notes">{extraNotes(system)}</td>
-        </tr>
+      {systems.map((system, index) => (
+        <>
+          {index > 0 && index % 5 === 0 && (
+            <tr class="repeat-head">
+              <th></th>
+              <th></th>
+              <th>💳</th>
+              <th>💳↗</th>
+              <th>📱</th>
+              <th>QR</th>
+              <th>APP</th>
+              <th>🎫</th>
+              <th>💴</th>
+              <th>TVM</th>
+              <th>OL</th>
+              <th>+</th>
+            </tr>
+          )}
+          <tr>
+            <th scope="row">
+              <a href={`systems/${system.id}/`}>{system.system}</a>
+              <small>{system.city} / {system.country}</small>
+            </th>
+            <td>{system.modes.join("/")}</td>
+            <td>{compactMethod(system.payment.gate_entry.local_transit_card.status, system.payment.gate_entry.local_transit_card.methods)}</td>
+            <td>{compactMethod(system.payment.gate_entry.contactless_bank_card.status, system.payment.gate_entry.contactless_bank_card.schemes)}</td>
+            <td>{compactMethod(system.payment.gate_entry.mobile_wallet.status)}</td>
+            <td>{compactMethod(system.payment.gate_entry.qr_code.status)}</td>
+            <td>{compactMethod(system.payment.gate_entry.official_app.status)}</td>
+            <td>{compactMethod(system.payment.gate_entry.tourist_pass.status)}</td>
+            <td>{compactMethod(system.payment.ticket_machine.cash.status)}</td>
+            <td>{compactMethod(system.payment.ticket_machine.bank_card.status, system.payment.ticket_machine.bank_card.schemes)}</td>
+            <td>{compactMethod(system.interoperability.open_loop)}</td>
+            <td class="notes">{extraNotes(system) ? "ⓘ" : ""}</td>
+          </tr>
+        </>
       ))}
     </tbody>
   </table>

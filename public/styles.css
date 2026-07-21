@@ -37,7 +37,7 @@ a:focus {
 }
 
 .wrapper {
-  width: 980px;
+  width: 1040px;
   margin: 0 auto;
 }
 
@@ -53,7 +53,7 @@ a:focus {
 }
 
 main {
-  width: 650px;
+  width: 720px;
   float: right;
   padding-bottom: 50px;
 }
@@ -70,13 +70,19 @@ h6 {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 27px;
 }
 
 h2 {
   color: var(--subheading);
-  font-size: 22px;
+  font-size: 21px;
   margin-top: 30px;
+}
+
+h3 {
+  color: #494949;
+  font-size: 17px;
+  margin-top: 24px;
 }
 
 p,
@@ -130,7 +136,7 @@ table {
 th,
 td {
   border-bottom: 1px solid var(--line);
-  padding: 5px 10px;
+  padding: 5px 8px;
   text-align: left;
   vertical-align: middle;
 }
@@ -156,25 +162,25 @@ th {
 }
 
 .matrix {
-  min-width: 1120px;
+  min-width: 920px;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .matrix th,
 .matrix td {
   border-bottom: 1px solid var(--line);
-  padding: 5px 8px;
+  padding: 5px 6px;
 }
 
 .matrix th[scope="row"] {
-  min-width: 185px;
+  min-width: 145px;
 }
 
 .matrix small {
   display: block;
   color: #777;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .matrix td:not(.notes) {
@@ -183,9 +189,16 @@ th {
 }
 
 .matrix .notes {
-  min-width: 260px;
+  min-width: 38px;
   color: #666;
+  font-size: 13px;
+  text-align: center;
+}
+
+.repeat-head th {
+  color: #777;
   font-size: 12px;
+  text-align: center;
 }
 
 .payment-cell {
@@ -209,6 +222,15 @@ th {
 .source-list small {
   display: block;
   color: #777;
+}
+
+.notes-list {
+  font-size: 13px;
+  padding-left: 22px;
+}
+
+.notes-list li + li {
+  margin-top: 4px;
 }
 
 @media print, screen and (max-width: 960px) {

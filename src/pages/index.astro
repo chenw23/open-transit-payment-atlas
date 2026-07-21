@@ -63,11 +63,19 @@ const systems = loadSystems();
         <table class="legend-table">
           <thead>
             <tr>
-              <th>Icon</th>
+              <th>Mark</th>
               <th>Meaning</th>
             </tr>
           </thead>
           <tbody>
+            <tr><td>💳</td><td>Local or regional closed-loop transit card</td></tr>
+            <tr><td>💳↗</td><td>Open-loop contactless bank card at fare gate</td></tr>
+            <tr><td>📱</td><td>Mobile wallet or mobile transit card at fare gate</td></tr>
+            <tr><td>QR</td><td>QR ticket or QR gate-entry product</td></tr>
+            <tr><td>APP</td><td>Official app ticket or app-based gate entry</td></tr>
+            <tr><td>🎫</td><td>Tourist pass or visitor product</td></tr>
+            <tr><td>TVM</td><td>Ticket vending machine bank-card purchase/top-up</td></tr>
+            <tr><td>OL</td><td>Open-loop tap-to-ride model</td></tr>
             <tr><td>✅</td><td>Fully supported / generally usable</td></tr>
             <tr><td>⭕</td><td>Limited support / selected channels, stations, products, or cards</td></tr>
             <tr><td>⏳</td><td>Officially announced or planned</td></tr>
@@ -79,6 +87,15 @@ const systems = loadSystems();
 
         <h2 id="passing">Passing Gate</h2>
         <PaymentMatrix systems={systems} />
+
+        <h3>Notes</h3>
+        <ol class="notes-list">
+          {systems.map((system) => (
+            <li>
+              <strong>{system.system}</strong>: {system.notes || system.interoperability.notes || "See system detail page for source-backed limitations."}
+            </li>
+          ))}
+        </ol>
 
         <h2 id="tickets">Tickets</h2>
         <p>
