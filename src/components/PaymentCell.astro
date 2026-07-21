@@ -1,0 +1,25 @@
+---
+import StatusBadge from "./StatusBadge.astro";
+import { methodText, sourceByTitle } from "@lib/data";
+import type { PaymentMethod, TransitSystem } from "@lib/schema";
+
+interface Props {
+  method: PaymentMethod;
+  system: TransitSystem;
+}
+
+const { method, system } = Astro.props;
+const values = [...method.methods, ...method.schemes];
+const source = sourceByTitle(system, method.source);
+---
+
+<div class="payment-cell">
+  <StatusBadge status={method.status} />
+  <span>{methodText(method.status, values)}</span>
+  {source && (
+    <a class="source-link" href={source.url} aria-label={`Source: ${source.title}`}>
+      Source
+    </a>
+  )}
+  {method.notes && <small>{method.notes}</small>}
+</div>

@@ -1,0 +1,441 @@
+- id: london-underground
+  country: United Kingdom
+  city: London
+  region: Greater London
+  system: London Underground
+  operator: Transport for London
+  modes: [metro]
+  official_website: https://tfl.gov.uk/fares/
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Oyster]
+        source: TfL fares
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express]
+        source: TfL contactless
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, contactless mobile wallet]
+        source: TfL contactless
+      qr_code:
+        status: no
+        notes: QR tickets are not the standard gate-entry method for the Underground.
+      official_app:
+        status: partial
+        notes: TfL account/app supports account management, not direct QR gate entry.
+      paper_or_token:
+        status: partial
+        methods: [Paper ticket]
+        notes: Paper tickets remain available for some journeys but are not the recommended payment method.
+      tourist_pass:
+        status: partial
+        methods: [Visitor Oyster]
+        source: TfL fares
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Availability varies by station and machine.
+      bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express]
+        source: TfL fares
+      contactless_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express]
+        source: TfL contactless
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because support follows card acceptance at machines and varies by station/machine.
+        methods: [Apple Pay, Google Pay]
+      qr_payment:
+        status: no
+  interoperability:
+    open_loop: yes
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Oyster and contactless support daily/weekly capping across TfL modes with rules by zone and mode.
+  sources:
+    - title: TfL fares
+      url: https://tfl.gov.uk/fares/
+      accessed: "2026-07-21"
+    - title: TfL contactless
+      url: https://tfl.gov.uk/fares/contactless-and-oyster-account
+      accessed: "2026-07-21"
+  notes: Treat London as the reference implementation for mature open-loop urban rail payment.
+
+- id: new-york-subway
+  country: United States
+  city: New York
+  region: New York metropolitan area
+  system: New York City Subway
+  operator: Metropolitan Transportation Authority
+  modes: [subway]
+  official_website: https://new.mta.info/fares
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [OMNY card, MetroCard]
+        source: MTA fares
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express, Discover]
+        source: OMNY
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay]
+        source: OMNY
+      qr_code:
+        status: no
+      official_app:
+        status: no
+        notes: OMNY is account-based contactless payment, not QR gate entry.
+      paper_or_token:
+        status: deprecated
+        notes: Tokens are discontinued; MetroCard is being phased out.
+      tourist_pass:
+        status: partial
+        notes: Visitors can use contactless cards or buy OMNY/MetroCard products.
+    ticket_machine:
+      cash:
+        status: yes
+        source: MTA fares
+      bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, American Express, Discover]
+        source: MTA fares
+      contactless_card:
+        status: partial
+        notes: Machine capability varies; gate contactless is the primary open-loop channel.
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because mobile wallets generally follow card acceptance at compatible machines.
+      qr_payment:
+        status: no
+  interoperability:
+    open_loop: yes
+    fare_capping: yes
+    regional_card: partial
+    national_card: no
+    notes: OMNY fare capping applies within supported MTA services.
+  sources:
+    - title: MTA fares
+      url: https://new.mta.info/fares
+      accessed: "2026-07-21"
+    - title: OMNY
+      url: https://omny.info/
+      accessed: "2026-07-21"
+
+- id: singapore-mrt
+  country: Singapore
+  city: Singapore
+  system: MRT and LRT
+  operator: Land Transport Authority
+  modes: [metro, light rail]
+  official_website: https://www.lta.gov.sg/content/ltagov/en/map/fare-calculator.html
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [SimplyGo EZ-Link, NETS Prepaid Card]
+        source: SimplyGo
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        source: SimplyGo
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay]
+        source: SimplyGo
+      qr_code:
+        status: no
+      official_app:
+        status: partial
+        notes: The SimplyGo app supports account and card management; gate entry uses cards/devices.
+      paper_or_token:
+        status: no
+      tourist_pass:
+        status: yes
+        methods: [Singapore Tourist Pass]
+        source: SimplyGo
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Top-up and purchase options vary by machine and card product.
+      bank_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        source: SimplyGo
+      contactless_card:
+        status: yes
+        schemes: [Visa, Mastercard]
+        source: SimplyGo
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because machine support can vary; gate entry is separately verified.
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: yes
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: Stored-value and account-based payments apply across bus, MRT, and LRT.
+  sources:
+    - title: SimplyGo
+      url: https://www.simplygo.com.sg/
+      accessed: "2026-07-21"
+    - title: LTA fares
+      url: https://www.lta.gov.sg/content/ltagov/en/map/fare-calculator.html
+      accessed: "2026-07-21"
+
+- id: tokyo-metro
+  country: Japan
+  city: Tokyo
+  region: Greater Tokyo
+  system: Tokyo Metro
+  operator: Tokyo Metro
+  modes: [metro]
+  official_website: https://www.tokyometro.jp/en/ticket/
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [PASMO, Suica, nationwide IC cards]
+        source: Tokyo Metro tickets
+      contactless_bank_card:
+        status: partial
+        schemes: [Visa]
+        notes: Contactless bank-card pilots and rollouts should be verified by line and gate.
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay Suica, Apple Pay PASMO, Mobile Suica, Mobile PASMO]
+        source: Tokyo Metro tickets
+      qr_code:
+        status: partial
+        notes: QR ticket availability depends on product and channel.
+      official_app:
+        status: partial
+        notes: App and online products exist, but IC card remains the main gate-entry channel.
+      paper_or_token:
+        status: yes
+        methods: [Magnetic ticket]
+        source: Tokyo Metro tickets
+      tourist_pass:
+        status: yes
+        methods: [Tokyo Subway Ticket]
+        source: Tokyo Metro tickets
+    ticket_machine:
+      cash:
+        status: yes
+        source: Tokyo Metro tickets
+      bank_card:
+        status: partial
+        notes: Availability depends on machine and product.
+      contactless_card:
+        status: partial
+        notes: Treated as partial because bank-card support is not a network-wide default for all products.
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because wallet support depends on IC card or specific ticket product.
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: partial
+    fare_capping: no
+    regional_card: yes
+    national_card: yes
+    notes: IC interoperability is the core passenger payment model.
+  sources:
+    - title: Tokyo Metro tickets
+      url: https://www.tokyometro.jp/en/ticket/
+      accessed: "2026-07-21"
+
+- id: sydney-trains-metro
+  country: Australia
+  city: Sydney
+  region: New South Wales
+  system: Sydney Trains and Metro
+  operator: Transport for NSW
+  modes: [suburban rail, metro]
+  official_website: https://transportnsw.info/tickets-opal/opal/contactless-payments
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Opal]
+        source: Opal
+      contactless_bank_card:
+        status: yes
+        schemes: [American Express, Mastercard, Visa]
+        source: Contactless payments
+      mobile_wallet:
+        status: yes
+        methods: [Apple Pay, Google Pay, Samsung Pay]
+        source: Contactless payments
+      qr_code:
+        status: no
+      official_app:
+        status: partial
+        notes: Apps support planning and account management; gate entry uses Opal or contactless payment.
+      paper_or_token:
+        status: no
+      tourist_pass:
+        status: partial
+        notes: Tourist use generally relies on Opal or contactless payment rather than a dedicated rail-only pass.
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Treated as partial because machine cash availability can vary by location.
+      bank_card:
+        status: yes
+        source: Opal
+      contactless_card:
+        status: yes
+        source: Contactless payments
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because machine wallet support is separate from gate contactless support.
+      qr_payment:
+        status: no
+  interoperability:
+    open_loop: yes
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Opal and contactless payments work across multiple Transport for NSW modes with fare rules.
+  sources:
+    - title: Contactless payments
+      url: https://transportnsw.info/tickets-opal/opal/contactless-payments
+      accessed: "2026-07-21"
+    - title: Opal
+      url: https://transportnsw.info/tickets-opal/opal
+      accessed: "2026-07-21"
+
+- id: dubai-metro
+  country: United Arab Emirates
+  city: Dubai
+  system: Dubai Metro
+  operator: Roads and Transport Authority
+  modes: [metro, tram]
+  official_website: https://www.rta.ae/wps/portal/rta/ae/public-transport/nol
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [nol card]
+        source: RTA nol
+      contactless_bank_card:
+        status: no
+        notes: Bank cards are not the standard direct gate-entry payment method.
+      mobile_wallet:
+        status: partial
+        notes: Mobile wallet support depends on nol product and RTA channels, not direct bank-card tapping.
+      qr_code:
+        status: no
+      official_app:
+        status: partial
+        notes: RTA apps support services and account management; verify any mobile ticket before travel.
+      paper_or_token:
+        status: no
+      tourist_pass:
+        status: partial
+        methods: [nol Red Ticket]
+        source: RTA nol
+    ticket_machine:
+      cash:
+        status: yes
+        source: RTA nol
+      bank_card:
+        status: yes
+        source: RTA nol
+      contactless_card:
+        status: partial
+        notes: Treated as partial for ticket purchase/top-up channels; direct bank-card gate entry is no.
+      mobile_wallet:
+        status: partial
+        notes: Treated as partial because wallet support depends on RTA channel and nol product.
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: nol is the shared stored-value product for Dubai public transport.
+  sources:
+    - title: RTA nol
+      url: https://www.rta.ae/wps/portal/rta/ae/public-transport/nol
+      accessed: "2026-07-21"
+
+- id: paris-metro
+  country: France
+  city: Paris
+  region: Ile-de-France
+  system: Paris Metro and RER
+  operator: Ile-de-France Mobilites
+  modes: [metro, regional rail]
+  official_website: https://www.iledefrance-mobilites.fr/en/tickets-fares
+  last_verified: "2026-07-21"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [Navigo Easy, Navigo card]
+        source: IDFM tickets
+      contactless_bank_card:
+        status: no
+        notes: Direct open-loop bank-card gate entry is not the standard network-wide model.
+      mobile_wallet:
+        status: partial
+        methods: [Mobile ticket, smartphone-based Navigo products]
+        source: IDFM tickets
+      qr_code:
+        status: partial
+        notes: Some digital products use app-based validation; verify product and mode.
+      official_app:
+        status: yes
+        methods: [Ile-de-France Mobilites app]
+        source: IDFM tickets
+      paper_or_token:
+        status: deprecated
+        notes: Legacy paper tickets are being phased out.
+      tourist_pass:
+        status: yes
+        methods: [Paris Visite, Navigo Day Ticket]
+        source: IDFM tickets
+    ticket_machine:
+      cash:
+        status: partial
+        notes: Treated as partial because cash purchase availability varies by station and sales channel.
+      bank_card:
+        status: yes
+        source: IDFM tickets
+      contactless_card:
+        status: partial
+        notes: Treated as partial for ticket purchase channels, not direct open-loop gate entry.
+      mobile_wallet:
+        status: partial
+        source: IDFM tickets
+      qr_payment:
+        status: unknown
+  interoperability:
+    open_loop: no
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: Navigo products are the main regional fare media.
+  sources:
+    - title: IDFM tickets
+      url: https://www.iledefrance-mobilites.fr/en/tickets-fares
+      accessed: "2026-07-21"

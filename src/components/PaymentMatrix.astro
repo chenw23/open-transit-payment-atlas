@@ -1,0 +1,68 @@
+---
+import PaymentCell from "./PaymentCell.astro";
+import type { TransitSystem } from "@lib/schema";
+
+interface Props {
+  systems: TransitSystem[];
+}
+
+const { systems } = Astro.props;
+---
+
+<div class="table-wrap">
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th>System</th>
+        <th>Region</th>
+        <th>Transit Card</th>
+        <th>Bank Card at Gate</th>
+        <th>Mobile Wallet</th>
+        <th>QR / App Gate Entry</th>
+        <th>Ticket Machine</th>
+        <th>Interoperability</th>
+      </tr>
+    </thead>
+    <tbody>
+      {systems.map((system) => (
+        <tr>
+          <th scope="row">
+            <a href={`systems/${system.id}/`}>{system.system}</a>
+            <small>{system.operator}</small>
+          </th>
+          <td>
+            {system.city}, {system.country}
+            {system.region && <small>{system.region}</small>}
+          </td>
+          <td>
+            <PaymentCell method={system.payment.gate_entry.local_transit_card} system={system} />
+          </td>
+          <td>
+            <PaymentCell method={system.payment.gate_entry.contactless_bank_card} system={system} />
+          </td>
+          <td>
+            <PaymentCell method={system.payment.gate_entry.mobile_wallet} system={system} />
+          </td>
+          <td>
+            <PaymentCell method={system.payment.gate_entry.qr_code} system={system} />
+            <PaymentCell method={system.payment.gate_entry.official_app} system={system} />
+          </td>
+          <td>
+            <PaymentCell method={system.payment.ticket_machine.cash} system={system} />
+            <PaymentCell method={system.payment.ticket_machine.bank_card} system={system} />
+            <PaymentCell method={system.payment.ticket_machine.contactless_card} system={system} />
+          </td>
+          <td>
+            <div class="payment-cell">
+              <span>Open loop: {system.interoperability.open_loop}</span>
+              <span>Fare capping: {system.interoperability.fare_capping}</span>
+              <span>Regional card: {system.interoperability.regional_card}</span>
+              <span>National card: {system.interoperability.national_card}</span>
+              {system.interoperability.notes && <small>{system.interoperability.notes}</small>}
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

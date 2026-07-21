@@ -1,0 +1,14 @@
+---
+import { statusLabels, statusMarks } from "@lib/data";
+import type { PaymentStatus } from "@lib/schema";
+
+interface Props {
+  status: PaymentStatus;
+}
+
+const { status } = Astro.props;
+---
+
+<span class={`status status-${status}`} title={statusLabels[status]}>
+  {statusMarks[status]}
+</span>

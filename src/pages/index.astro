@@ -1,0 +1,117 @@
+---
+import PaymentMatrix from "@components/PaymentMatrix.astro";
+import { loadSystems } from "@lib/data";
+
+const systems = loadSystems();
+const countries = [...new Set(systems.map((system) => system.country))].sort();
+const openLoopCount = systems.filter(
+  (system) => system.payment.gate_entry.contactless_bank_card.status === "yes",
+).length;
+const partialOpenLoopCount = systems.filter(
+  (system) => system.payment.gate_entry.contactless_bank_card.status === "partial",
+).length;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An evidence-backed atlas of rail transit payment methods around the world."
+    />
+    <title>Open Transit Payment Atlas</title>
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles.css`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav>
+        <a class="brand" href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a>
+        <a href="#matrix">Payment matrix</a>
+        <a href="#contribute">Contribute</a>
+        <a href="data/systems.json">JSON</a>
+        <a href="data/systems.csv">CSV</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">Rail transit payment information</p>
+          <h1>Passenger-facing payment methods for metro, urban rail, and airport rail.</h1>
+          <p>
+            This project records what passengers can actually use: local transit cards,
+            contactless bank cards, mobile wallets, QR tickets, official apps, ticket
+            vending machine payments, and important limitations, backed by official
+            sources wherever possible.
+          </p>
+        </div>
+        <dl class="stats">
+          <div>
+            <dt>{systems.length}</dt>
+            <dd>systems tracked</dd>
+          </div>
+          <div>
+            <dt>{countries.length}</dt>
+            <dd>countries / regions</dd>
+          </div>
+          <div>
+            <dt>{openLoopCount}</dt>
+            <dd>full open-loop systems</dd>
+          </div>
+          <div>
+            <dt>{partialOpenLoopCount}</dt>
+            <dd>partial open-loop systems</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="principles">
+        <article>
+          <h2>Passenger first</h2>
+          <p>
+            The atlas answers practical questions: can I tap a bank card, use a local
+            transit card, scan a QR ticket, buy at a machine, or rely on an official app?
+          </p>
+        </article>
+        <article>
+          <h2>Evidence required</h2>
+          <p>
+            Each non-obvious payment claim should have an official source from the
+            operator, city, transport authority, or payment provider.
+          </p>
+        </article>
+        <article>
+          <h2>Structured data</h2>
+          <p>
+            YAML is the source of truth. The web matrix, JSON export, and CSV export are
+            generated from the same validated records.
+          </p>
+        </article>
+      </section>
+
+      <section id="matrix" class="matrix-section">
+        <div class="section-heading">
+          <p class="eyebrow">Current sample data</p>
+          <h2>Payment matrix</h2>
+        </div>
+        <PaymentMatrix systems={systems} />
+      </section>
+
+      <section id="contribute" class="contribute">
+        <div>
+          <p class="eyebrow">Contribution model</p>
+          <h2>Start with official sources, then encode the passenger rule.</h2>
+        </div>
+        <ol>
+          <li>Find the official fare, ticketing, or contactless-payment page.</li>
+          <li>Separate gate entry from ticket purchase and ticket vending machines.</li>
+          <li>Use explicit status values: yes, partial, planned, no, unknown, deprecated.</li>
+          <li>Record limitations such as selected stations, selected gates, app-region locks, or local-card requirements.</li>
+          <li>Run the validator before opening a pull request.</li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+---
+import PaymentCell from "@components/PaymentCell.astro";
+import { loadSystems, statusLabels } from "@lib/data";
+
+export function getStaticPaths() {
+  return loadSystems().map((system) => ({
+    params: { id: system.id },
+    props: { system },
+  }));
+}
+
+const { system } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{system.system} - Open Transit Payment Atlas</title>
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles.css`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav>
+        <a class="brand" href={import.meta.env.BASE_URL}>Open Transit Payment Atlas</a>
+        <a href={`${import.meta.env.BASE_URL}#matrix`}>Payment matrix</a>
+        <a href={system.official_website}>Official website</a>
+      </nav>
+    </header>
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">{system.city}, {system.country}</p>
+          <h1>{system.system}</h1>
+          <p>
+            Operated by {system.operator}. Last verified on {system.last_verified}.
+          </p>
+        </div>
+        <dl class="stats">
+          <div>
+            <dt>{statusLabels[system.payment.gate_entry.contactless_bank_card.status]}</dt>
+            <dd>bank card at gate</dd>
+          </div>
+          <div>
+            <dt>{statusLabels[system.interoperability.open_loop]}</dt>
+            <dd>open-loop payment</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="principles">
+        <article>
+          <h2>Gate entry</h2>
+          <PaymentCell method={system.payment.gate_entry.local_transit_card} system={system} />
+          <PaymentCell method={system.payment.gate_entry.contactless_bank_card} system={system} />
+          <PaymentCell method={system.payment.gate_entry.mobile_wallet} system={system} />
+          <PaymentCell method={system.payment.gate_entry.qr_code} system={system} />
+          <PaymentCell method={system.payment.gate_entry.official_app} system={system} />
+          <PaymentCell method={system.payment.gate_entry.paper_or_token} system={system} />
+          <PaymentCell method={system.payment.gate_entry.tourist_pass} system={system} />
+        </article>
+        <article>
+          <h2>Ticket purchase</h2>
+          <PaymentCell method={system.payment.ticket_machine.cash} system={system} />
+          <PaymentCell method={system.payment.ticket_machine.bank_card} system={system} />
+          <PaymentCell method={system.payment.ticket_machine.contactless_card} system={system} />
+          <PaymentCell method={system.payment.ticket_machine.mobile_wallet} system={system} />
+          <PaymentCell method={system.payment.ticket_machine.qr_payment} system={system} />
+        </article>
+        <article>
+          <h2>Sources</h2>
+          <ul class="source-list">
+            {system.sources.map((source) => (
+              <li>
+                <a href={source.url}>{source.title}</a>
+                <small>Accessed {source.accessed}</small>
+              </li>
+            ))}
+          </ul>
+          {system.notes && <p>{system.notes}</p>}
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
