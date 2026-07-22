@@ -1,17 +1,26 @@
 import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
-import { systemFileSchema, type PaymentStatus, type TransitSystem } from "./schema";
+import {
+  busSystemFileSchema,
+  systemFileSchema,
+  type BusSystem,
+  type PaymentStatus,
+  type TransitSystem,
+} from "./schema";
 
 const DATA_DIR = path.resolve("data/systems");
+const BUS_DATA_DIR = path.resolve("data/bus-systems");
 
-export function loadSystems(): TransitSystem[] {
-  const files: string[] = fs
-    .readdirSync(DATA_DIR)
+function dataFiles(directory: string): string[] {
+  return fs
+    .readdirSync(directory)
     .filter((file: string) => file.endsWith(".yaml") || file.endsWith(".yml"))
     .sort();
+}
 
-  const systems: TransitSystem[] = files.flatMap((file: string) => {
+export function loadSystems(): TransitSystem[] {
+  const systems: TransitSystem[] = dataFiles(DATA_DIR).flatMap((file: string) => {
     const raw = fs.readFileSync(path.join(DATA_DIR, file), "utf8");
     const parsed = YAML.parse(raw);
     return systemFileSchema.parse(parsed);
@@ -20,6 +29,22 @@ export function loadSystems(): TransitSystem[] {
   return systems.sort((a: TransitSystem, b: TransitSystem) =>
     [a.country, a.city, a.system].join("|").localeCompare(
       [b.country, b.city, b.system].join("|"),
+    ),
+  );
+}
+
+export function loadBusSystems(): BusSystem[] {
+  const systems: BusSystem[] = dataFiles(BUS_DATA_DIR).flatMap(
+    (file: string) => {
+      const raw = fs.readFileSync(path.join(BUS_DATA_DIR, file), "utf8");
+      const parsed = YAML.parse(raw);
+      return busSystemFileSchema.parse(parsed);
+    },
+  );
+
+  return systems.sort((a: BusSystem, b: BusSystem) =>
+    [a.country, a.city, a.network].join("|").localeCompare(
+      [b.country, b.city, b.network].join("|"),
     ),
   );
 }
@@ -66,7 +91,10 @@ export function compactSchemes(status: PaymentStatus, schemes: string[] = []): s
   return `${prefix}${schemes.map((scheme) => schemeShortNames[scheme] ?? scheme).join("/")}`;
 }
 
-export function sourceByTitle(system: TransitSystem, title?: string) {
+export function sourceByTitle(
+  system: Pick<TransitSystem | BusSystem, "sources">,
+  title?: string,
+) {
   if (!title) return undefined;
   return system.sources.find((source) => source.title === title);
 }

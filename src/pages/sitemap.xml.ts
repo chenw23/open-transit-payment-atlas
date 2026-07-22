@@ -1,5 +1,9 @@
-import { loadSystems } from "@lib/data";
-import { siteUrl, systemModifiedDate } from "@lib/seo";
+import { loadBusSystems, loadSystems } from "@lib/data";
+import {
+  busSystemModifiedDate,
+  siteUrl,
+  systemModifiedDate,
+} from "@lib/seo";
 
 function escapeXml(value: string): string {
   return value
@@ -12,8 +16,11 @@ function escapeXml(value: string): string {
 
 export function GET() {
   const systems = loadSystems();
-  const latestVerified = systems
-    .map(systemModifiedDate)
+  const busSystems = loadBusSystems();
+  const latestVerified = [
+    ...systems.map(systemModifiedDate),
+    ...busSystems.map(busSystemModifiedDate),
+  ]
     .sort()
     .at(-1);
   const entries = [
@@ -24,6 +31,14 @@ export function GET() {
     ...systems.map((system) => ({
       location: siteUrl(`/systems/${system.id}/`).href,
       lastModified: systemModifiedDate(system),
+    })),
+    {
+      location: siteUrl("/bus/").href,
+      lastModified: busSystems.map(busSystemModifiedDate).sort().at(-1),
+    },
+    ...busSystems.map((system) => ({
+      location: siteUrl(`/bus/systems/${system.id}/`).href,
+      lastModified: busSystemModifiedDate(system),
     })),
   ];
 

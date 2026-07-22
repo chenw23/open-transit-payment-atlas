@@ -1,0 +1,86 @@
+---
+import MatrixValue from "@components/MatrixValue.astro";
+import type { BusSystem } from "@lib/schema";
+
+interface Props {
+  systems: BusSystem[];
+}
+
+const { systems } = Astro.props;
+
+const exitLabels: Record<BusSystem["exit_validation"], string> = {
+  required: "Required",
+  not_required: "No",
+  route_dependent: "Depends",
+};
+---
+
+<div class="table-wrap" data-matrix="bus">
+  <table class="matrix matrix-bus">
+    <thead>
+      <tr>
+        <th class="location-column">Country / Region</th>
+        <th class="system-column">City / bus network</th>
+        <th>Cash</th>
+        <th>Transit / fare card</th>
+        <th>Bank card / device</th>
+        <th>QR / app</th>
+        <th>Tap off</th>
+      </tr>
+    </thead>
+    <tbody>
+      {systems.map((system) => (
+        <tr
+          data-system
+          data-search={`${system.network} ${system.city} ${system.country}`.toLowerCase()}
+          data-bank-card={system.payment.contactless_bank_card.status}
+          data-mobile-wallet={system.payment.mobile_wallet.status}
+          data-cash={system.payment.cash.status}
+          data-tap-off={system.exit_validation}
+        >
+          <td class="location-cell country-cell">
+            <strong>{system.country}</strong>
+            {system.region && <small>{system.region}</small>}
+          </td>
+          <th class="system-cell" scope="row">
+            <strong>{system.city}</strong>
+            <a href={`systems/${system.id}/`}>{system.network}</a>
+          </th>
+          <td>
+            <MatrixValue items={[{ label: "Cash", method: system.payment.cash }]} />
+          </td>
+          <td>
+            <MatrixValue
+              items={[
+                { label: "Transit card", method: system.payment.transit_card },
+                { label: "Paper ticket", method: system.payment.paper_ticket },
+                { label: "Visitor pass", method: system.payment.tourist_pass },
+              ]}
+            />
+          </td>
+          <td>
+            <MatrixValue
+              items={[
+                { label: "Contactless bank card", method: system.payment.contactless_bank_card },
+                { label: "Mobile wallet", method: system.payment.mobile_wallet },
+              ]}
+            />
+          </td>
+          <td>
+            <MatrixValue
+              items={[
+                { label: "QR code", method: system.payment.qr_code },
+                { label: "Official app", method: system.payment.official_app },
+              ]}
+            />
+          </td>
+          <td>
+            <span class={`validation-status validation-${system.exit_validation}`}>
+              {exitLabels[system.exit_validation]}
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

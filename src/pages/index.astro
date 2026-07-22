@@ -112,6 +112,8 @@ function joinValues(values: string[]): string {
           <span>Open Transit Payment Atlas</span>
         </a>
         <nav>
+          <a aria-current="page" href={homePath}>Rail</a>
+          <a href={`${homePath}bus/`}>Bus</a>
           <a href="#passing-gate">Passing Gate</a>
           <a href="#tickets">Tickets</a>
           <a href="#legend">Legend</a>
@@ -123,6 +125,11 @@ function joinValues(values: string[]): string {
     </header>
 
     <main class="page-shell">
+      <nav class="mode-switch" aria-label="Transport mode">
+        <a class="active" aria-current="page" href={homePath}>Rail transit</a>
+        <a href={`${homePath}bus/`}>City buses</a>
+      </nav>
+
       <section class="intro-band">
         <div class="intro-copy">
           <p class="eyebrow">Rail transit payment reference</p>

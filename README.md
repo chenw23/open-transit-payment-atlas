@@ -1,12 +1,13 @@
 # Open Transit Payment Atlas
 
 Open Transit Payment Atlas is an evidence-backed database of passenger-facing
-payment methods for metro, urban rail, airport rail, and comparable rail transit
-systems around the world.
+payment methods for rail transit and representative major-city bus networks
+around the world.
 
 It answers practical questions:
 
 - Can I tap a contactless bank card at the gate?
+- Can I pay on board a city bus, and do I need to tap off?
 - Which schemes work, such as Visa, Mastercard, American Express, JCB, Discover,
   UnionPay, or local card schemes?
 - Can I use Apple Pay, Google Pay, Samsung Pay, or a local mobile wallet?
@@ -31,11 +32,13 @@ Included:
 - airport rail links;
 - light rail, tram, monorail, and automated guideway systems where the payment
   model is comparable.
+- representative major-city public bus networks.
 
 Not the primary focus:
 
 - long-distance intercity rail ticketing;
-- bus-only systems;
+- intercity coaches, school buses, private shuttles, and exhaustive bus-route
+  coverage;
 - pure route geometry or GTFS schedule data;
 - railway infrastructure such as track speed, signalling, or electrification.
 
@@ -49,14 +52,25 @@ Not the primary focus:
 
 ## Coverage
 
-The current dataset starts with representative systems across major metro
-countries and regions rather than claiming exhaustive worldwide coverage. Each
-system is researched independently; a payment method supported in one city is
-not assumed to work elsewhere in the same country.
+The rail dataset starts with representative systems across major metro countries
+and regions rather than claiming exhaustive worldwide coverage. Each system is
+researched independently; a payment method supported in one city is not assumed
+to work elsewhere in the same country.
+
+The bus dataset is intentionally city-selective because worldwide bus coverage
+would be unbounded. It prioritizes:
+
+1. one capital, largest city, or internationally significant bus network in a
+   major country;
+2. additional cities only when their payment model materially differs or the
+   official evidence is especially useful;
+3. urban public bus services, excluding intercity coaches, school buses, and
+   private shuttles.
 
 Mainland China data is maintained by CNRT and should not be duplicated here:
 
-- https://ivysauro.github.io/CNRT/data/Pay
+- Rail: https://ivysauro.github.io/CNRT/data/Pay
+- Bus: https://ivysauro.github.io/CNRT/data/BusPay
 
 ## Data
 

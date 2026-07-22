@@ -115,6 +115,32 @@ a:focus {
   padding: 42px 0 72px;
 }
 
+.mode-switch {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.mode-switch a {
+  min-width: 108px;
+  padding: 7px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  text-align: center;
+}
+
+.mode-switch a + a {
+  border-left: 1px solid var(--line-strong);
+}
+
+.mode-switch a.active {
+  background: var(--accent);
+  color: white;
+}
+
 .intro-band {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(360px, 0.55fr);
@@ -457,6 +483,10 @@ h2 {
   min-width: 720px;
 }
 
+.matrix-bus {
+  min-width: 920px;
+}
+
 .matrix th,
 .matrix td {
   height: 72px;
@@ -615,6 +645,38 @@ h2 {
   overflow-wrap: anywhere;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.validation-status {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.validation-required {
+  border-color: #edb6b2;
+  background: #fff0ef;
+  color: var(--red);
+}
+
+.validation-not_required {
+  border-color: #a9ded2;
+  background: var(--accent-soft);
+  color: #087263;
+}
+
+.validation-route_dependent {
+  border-color: #efd49b;
+  background: #fff5dc;
+  color: var(--amber);
 }
 
 .support {
@@ -1036,6 +1098,16 @@ h2 {
   .page-shell {
     width: min(100% - 24px, 1320px);
     padding-top: 24px;
+  }
+
+  .mode-switch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .mode-switch a {
+    min-width: 0;
   }
 
   .intro-band {

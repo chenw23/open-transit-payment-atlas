@@ -3,8 +3,8 @@
 Thanks for improving Open Transit Payment Atlas.
 
 This project is about passenger-facing payment facts. A contribution should
-answer what a rider can actually use at the gate, at a ticket machine, or in an
-official ticketing channel.
+answer what a rider can actually use at a rail gate, at a ticket machine, when
+boarding a bus, or in an official ticketing channel.
 
 ## Before You Edit
 
@@ -48,7 +48,14 @@ Use exactly one of:
 
 ## Editing Data
 
-Add or edit YAML files under `data/systems/`.
+Add or edit rail YAML files under `data/systems/` and bus YAML files under
+`data/bus-systems/`.
+
+Bus contributions should follow the representative-city policy: prioritize a
+capital, largest city, or internationally significant network in a major
+country. Add another city only when its payment model materially differs or it
+fills a clear evidence gap. Bus records must explicitly state whether riders
+tap off.
 
 Run:
 
@@ -74,8 +81,9 @@ npm run export:csv
 ## What Not To Add
 
 - Mainland China records. Contribute those to
-  [CNRT](https://ivysauro.github.io/CNRT/data/Pay); Hong Kong, Macao, and Taiwan
-  remain in scope here.
+  [CNRT Rail Pay](https://ivysauro.github.io/CNRT/data/Pay) or
+  [CNRT BusPay](https://ivysauro.github.io/CNRT/data/BusPay); Hong Kong, Macao,
+  and Taiwan remain in scope here.
 - Unsourced claims.
 - Generic tourist advice without official confirmation.
 - Route maps, GTFS feeds, station geometry, or railway infrastructure data.

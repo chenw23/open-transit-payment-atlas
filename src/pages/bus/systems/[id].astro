@@ -1,0 +1,202 @@
+---
+import BusPaymentCell from "@components/BusPaymentCell.astro";
+import SeoHead from "@components/SeoHead.astro";
+import { loadBusSystems } from "@lib/data";
+import {
+  busSystemDescription,
+  busSystemModifiedDate,
+  busSystemTitle,
+  siteUrl,
+} from "@lib/seo";
+
+export function getStaticPaths() {
+  return loadBusSystems().map((system) => ({
+    params: { id: system.id },
+    props: { system },
+  }));
+}
+
+const { system } = Astro.props;
+const homePath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const busPath = `${homePath}bus/`;
+const title = busSystemTitle(system);
+const description = busSystemDescription(system);
+const pageUrl = siteUrl(`/bus/systems/${system.id}/`).href;
+const exitLabels = {
+  required: "Required",
+  not_required: "Not required",
+  route_dependent: "Route dependent",
+};
+const boardingLabels = {
+  tap: "Tap",
+  scan: "Scan",
+  show: "Show ticket",
+  cash: "Pay cash",
+  mixed: "Multiple methods",
+};
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      name: title,
+      description,
+      url: pageUrl,
+      inLanguage: "en",
+      dateModified: busSystemModifiedDate(system),
+      citation: system.sources.map((source) => source.url),
+      isPartOf: {
+        "@id": `${siteUrl("/").href}#website`,
+      },
+      about: {
+        "@type": "Service",
+        name: system.network,
+        serviceType: `${system.modes.join(", ")} public transport`,
+        url: system.official_website,
+        areaServed: {
+          "@type": "City",
+          name: system.city,
+          containedInPlace: {
+            "@type": "Country",
+            name: system.country,
+          },
+        },
+        provider: {
+          "@type": "Organization",
+          name: system.operator,
+          url: system.official_website,
+        },
+      },
+      breadcrumb: {
+        "@id": `${pageUrl}#breadcrumb`,
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Payment atlas",
+          item: siteUrl("/").href,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Bus payments",
+          item: siteUrl("/bus/").href,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: system.network,
+          item: pageUrl,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      path={`/bus/systems/${system.id}/`}
+      imagePath="/bus-og-image.png"
+      imageAlt={`${system.network} bus payment methods in ${system.city}, ${system.country}`}
+      jsonLd={jsonLd}
+    />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href={busPath}>
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>Open Transit Payment Atlas</span>
+        </a>
+        <nav>
+          <a href={homePath}>Rail</a>
+          <a href={busPath}>Bus</a>
+          <a href={system.official_website}>Official website</a>
+          <a class="icon-link" href="https://github.com/chenw23/open-transit-payment-atlas" aria-label="GH: GitHub repository">
+            GH
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell detail-page">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href={homePath}>Payment atlas</a></li>
+          <li><a href={busPath}>Bus payments</a></li>
+          <li aria-current="page"><span>{system.network}</span></li>
+        </ol>
+      </nav>
+      <a class="back-link" href={`${busPath}#bus-matrix`}>
+        ← Back to bus matrix
+      </a>
+
+      <section class="detail-intro">
+        <div>
+          <p class="eyebrow">{system.city}, {system.country}</p>
+          <h1>{system.network}</h1>
+          <p class="lede">
+            Operated by {system.operator}. Last verified on {system.last_verified}.
+          </p>
+          <a class="button secondary" href={system.official_website}>
+            Official website ↗
+          </a>
+        </div>
+        <dl class="detail-summary">
+          <div>
+            <dt>{boardingLabels[system.boarding_validation]}</dt>
+            <dd>boarding validation</dd>
+          </div>
+          <div>
+            <dt>{exitLabels[system.exit_validation]}</dt>
+            <dd>tap off</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="detail-grid">
+        <article class="detail-panel">
+          <p class="eyebrow">Boarding payment</p>
+          <h2>Ways to pay</h2>
+          <BusPaymentCell label="Cash" method={system.payment.cash} system={system} />
+          <BusPaymentCell label="Transit or fare card" method={system.payment.transit_card} system={system} />
+          <BusPaymentCell label="Contactless bank card" method={system.payment.contactless_bank_card} system={system} />
+          <BusPaymentCell label="Mobile wallet" method={system.payment.mobile_wallet} system={system} />
+        </article>
+        <article class="detail-panel">
+          <p class="eyebrow">Tickets and apps</p>
+          <h2>Digital and visitor products</h2>
+          <BusPaymentCell label="QR code" method={system.payment.qr_code} system={system} />
+          <BusPaymentCell label="Official app" method={system.payment.official_app} system={system} />
+          <BusPaymentCell label="Paper ticket" method={system.payment.paper_ticket} system={system} />
+          <BusPaymentCell label="Visitor pass" method={system.payment.tourist_pass} system={system} />
+        </article>
+        <article class="detail-panel">
+          <p class="eyebrow">Evidence</p>
+          <h2>Sources</h2>
+          <ul class="source-list">
+            {system.sources.map((source) => (
+              <li>
+                <a href={source.url}>{source.title}</a>
+                <small>Accessed {source.accessed}</small>
+              </li>
+            ))}
+          </ul>
+          {system.notes && <p>{system.notes}</p>}
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

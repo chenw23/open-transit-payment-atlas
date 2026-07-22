@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { loadSystems } from "../src/lib/data";
+import { loadBusSystems, loadSystems } from "../src/lib/data";
 
 function csvEscape(value: unknown): string {
   const text = String(value ?? "");
@@ -48,4 +48,51 @@ fs.writeFileSync(
 );
 fs.writeFileSync("dist-data/systems.json", `${JSON.stringify(systems, null, 2)}\n`);
 
-console.log(`Exported ${systems.length} systems to dist-data/.`);
+const busSystems = loadBusSystems();
+const busHeaders = [
+  "id",
+  "country",
+  "city",
+  "network",
+  "operator",
+  "cash",
+  "transit_card",
+  "bank_card",
+  "bank_card_schemes",
+  "mobile_wallet",
+  "qr_code",
+  "official_app",
+  "exit_validation",
+  "last_verified",
+];
+const busRows = busSystems.map((system) => [
+  system.id,
+  system.country,
+  system.city,
+  system.network,
+  system.operator,
+  system.payment.cash.status,
+  system.payment.transit_card.status,
+  system.payment.contactless_bank_card.status,
+  system.payment.contactless_bank_card.schemes.join(";"),
+  system.payment.mobile_wallet.status,
+  system.payment.qr_code.status,
+  system.payment.official_app.status,
+  system.exit_validation,
+  system.last_verified,
+]);
+
+fs.writeFileSync(
+  "dist-data/bus-systems.csv",
+  `${[busHeaders, ...busRows]
+    .map((row) => row.map(csvEscape).join(","))
+    .join("\n")}\n`,
+);
+fs.writeFileSync(
+  "dist-data/bus-systems.json",
+  `${JSON.stringify(busSystems, null, 2)}\n`,
+);
+
+console.log(
+  `Exported ${systems.length} rail and ${busSystems.length} bus systems to dist-data/.`,
+);

@@ -5,6 +5,7 @@ interface Props {
   path: string;
   type?: "website" | "article";
   imageAlt?: string;
+  imagePath?: string;
   jsonLd?: Record<string, unknown>;
 }
 
@@ -14,6 +15,7 @@ const {
   path,
   type = "website",
   imageAlt = "Open Transit Payment Atlas payment-method comparison table",
+  imagePath = "/og-image.png",
   jsonLd,
 } = Astro.props;
 
@@ -21,7 +23,8 @@ const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 const canonicalUrl = new URL(`${basePath}${normalizedPath}`, siteOrigin);
-const imageUrl = new URL(`${basePath}/og-image.png`, siteOrigin);
+const normalizedImagePath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+const imageUrl = new URL(`${basePath}${normalizedImagePath}`, siteOrigin);
 const sitemapUrl = new URL(`${basePath}/sitemap.xml`, siteOrigin);
 const faviconUrl = `${basePath}/favicon.svg`;
 const serializedJsonLd = jsonLd

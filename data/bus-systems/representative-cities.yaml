@@ -1,0 +1,556 @@
+- id: london-buses
+  country: United Kingdom
+  city: London
+  region: Greater London
+  network: London Buses
+  operator: Transport for London
+  modes: [city bus, night bus]
+  official_website: https://tfl.gov.uk/fares/find-fares/bus-and-tram-fares
+  last_verified: "2026-07-22"
+  boarding_validation: tap
+  exit_validation: not_required
+  payment:
+    cash:
+      status: no
+      notes: London buses do not accept cash fares.
+    transit_card:
+      status: yes
+      methods: [Oyster]
+      source: TfL bus fares
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, American Express]
+      source: TfL contactless
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay, Samsung Pay, Garmin Pay, Fitbit Pay]
+      source: TfL contactless
+    qr_code:
+      status: no
+      notes: QR boarding payment is not the standard London bus fare medium.
+    official_app:
+      status: no
+      notes: TfL apps can manage travel information or Oyster accounts but are not shown to the driver as a bus ticket.
+    paper_ticket:
+      status: partial
+      notes: Paper products exist for specific concessions or arrangements but are not the standard visitor fare.
+    tourist_pass:
+      status: partial
+      methods: [Visitor Oyster]
+      notes: Visitors can use Visitor Oyster, but ordinary contactless payment is also supported.
+      source: TfL bus fares
+  interoperability:
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Oyster and contactless daily or weekly capping applies under TfL fare rules.
+  sources:
+    - title: TfL bus fares
+      url: https://tfl.gov.uk/fares/find-fares/bus-and-tram-fares
+      accessed: "2026-07-22"
+    - title: TfL contactless
+      url: https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/pay-as-you-go/contactless-and-mobile-pay-as-you-go
+      accessed: "2026-07-22"
+    - title: TfL touching rules
+      url: https://tfl.gov.uk/fares/touching-in-and-out
+      accessed: "2026-07-22"
+
+- id: new-york-city-buses
+  country: United States
+  city: New York
+  region: New York City
+  network: MTA New York City Buses
+  operator: Metropolitan Transportation Authority
+  modes: [local bus, express bus, select bus service]
+  official_website: https://www.mta.info/fares-tolls
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: not_required
+  payment:
+    cash:
+      status: yes
+      notes: Cash remains available on regular buses; exact fare and service-specific rules apply.
+    transit_card:
+      status: yes
+      methods: [OMNY card]
+      source: MTA fares
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, American Express, Discover]
+      source: MTA fares
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay, Samsung Pay]
+      source: MTA fares
+    qr_code:
+      status: no
+      notes: QR payment is not a standard bus boarding fare medium.
+    official_app:
+      status: no
+      notes: MTA apps provide travel information; OMNY card or payment media is used for boarding.
+    paper_ticket:
+      status: partial
+      notes: Select Bus Service routes may use off-board proof-of-payment processes; OMNY is also accepted.
+    tourist_pass:
+      status: no
+      notes: There is no separate tourist-only MTA bus pass.
+  interoperability:
+    fare_capping: yes
+    regional_card: partial
+    national_card: no
+    notes: OMNY fare capping applies to eligible subway and local bus journeys.
+  sources:
+    - title: MTA fares
+      url: https://www.mta.info/fares-tolls
+      accessed: "2026-07-22"
+    - title: MTA fare changes
+      url: https://www.mta.info/fares-tolls/2025-changes
+      accessed: "2026-07-22"
+
+- id: toronto-ttc-buses
+  country: Canada
+  city: Toronto
+  region: Greater Toronto Area
+  network: TTC Buses
+  operator: Toronto Transit Commission
+  modes: [city bus, night bus]
+  official_website: https://www.ttc.ca/Fares-and-passes
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: route_dependent
+  payment:
+    cash:
+      status: yes
+      notes: Exact cash can be paid at the fares and transfers machine on board.
+      source: TTC riding guide
+    transit_card:
+      status: yes
+      methods: [PRESTO card, PRESTO Ticket]
+      source: TTC fares
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, American Express, Interac Debit]
+      source: TTC fares
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay, PRESTO in mobile wallet]
+      source: TTC fares
+    qr_code:
+      status: no
+      notes: QR boarding payment is not the standard TTC bus fare medium.
+    official_app:
+      status: no
+      notes: A TTC app is not used as the primary boarding ticket.
+    paper_ticket:
+      status: yes
+      methods: [Paper transfer]
+      notes: A paper transfer is issued for cash payment and serves as proof of payment.
+      source: TTC riding guide
+    tourist_pass:
+      status: partial
+      methods: [PRESTO day products]
+      notes: Availability depends on the PRESTO product and current fare policy.
+  interoperability:
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: Most TTC bus journeys require only a boarding tap. Cross-boundary TTC-operated routes can require an exit tap under zone-fare rules.
+  sources:
+    - title: TTC fares
+      url: https://www.ttc.ca/Fares-and-passes
+      accessed: "2026-07-22"
+    - title: TTC riding guide
+      url: https://www.ttc.ca/riding-the-ttc/Students/How-to-ride-the-TTC
+      accessed: "2026-07-22"
+    - title: TTC cross-boundary rules
+      url: https://www.ttc.ca/riding-the-ttc/Updates/One-Fare-Program
+      accessed: "2026-07-22"
+
+- id: singapore-public-buses
+  country: Singapore
+  city: Singapore
+  network: Singapore Public Buses
+  operator: Land Transport Authority and contracted operators
+  modes: [city bus]
+  official_website: https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/plan_your_journey.html
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: required
+  payment:
+    cash:
+      status: yes
+      notes: Pay the exact fare because no change is given; keep the ticket as proof of payment.
+      source: LTA journey guide
+    transit_card:
+      status: yes
+      methods: [SimplyGo EZ-Link, NETS Prepaid Card]
+      source: LTA SimplyGo FAQ
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, NETS]
+      source: LTA SimplyGo FAQ
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Fitbit Pay, Garmin Pay, Google Pay, Samsung Pay]
+      source: LTA SimplyGo FAQ
+    qr_code:
+      status: no
+      notes: QR is not the standard fare-validation method on public buses.
+    official_app:
+      status: partial
+      notes: SimplyGo manages travel cards and accounts; boarding uses a card or supported device.
+    paper_ticket:
+      status: yes
+      methods: [Cash fare receipt]
+      source: LTA journey guide
+    tourist_pass:
+      status: yes
+      methods: [Singapore Tourist Pass]
+      notes: Product validity and included services are subject to current terms.
+  interoperability:
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: Use the same card or device to tap in and tap out so the distance fare can be calculated.
+  sources:
+    - title: LTA journey guide
+      url: https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/plan_your_journey.html
+      accessed: "2026-07-22"
+    - title: LTA SimplyGo FAQ
+      url: https://www.lta.gov.sg/content/dam/ltagov/news/press/2024/240109_SimplyGo_FAQs_AnnexB.pdf
+      accessed: "2026-07-22"
+
+- id: dubai-public-buses
+  country: United Arab Emirates
+  city: Dubai
+  network: Dubai Public Buses
+  operator: Roads and Transport Authority
+  modes: [city bus, feeder bus]
+  official_website: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
+  last_verified: "2026-07-22"
+  boarding_validation: tap
+  exit_validation: required
+  payment:
+    cash:
+      status: no
+      notes: Dubai public buses use nol fare media rather than onboard cash payment.
+    transit_card:
+      status: yes
+      methods: [nol card]
+      source: RTA nol
+    contactless_bank_card:
+      status: no
+      notes: Ordinary contactless bank cards are not documented as direct bus fare media.
+    mobile_wallet:
+      status: partial
+      methods: [Digital nol card on supported Samsung or Huawei devices]
+      notes: This is a device-limited digital nol card, not general Apple Pay, Google Pay, or bank-card wallet acceptance.
+      source: RTA digital nol
+    qr_code:
+      status: no
+      notes: QR boarding payment is not documented for RTA public buses.
+    official_app:
+      status: no
+      notes: The nol Pay app issues or manages a digital nol card; the app itself is not scanned as a bus ticket.
+    paper_ticket:
+      status: no
+      notes: A paper ticket is not the standard RTA bus fare medium.
+    tourist_pass:
+      status: no
+      notes: RTA does not document a separate tourist bus pass.
+  interoperability:
+    fare_capping: partial
+    regional_card: yes
+    national_card: no
+    notes: nol works across Dubai buses, Metro, Tram and other participating RTA services. Tap in and tap out with the same fare medium.
+  sources:
+    - title: RTA nol
+      url: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
+      accessed: "2026-07-22"
+    - title: RTA digital nol
+      url: https://mediaoffice.ae/en/news/2025/november/17-11/rta-unveils-upgraded-nol-pay-app-with-refreshed-design-and-enhanced-features
+      accessed: "2026-07-22"
+    - title: Samsung digital nol
+      url: https://www.samsung.com/ae/galaxy-rta-nol/
+      accessed: "2026-07-22"
+
+- id: sydney-buses
+  country: Australia
+  city: Sydney
+  region: New South Wales
+  network: Sydney Buses
+  operator: Transport for NSW and contracted operators
+  modes: [city bus, regional bus]
+  official_website: https://transportnsw.info/tickets-fares/opal
+  last_verified: "2026-07-22"
+  boarding_validation: tap
+  exit_validation: required
+  payment:
+    cash:
+      status: no
+      notes: Opal-enabled services require an Opal card or supported contactless card or device.
+    transit_card:
+      status: yes
+      methods: [Opal]
+      source: Opal
+    contactless_bank_card:
+      status: yes
+      schemes: [American Express, Mastercard, Visa]
+      source: Contactless payments
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay, Samsung Pay]
+      source: Contactless payments
+    qr_code:
+      status: no
+      notes: QR is not the standard Sydney bus fare medium.
+    official_app:
+      status: no
+      notes: Planning apps do not replace the Opal or contactless fare credential.
+    paper_ticket:
+      status: no
+      notes: Opal-enabled buses use electronic fare media.
+    tourist_pass:
+      status: partial
+      notes: Visitors generally use an Opal card or contactless card rather than a dedicated bus-only pass.
+  interoperability:
+    fare_capping: yes
+    regional_card: yes
+    national_card: no
+    notes: Tap on and tap off with the same Opal card, bank card, or device.
+  sources:
+    - title: Opal
+      url: https://transportnsw.info/tickets-fares/opal
+      accessed: "2026-07-22"
+    - title: Contactless payments
+      url: https://transportnsw.info/tickets-fares/contactless-payments
+      accessed: "2026-07-22"
+    - title: Bus basics
+      url: https://transportnsw.info/document/8097/COG026-BusBasics-WCAG.pdf
+      accessed: "2026-07-22"
+
+- id: amsterdam-gvb-buses
+  country: Netherlands
+  city: Amsterdam
+  network: GVB Buses
+  operator: GVB
+  modes: [city bus, night bus]
+  official_website: https://www.gvb.nl/en/Payment-options
+  last_verified: "2026-07-22"
+  boarding_validation: tap
+  exit_validation: required
+  payment:
+    cash:
+      status: no
+      notes: Cash is not accepted for onboard fare purchase.
+      source: GVB payment options
+    transit_card:
+      status: yes
+      methods: [OV-chipkaart, OV-pas, paper chip card]
+      source: GVB payment options
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, Maestro, V PAY]
+      source: GVB payment options
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Wallet, contactless payment app]
+      source: GVB OVpay
+    qr_code:
+      status: yes
+      methods: [GVB barcode e-ticket]
+      source: GVB payment options
+    official_app:
+      status: yes
+      methods: [GVB app e-ticket]
+      source: GVB payment options
+    paper_ticket:
+      status: yes
+      methods: [Paper chip card]
+      source: GVB payment options
+    tourist_pass:
+      status: yes
+      methods: [GVB day ticket, Amsterdam Travel Ticket]
+      source: GVB payment options
+  interoperability:
+    fare_capping: partial
+    regional_card: yes
+    national_card: yes
+    notes: Check in and check out using exactly the same card or device.
+  sources:
+    - title: GVB payment options
+      url: https://www.gvb.nl/en/Payment-options
+      accessed: "2026-07-22"
+    - title: GVB OVpay
+      url: https://www.gvb.nl/en/customer-service/how-does-ovpay-work
+      accessed: "2026-07-22"
+
+- id: hong-kong-kmb
+  country: Hong Kong
+  city: Hong Kong
+  network: KMB and LWB Buses
+  operator: Kowloon Motor Bus and Long Win Bus
+  modes: [city bus, airport bus]
+  official_website: https://www.kmb.hk/payment.html
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: route_dependent
+  payment:
+    cash:
+      status: yes
+      notes: Exact cash is accepted; change is not provided.
+    transit_card:
+      status: yes
+      methods: [Octopus]
+      source: KMB payment
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard, UnionPay]
+      source: KMB payment
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay, Samsung Pay, contactless card wallet]
+      source: KMB payment
+    qr_code:
+      status: yes
+      methods: [Alipay, AlipayHK, WeChat Pay, UnionPay QR]
+      source: KMB payment
+    official_app:
+      status: partial
+      methods: [App1933 Tourist Day Pass QR]
+      notes: App1933 QR is used for designated pass products rather than every ordinary fare.
+      source: KMB tourist pass
+    paper_ticket:
+      status: no
+      notes: Ordinary KMB fares use cash, Octopus, bank card, wallet, or QR media.
+    tourist_pass:
+      status: yes
+      methods: [KMB and LWB Tourist Day Pass]
+      source: KMB tourist pass
+  interoperability:
+    fare_capping: unknown
+    regional_card: yes
+    national_card: no
+    notes: Most routes require payment only when boarding. Some section-fare refund schemes require tapping or scanning after alighting at a designated stop reader.
+  sources:
+    - title: KMB payment
+      url: https://www.kmb.hk/payment.html
+      accessed: "2026-07-22"
+    - title: KMB tourist pass
+      url: https://www.kmb.hk/files/Tourist%20Day%20Pass%20-%20T&C_E.pdf
+      accessed: "2026-07-22"
+
+- id: tokyo-toei-bus
+  country: Japan
+  city: Tokyo
+  network: Toei Bus
+  operator: Tokyo Metropolitan Bureau of Transportation
+  modes: [city bus]
+  official_website: https://www.kotsu.metro.tokyo.jp/eng/guides/faq/
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: not_required
+  payment:
+    cash:
+      status: yes
+      notes: Coins and 1,000-yen notes are accepted; prepare suitable cash.
+      source: Toei Bus FAQ
+    transit_card:
+      status: yes
+      methods: [PASMO, Suica, compatible IC cards]
+      source: Toei Bus FAQ
+    contactless_bank_card:
+      status: no
+      notes: Ordinary contactless bank cards are not documented as direct Toei Bus fare media.
+    mobile_wallet:
+      status: yes
+      methods: [Mobile Suica, Mobile PASMO, Apple Pay PASMO]
+      source: Toei Bus day pass
+    qr_code:
+      status: partial
+      notes: Digital ticket products may use a phone ticket, but QR is not the standard ordinary fare medium.
+    official_app:
+      status: partial
+      notes: Digital day-ticket products are available subject to product requirements.
+    paper_ticket:
+      status: yes
+      methods: [Toei one-day ticket]
+      source: Toei Bus ride method
+    tourist_pass:
+      status: yes
+      methods: [Toei Bus one-day ticket]
+      source: Toei Bus day pass
+  interoperability:
+    fare_capping: no
+    regional_card: yes
+    national_card: yes
+    notes: Tokyo 23-ward Toei Bus services use a flat fare paid when boarding; no exit tap is required.
+  sources:
+    - title: Toei Bus FAQ
+      url: https://www.kotsu.metro.tokyo.jp/eng/guides/faq/
+      accessed: "2026-07-22"
+    - title: Toei Bus ride method
+      url: https://www.kotsu.metro.tokyo.jp/bus/kanren/riyo.html
+      accessed: "2026-07-22"
+    - title: Toei Bus day pass
+      url: https://www.kotsu.metro.tokyo.jp/bus/fare/otoku_bus_oneday.html
+      accessed: "2026-07-22"
+
+- id: berlin-bvg-buses
+  country: Germany
+  city: Berlin
+  network: BVG Buses
+  operator: Berliner Verkehrsbetriebe
+  modes: [city bus, night bus]
+  official_website: https://www.bvg.de/de/service-und-kontakt/bargeldlos-im-bus
+  last_verified: "2026-07-22"
+  boarding_validation: mixed
+  exit_validation: not_required
+  payment:
+    cash:
+      status: no
+      notes: Since September 2024, onboard bus ticket sales are cashless.
+      source: BVG cashless buses
+    transit_card:
+      status: partial
+      methods: [VBB-fahrCard, BVG prepaid card]
+      notes: VBB-fahrCard carries subscriptions; the BVG prepaid card can pay for onboard ticket purchase.
+      source: BVG cashless buses
+    contactless_bank_card:
+      status: yes
+      schemes: [Visa, Mastercard and other major debit or credit cards]
+      notes: A contactless bank card purchases a ticket on board; the card is not a pay-as-you-go trip credential.
+      source: BVG cashless buses
+    mobile_wallet:
+      status: yes
+      methods: [Apple Pay, Google Pay]
+      notes: Wallets are accepted to purchase an onboard ticket.
+      source: BVG cashless buses
+    qr_code:
+      status: yes
+      methods: [BVG mobile ticket]
+      source: BVG tourist tickets
+    official_app:
+      status: yes
+      methods: [BVG Tickets app, Jelbi app]
+      source: BVG tourist tickets
+    paper_ticket:
+      status: yes
+      methods: [Onboard paper ticket]
+      source: BVG cashless buses
+    tourist_pass:
+      status: yes
+      methods: [Berlin WelcomeCard, day ticket]
+      source: BVG tourist tickets
+  interoperability:
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: Purchase or validate before or when boarding. Berlin buses do not use distance-based exit tapping.
+  sources:
+    - title: BVG cashless buses
+      url: https://www.bvg.de/de/service-und-kontakt/bargeldlos-im-bus
+      accessed: "2026-07-22"
+    - title: BVG tourist tickets
+      url: https://www.bvg.de/en/tourists/tickets
+      accessed: "2026-07-22"

@@ -1,5 +1,9 @@
-import { loadSystems } from "../src/lib/data";
-import type { PaymentMethod, TransitSystem } from "../src/lib/schema";
+import { loadBusSystems, loadSystems } from "../src/lib/data";
+import type {
+  BusSystem,
+  PaymentMethod,
+  TransitSystem,
+} from "../src/lib/schema";
 
 const sourceRequiredStatuses = new Set(["yes", "partial", "planned", "deprecated"]);
 
@@ -20,7 +24,21 @@ function methodsFor(system: TransitSystem): Array<[string, PaymentMethod]> {
   ];
 }
 
+function busMethodsFor(system: BusSystem): Array<[string, PaymentMethod]> {
+  return [
+    ["payment.cash", system.payment.cash],
+    ["payment.transit_card", system.payment.transit_card],
+    ["payment.contactless_bank_card", system.payment.contactless_bank_card],
+    ["payment.mobile_wallet", system.payment.mobile_wallet],
+    ["payment.qr_code", system.payment.qr_code],
+    ["payment.official_app", system.payment.official_app],
+    ["payment.paper_ticket", system.payment.paper_ticket],
+    ["payment.tourist_pass", system.payment.tourist_pass],
+  ];
+}
+
 const systems = loadSystems();
+const busSystems = loadBusSystems();
 const ids = new Set<string>();
 const errors: string[] = [];
 
@@ -72,9 +90,41 @@ for (const system of systems) {
   }
 }
 
+const busIds = new Set<string>();
+for (const system of busSystems) {
+  if (busIds.has(system.id)) {
+    errors.push(`Duplicate bus system id: ${system.id}`);
+  }
+  busIds.add(system.id);
+
+  if (system.country.trim().toLowerCase() === "china") {
+    errors.push(
+      `${system.id} is in mainland China, which is maintained by CNRT BusPay rather than this atlas`,
+    );
+  }
+
+  const sourceTitles = new Set(system.sources.map((source) => source.title));
+  for (const [field, method] of busMethodsFor(system)) {
+    if (!method || !method.status) {
+      errors.push(`${system.id}.${field} was not defaulted to a complete method`);
+      continue;
+    }
+    if (method.source && !sourceTitles.has(method.source)) {
+      errors.push(`${system.id}.${field} references unknown source: ${method.source}`);
+    }
+    if (sourceRequiredStatuses.has(method.status) && !method.source && !method.notes) {
+      errors.push(
+        `${system.id}.${field} has status ${method.status} but no source or explanatory note`,
+      );
+    }
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
 }
 
-console.log(`Validated ${systems.length} transit payment records.`);
+console.log(
+  `Validated ${systems.length} rail and ${busSystems.length} bus payment records.`,
+);

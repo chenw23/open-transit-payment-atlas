@@ -1,0 +1,228 @@
+---
+import BusPaymentMatrix from "@components/BusPaymentMatrix.astro";
+import SeoHead from "@components/SeoHead.astro";
+import { loadBusSystems } from "@lib/data";
+import { busSystemModifiedDate, siteUrl } from "@lib/seo";
+
+const systems = loadBusSystems();
+const homePath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const busPath = `${homePath}bus/`;
+const countries = new Set(systems.map((system) => system.country)).size;
+const bankCard = systems.filter(
+  (system) => system.payment.contactless_bank_card.status === "yes",
+).length;
+const tapOff = systems.filter(
+  (system) => system.exit_validation === "required",
+).length;
+const latestVerified = systems
+  .map((system) => system.last_verified)
+  .sort()
+  .at(-1);
+const latestModified = systems
+  .map(busSystemModifiedDate)
+  .sort()
+  .at(-1);
+const latestVerifiedLabel = latestVerified
+  ? new Intl.DateTimeFormat("en", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(`${latestVerified}T00:00:00Z`))
+  : "Not available";
+const title = "Bus Payment Methods Worldwide | Open Transit Payment Atlas";
+const description = `Compare bus fare payment methods and tap-off rules for ${systems.length} representative city networks across ${countries} countries and regions, excluding mainland China.`;
+const busJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": `${siteUrl("/bus/").href}#dataset`,
+  name: "Open Transit Payment Atlas - Bus Payment Methods",
+  description,
+  url: siteUrl("/bus/").href,
+  inLanguage: "en",
+  isAccessibleForFree: true,
+  spatialCoverage: "Selected major cities worldwide, excluding mainland China",
+  dateModified: latestModified,
+  creator: {
+    "@type": "Organization",
+    name: "Open Transit Payment Atlas",
+    url: siteUrl("/").href,
+  },
+  sameAs: "https://github.com/chenw23/open-transit-payment-atlas",
+  keywords: [
+    "bus payment methods",
+    "bus contactless payment",
+    "bus transit card",
+    "bus tap off",
+    "bus QR ticket",
+  ],
+  distribution: [
+    {
+      "@type": "DataDownload",
+      encodingFormat: "application/json",
+      contentUrl: siteUrl("/data/bus-systems.json").href,
+    },
+    {
+      "@type": "DataDownload",
+      encodingFormat: "text/csv",
+      contentUrl: siteUrl("/data/bus-systems.csv").href,
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead
+      title={title}
+      description={description}
+      path="/bus/"
+      imagePath="/bus-og-image.png"
+      imageAlt="Open Transit Payment Atlas bus payment-method matrix"
+      jsonLd={busJsonLd}
+    />
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}/styles.css`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href={homePath}>
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>Open Transit Payment Atlas</span>
+        </a>
+        <nav>
+          <a href={homePath}>Rail</a>
+          <a aria-current="page" href={busPath}>Bus</a>
+          <a href="#scope">Scope</a>
+          <a class="icon-link" href="https://github.com/chenw23/open-transit-payment-atlas" aria-label="GH: GitHub repository">
+            GH
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <nav class="mode-switch" aria-label="Transport mode">
+        <a href={homePath}>Rail transit</a>
+        <a class="active" aria-current="page" href={busPath}>City buses</a>
+      </nav>
+
+      <section class="intro-band">
+        <div class="intro-copy">
+          <p class="eyebrow">Representative city bus networks</p>
+          <h1>How can I pay for this bus?</h1>
+          <p class="lede">
+            Compare boarding payment methods and tap-off rules for major city bus
+            networks outside mainland China.
+          </p>
+          <div class="intro-actions">
+            <a class="button primary" href="#bus-matrix">Browse bus payments</a>
+            <a class="button secondary" href={homePath}>View rail payments</a>
+          </div>
+        </div>
+        <dl class="summary-grid">
+          <div><dt>{systems.length}</dt><dd>city bus networks</dd></div>
+          <div><dt>{countries}</dt><dd>countries / regions</dd></div>
+          <div><dt>{bankCard}</dt><dd>accept bank cards</dd></div>
+          <div><dt>{tapOff}</dt><dd>require tap off</dd></div>
+        </dl>
+      </section>
+
+      <aside class="coverage-notice" aria-labelledby="mainland-bus-coverage">
+        <span class="coverage-code" aria-hidden="true">CN</span>
+        <div>
+          <h2 id="mainland-bus-coverage">Looking for mainland China buses?</h2>
+          <p>
+            Mainland China bus records are maintained by CNRT and are not duplicated
+            in this atlas.
+          </p>
+        </div>
+        <a href="https://ivysauro.github.io/CNRT/data/BusPay">
+          View mainland China bus data ↗
+        </a>
+      </aside>
+
+      <section id="bus-matrix" class="matrix-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Boarding payment reference</p>
+            <h2>Bus payment matrix</h2>
+            <p class="section-summary">
+              Sorted by Country / Region, then City / Area, then Bus Network.
+              Latest record verification: {latestVerifiedLabel}.
+            </p>
+          </div>
+          <div class="export-links" id="data">
+            <a href="../data/bus-systems.json">JSON ↗</a>
+            <a href="../data/bus-systems.csv">CSV ↗</a>
+            <a href="https://github.com/chenw23/open-transit-payment-atlas/tree/master/data/bus-systems">
+              YAML ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="matrix-toolbar">
+          <label class="search-field">
+            <span aria-hidden="true">⌕</span>
+            <input id="bus-search" type="search" placeholder="Filter by network, city, or country" />
+          </label>
+          <select id="bus-filter" aria-label="Filter bus payment support">
+            <option value="all">All networks</option>
+            <option value="bank-card">Contactless bank card</option>
+            <option value="mobile-wallet">Mobile wallet</option>
+            <option value="cash">Cash accepted</option>
+            <option value="tap-off">Tap off required</option>
+          </select>
+        </div>
+
+        <BusPaymentMatrix systems={systems} />
+      </section>
+
+      <section id="scope" class="reference-grid">
+        <article class="reference-panel">
+          <p class="eyebrow">Selection policy</p>
+          <h2>Representative coverage</h2>
+          <dl class="scope-list">
+            <div><dt>Countries</dt><dd>Major bus countries are represented by a capital, largest city, or internationally significant network.</dd></div>
+            <div><dt>Cities</dt><dd>Additional cities are added when their payment model materially differs or official evidence is especially useful.</dd></div>
+            <div><dt>Excluded</dt><dd>Intercity coaches, private shuttles, school buses, and mainland China are outside this dataset.</dd></div>
+          </dl>
+        </article>
+        <article class="reference-panel">
+          <p class="eyebrow">How to read the matrix</p>
+          <h2>Tap off</h2>
+          <dl class="status-list">
+            <div><dt><span class="dot dot-no"></span>Required</dt><dd>Validate again when leaving the bus</dd></div>
+            <div><dt><span class="dot dot-yes"></span>No</dt><dd>Only validate or pay when boarding</dd></div>
+            <div><dt><span class="dot dot-partial"></span>Depends</dt><dd>Rule varies by route, service, or fare zone</dd></div>
+          </dl>
+        </article>
+      </section>
+    </main>
+
+    <script is:inline>
+      const search = document.querySelector("#bus-search");
+      const filter = document.querySelector("#bus-filter");
+      const rows = [...document.querySelectorAll('[data-matrix="bus"] tbody tr[data-system]')];
+
+      function applyBusFilters() {
+        const query = search?.value.trim().toLowerCase() ?? "";
+        const mode = filter?.value ?? "all";
+        rows.forEach((row) => {
+          const matchesQuery = row.dataset.search?.includes(query) ?? false;
+          const matchesMode =
+            mode === "all" ||
+            (mode === "bank-card" && row.dataset.bankCard === "yes") ||
+            (mode === "mobile-wallet" && row.dataset.mobileWallet === "yes") ||
+            (mode === "cash" && row.dataset.cash === "yes") ||
+            (mode === "tap-off" && row.dataset.tapOff === "required");
+          row.hidden = !(matchesQuery && matchesMode);
+        });
+      }
+
+      search?.addEventListener("input", applyBusFilters);
+      filter?.addEventListener("change", applyBusFilters);
+    </script>
+  </body>
+</html>

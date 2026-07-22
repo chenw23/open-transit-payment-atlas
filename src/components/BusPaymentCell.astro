@@ -1,0 +1,24 @@
+---
+import { sourceByTitle, statusLabels } from "@lib/data";
+import type { BusSystem, PaymentMethod } from "@lib/schema";
+
+interface Props {
+  label: string;
+  method: PaymentMethod;
+  system: BusSystem;
+}
+
+const { label, method, system } = Astro.props;
+const values = [...method.methods, ...method.schemes];
+const source = sourceByTitle(system, method.source);
+---
+
+<div class="payment-cell">
+  <div class="payment-cell-heading">
+    <h3>{label}</h3>
+    <span class={`support support-${method.status}`}>{statusLabels[method.status]}</span>
+  </div>
+  {values.length > 0 && <strong class="payment-values">{values.join(", ")}</strong>}
+  {source && <a class="source-link" href={source.url}>Source: {source.title}</a>}
+  {method.notes && <small>{method.notes}</small>}
+</div>

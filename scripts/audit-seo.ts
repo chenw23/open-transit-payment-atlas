@@ -1,7 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
-import { loadSystems } from "../src/lib/data";
-import { siteUrl, systemModifiedDate } from "../src/lib/seo";
+import { loadBusSystems, loadSystems } from "../src/lib/data";
+import {
+  busSystemModifiedDate,
+  siteUrl,
+  systemModifiedDate,
+} from "../src/lib/seo";
 
 const DIST_DIR = path.resolve("dist");
 const SITE_PREFIX = "/open-transit-payment-atlas";
@@ -20,7 +24,9 @@ function matches(html: string, pattern: RegExp): string[] {
 
 function targetCandidates(sourceFile: string, href: string): string[] {
   const targetPath = href.split("#")[0];
-  const resolved = targetPath.startsWith(SITE_PREFIX)
+  const resolved = (
+    targetPath === SITE_PREFIX || targetPath.startsWith(`${SITE_PREFIX}/`)
+  )
     ? path.join(DIST_DIR, targetPath.slice(SITE_PREFIX.length))
     : path.resolve(path.dirname(sourceFile), targetPath);
 
@@ -150,16 +156,30 @@ if (!fs.existsSync(sitemapFile)) {
     }
   }
   const systems = loadSystems();
+  const busSystems = loadBusSystems();
   const expectedModifiedDates = new Map([
     [
       siteUrl("/").href,
-      systems.map(systemModifiedDate).sort().at(-1) as string,
+      [...systems.map(systemModifiedDate), ...busSystems.map(busSystemModifiedDate)]
+        .sort()
+        .at(-1) as string,
     ],
     ...systems.map(
       (system) =>
         [
           siteUrl(`/systems/${system.id}/`).href,
           systemModifiedDate(system),
+        ] as const,
+    ),
+    [
+      siteUrl("/bus/").href,
+      busSystems.map(busSystemModifiedDate).sort().at(-1) as string,
+    ],
+    ...busSystems.map(
+      (system) =>
+        [
+          siteUrl(`/bus/systems/${system.id}/`).href,
+          busSystemModifiedDate(system),
         ] as const,
     ),
   ]);
@@ -175,6 +195,7 @@ if (!fs.existsSync(sitemapFile)) {
 for (const asset of [
   "favicon.svg",
   "og-image.png",
+  "bus-og-image.png",
   "robots.txt",
   "6d0db5d1eb9aa70cc895bebd66a35556.txt",
 ]) {

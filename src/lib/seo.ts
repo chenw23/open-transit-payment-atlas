@@ -1,4 +1,5 @@
 import type { TransitSystem } from "./schema";
+import type { BusSystem } from "./schema";
 
 export const SITE_NAME = "Open Transit Payment Atlas";
 export const SITE_ORIGIN = "https://chenw23.github.io";
@@ -28,6 +29,25 @@ export function systemDescription(system: TransitSystem): string {
 }
 
 export function systemModifiedDate(system: TransitSystem): string {
+  return [system.last_verified, ...system.sources.map((source) => source.accessed)]
+    .sort()
+    .at(-1) as string;
+}
+
+export function busSystemTitle(system: BusSystem): string {
+  const locationPrefix = system.network
+    .toLocaleLowerCase("en")
+    .includes(system.city.toLocaleLowerCase("en"))
+    ? ""
+    : `${system.city} `;
+  return `${locationPrefix}${system.network} Bus Payment Methods | Transit Payment Atlas`;
+}
+
+export function busSystemDescription(system: BusSystem): string {
+  return `Bus payment methods for ${system.network} in ${system.city}: cash, transit cards, contactless bank cards, mobile wallets, QR or app tickets, and tap-off rules.`;
+}
+
+export function busSystemModifiedDate(system: BusSystem): string {
   return [system.last_verified, ...system.sources.map((source) => source.accessed)]
     .sort()
     .at(-1) as string;
