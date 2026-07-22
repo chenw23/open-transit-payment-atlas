@@ -4,7 +4,7 @@ import { loadSystems } from "../src/lib/data";
 import { siteUrl, systemModifiedDate } from "../src/lib/seo";
 
 const DIST_DIR = path.resolve("dist");
-const SITE_PREFIX = "/ICS1";
+const SITE_PREFIX = "/open-transit-payment-atlas";
 
 function walkHtml(directory: string): string[] {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -84,7 +84,11 @@ for (const file of htmlFiles) {
     descriptions.set(description, relativeFile);
   }
   if (canonical) {
-    if (!canonical.startsWith("https://chenw23.github.io/ICS1/")) {
+    if (
+      !canonical.startsWith(
+        "https://chenw23.github.io/open-transit-payment-atlas/",
+      )
+    ) {
       errors.push(`${relativeFile}: canonical is outside the deployed site: ${canonical}`);
     }
     if (canonicalUrls.has(canonical)) {

@@ -2,7 +2,7 @@ import type { TransitSystem } from "./schema";
 
 export const SITE_NAME = "Open Transit Payment Atlas";
 export const SITE_ORIGIN = "https://chenw23.github.io";
-export const SITE_BASE_PATH = "/ICS1";
+export const SITE_BASE_PATH = "/open-transit-payment-atlas";
 
 export const HOME_TITLE =
   "Rail Transit Payment Methods Worldwide | Open Transit Atlas";
