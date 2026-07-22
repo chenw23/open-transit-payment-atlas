@@ -21,21 +21,15 @@ const isGate = type === "gate";
         {
           isGate ? (
             <>
-              <th>Transit card</th>
+              <th>Fare card / ticket</th>
               <th>Contactless bank card</th>
-              <th>Mobile wallet</th>
-              <th>QR</th>
-              <th>Official app</th>
-              <th>Paper ticket or token</th>
-              <th>Visitor pass</th>
+              <th>QR / app ticket</th>
             </>
           ) : (
             <>
               <th>Cash</th>
               <th>Bank card</th>
-              <th>Contactless card</th>
-              <th>Mobile wallet</th>
-              <th>QR payment</th>
+              <th>Mobile / QR</th>
             </>
           )
         }
@@ -66,21 +60,56 @@ const isGate = type === "gate";
           {
             isGate ? (
               <>
-                <td><MatrixValue method={system.payment.gate_entry.local_transit_card} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.contactless_bank_card} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.mobile_wallet} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.qr_code} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.official_app} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.paper_or_token} /></td>
-                <td><MatrixValue method={system.payment.gate_entry.tourist_pass} /></td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "Transit card", method: system.payment.gate_entry.local_transit_card },
+                      { label: "Paper ticket or token", method: system.payment.gate_entry.paper_or_token },
+                      { label: "Visitor pass", method: system.payment.gate_entry.tourist_pass },
+                    ]}
+                  />
+                </td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "Contactless bank card", method: system.payment.gate_entry.contactless_bank_card },
+                    ]}
+                  />
+                </td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "QR gate entry", method: system.payment.gate_entry.qr_code },
+                      { label: "Official app", method: system.payment.gate_entry.official_app },
+                    ]}
+                  />
+                </td>
               </>
             ) : (
               <>
-                <td><MatrixValue method={system.payment.ticket_machine.cash} /></td>
-                <td><MatrixValue method={system.payment.ticket_machine.bank_card} /></td>
-                <td><MatrixValue method={system.payment.ticket_machine.contactless_card} /></td>
-                <td><MatrixValue method={system.payment.ticket_machine.mobile_wallet} /></td>
-                <td><MatrixValue method={system.payment.ticket_machine.qr_payment} /></td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "Cash", method: system.payment.ticket_machine.cash },
+                    ]}
+                  />
+                </td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "Bank card", method: system.payment.ticket_machine.bank_card },
+                      { label: "Contactless card", method: system.payment.ticket_machine.contactless_card },
+                    ]}
+                  />
+                </td>
+                <td>
+                  <MatrixValue
+                    items={[
+                      { label: "Mobile wallet", method: system.payment.ticket_machine.mobile_wallet },
+                      { label: "QR payment", method: system.payment.ticket_machine.qr_payment },
+                    ]}
+                  />
+                </td>
               </>
             )
           }

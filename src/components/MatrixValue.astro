@@ -1,19 +1,55 @@
 ---
 import { statusLabels } from "@lib/data";
-import type { PaymentMethod } from "@lib/schema";
+import type { PaymentMethod, PaymentStatus } from "@lib/schema";
 
 interface Props {
-  method: PaymentMethod;
+  items: Array<{
+    label: string;
+    method: PaymentMethod;
+  }>;
 }
 
-const { method } = Astro.props;
-const details = [...method.methods, ...method.schemes];
+const { items } = Astro.props;
+const statusPriority: PaymentStatus[] = [
+  "yes",
+  "partial",
+  "planned",
+  "unknown",
+  "deprecated",
+  "no",
+];
+const status =
+  statusPriority.find((candidate) =>
+    items.some(({ method }) => method.status === candidate),
+  ) ?? "unknown";
+const details = [
+  ...new Set(
+    items.flatMap(({ method }) => [...method.methods, ...method.schemes]),
+  ),
+];
+const visibleDetails = details.slice(0, 4);
+const remainingDetails = details.length - visibleDetails.length;
+const fullDescription = items
+  .map(({ label, method }) => {
+    const values = [...method.methods, ...method.schemes];
+    return `${label}: ${statusLabels[method.status]}${
+      values.length ? ` (${values.join(", ")})` : ""
+    }`;
+  })
+  .join(" | ");
 ---
 
-<div class="matrix-value">
-  <span class={`matrix-status status-${method.status}`}>
+<div class="matrix-value" title={fullDescription}>
+  <span class={`matrix-status status-${status}`}>
     <span class="status-dot" aria-hidden="true"></span>
-    {statusLabels[method.status]}
+    {statusLabels[status]}
   </span>
-  {details.length > 0 && <small>{details.join(", ")}</small>}
+  {
+    visibleDetails.length > 0 && (
+      <small>
+        {visibleDetails.join(", ")}
+        {remainingDetails > 0 && ` +${remainingDetails}`}
+      </small>
+    )
+  }
 </div>

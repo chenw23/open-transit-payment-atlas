@@ -450,11 +450,11 @@ h2 {
 }
 
 .matrix-gate {
-  min-width: 1500px;
+  min-width: 920px;
 }
 
 .matrix-tickets {
-  min-width: 1240px;
+  min-width: 920px;
 }
 
 .matrix th,
@@ -622,7 +622,7 @@ h2 {
 
 .matrix-value small {
   display: -webkit-box;
-  max-width: 150px;
+  max-width: 180px;
   overflow: hidden;
   color: var(--muted);
   font-size: 9px;
