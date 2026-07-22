@@ -328,7 +328,7 @@
   operator: Roads and Transport Authority
   modes: [metro, tram]
   official_website: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
-  last_verified: "2026-07-21"
+  last_verified: "2026-07-22"
   payment:
     gate_entry:
       local_transit_card:
@@ -340,18 +340,22 @@
         notes: Bank cards are not the standard direct gate-entry payment method.
       mobile_wallet:
         status: partial
-        notes: Mobile wallet support depends on nol product and RTA channels, not direct bank-card tapping.
+        methods: [Digital nol card on supported Samsung or Huawei devices]
+        notes: This is a device-limited digital nol card, not general Apple Pay, Google Pay, or bank-card wallet acceptance.
+        source: RTA digital nol
       qr_code:
         status: no
       official_app:
-        status: partial
-        notes: RTA apps support services and account management; verify any mobile ticket before travel.
-      paper_or_token:
         status: no
-      tourist_pass:
-        status: partial
+        notes: The nol Pay app issues or manages a supported digital nol card; the app itself is not scanned or shown as a gate ticket.
+      paper_or_token:
+        status: yes
         methods: [nol Red Ticket]
+        notes: RTA describes the nol Red Ticket as a paper-based ticket sold by ticket vending machines.
         source: RTA nol
+      tourist_pass:
+        status: no
+        notes: RTA does not document a separate Dubai Metro tourist pass; the nol Red Ticket is a regular paper ticket.
     ticket_machine:
       cash:
         status: yes
@@ -363,10 +367,11 @@
         status: partial
         notes: Treated as partial for ticket purchase/top-up channels; direct bank-card gate entry is no.
       mobile_wallet:
-        status: partial
-        notes: Treated as partial because wallet support depends on RTA channel and nol product.
+        status: no
+        notes: Metro ticket vending machines are not documented as accepting mobile-wallet payment.
       qr_payment:
-        status: unknown
+        status: no
+        notes: Metro ticket vending machines are not documented as accepting QR-code payment.
   interoperability:
     open_loop: no
     fare_capping: partial
@@ -376,6 +381,15 @@
   sources:
     - title: RTA nol
       url: https://www.rta.ae/wps/portal/rta/ae/public-transport/Nol-Home
+      accessed: "2026-07-22"
+    - title: RTA digital nol
+      url: https://mediaoffice.ae/en/news/2025/november/17-11/rta-unveils-upgraded-nol-pay-app-with-refreshed-design-and-enhanced-features
+      accessed: "2026-07-22"
+    - title: Samsung digital nol
+      url: https://www.samsung.com/ae/galaxy-rta-nol/
+      accessed: "2026-07-22"
+    - title: Huawei digital nol
+      url: https://consumer.huawei.com/ae-en/support/content/en-us15785525/
       accessed: "2026-07-22"
 
 - id: paris-metro
