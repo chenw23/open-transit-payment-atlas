@@ -172,7 +172,12 @@ if (!fs.existsSync(sitemapFile)) {
   }
 }
 
-for (const asset of ["favicon.svg", "og-image.png", "robots.txt"]) {
+for (const asset of [
+  "favicon.svg",
+  "og-image.png",
+  "robots.txt",
+  "6d0db5d1eb9aa70cc895bebd66a35556.txt",
+]) {
   if (!fs.existsSync(path.join(DIST_DIR, asset))) {
     errors.push(`${asset}: missing from generated site`);
   }

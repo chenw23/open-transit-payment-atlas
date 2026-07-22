@@ -450,11 +450,11 @@ h2 {
 }
 
 .matrix-gate {
-  min-width: 920px;
+  min-width: 720px;
 }
 
 .matrix-tickets {
-  min-width: 920px;
+  min-width: 720px;
 }
 
 .matrix th,
@@ -487,21 +487,15 @@ h2 {
 
 .matrix .location-column,
 .matrix .location-cell {
-  width: 162px;
-  min-width: 162px;
+  width: 145px;
+  min-width: 145px;
   text-align: left;
-}
-
-.matrix .location-column:nth-child(2),
-.matrix .location-cell:nth-child(2) {
-  width: 128px;
-  min-width: 128px;
 }
 
 .matrix .system-column,
 .matrix .system-cell {
-  width: 206px;
-  min-width: 206px;
+  width: 190px;
+  min-width: 190px;
   text-align: left;
 }
 
@@ -513,32 +507,24 @@ h2 {
 }
 
 .matrix thead th:nth-child(2),
-.matrix tbody td:nth-child(2) {
+.matrix tbody th:nth-child(2) {
   position: sticky;
-  left: 162px;
-  z-index: 3;
-}
-
-.matrix thead th:nth-child(3),
-.matrix tbody th:nth-child(3) {
-  position: sticky;
-  left: 290px;
+  left: 145px;
   z-index: 3;
 }
 
 .matrix tbody td:nth-child(1),
-.matrix tbody td:nth-child(2),
-.matrix tbody th:nth-child(3) {
+.matrix tbody th:nth-child(2) {
   background: var(--surface);
 }
 
-.matrix thead th:nth-child(-n + 3) {
+.matrix thead th:nth-child(-n + 2) {
   z-index: 8;
   background: #e9efec;
 }
 
-.matrix thead th:nth-child(3),
-.matrix tbody th:nth-child(3) {
+.matrix thead th:nth-child(2),
+.matrix tbody th:nth-child(2) {
   box-shadow: 8px 0 12px -12px rgba(23, 32, 29, 0.65);
 }
 
@@ -553,24 +539,22 @@ h2 {
 }
 
 .matrix .system-cell a {
-  color: var(--heading);
-  font-weight: 760;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .matrix .location-cell strong,
-.matrix .system-cell a {
+.matrix .system-cell strong {
   display: block;
   font-size: 12px;
   line-height: 1.35;
 }
 
 .matrix .location-cell small,
-.matrix .system-cell small {
+.matrix .system-cell a {
   display: block;
   margin-top: 4px;
-  color: var(--muted);
   font-size: 10px;
-  font-weight: 500;
   line-height: 1.35;
 }
 
@@ -1109,38 +1093,27 @@ h2 {
 
   .matrix .location-column,
   .matrix .location-cell {
-    width: 118px;
-    min-width: 118px;
-  }
-
-  .matrix .location-column:nth-child(2),
-  .matrix .location-cell:nth-child(2) {
-    width: 94px;
-    min-width: 94px;
+    width: 112px;
+    min-width: 112px;
   }
 
   .matrix .system-column,
   .matrix .system-cell {
-    width: 166px;
-    min-width: 166px;
+    width: 180px;
+    min-width: 180px;
   }
 
   .matrix thead th:nth-child(2),
-  .matrix tbody td:nth-child(2) {
-    left: 118px;
-  }
-
-  .matrix thead th:nth-child(3),
-  .matrix tbody th:nth-child(3) {
+  .matrix tbody th:nth-child(2) {
     left: auto;
   }
 
-  .matrix tbody th:nth-child(3) {
+  .matrix tbody th:nth-child(2) {
     position: static;
     box-shadow: none;
   }
 
-  .matrix thead th:nth-child(3) {
+  .matrix thead th:nth-child(2) {
     z-index: 5;
     box-shadow: none;
   }

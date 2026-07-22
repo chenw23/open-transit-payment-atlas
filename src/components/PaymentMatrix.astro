@@ -16,13 +16,12 @@ const isGate = type === "gate";
     <thead>
       <tr>
         <th class="location-column">Country / Region</th>
-        <th class="location-column">City / Area</th>
-        <th class="system-column">Rail system</th>
+        <th class="system-column">City / rail system</th>
         {
           isGate ? (
             <>
-              <th>Fare card / ticket</th>
               <th>Contactless bank card</th>
+              <th>Mobile wallet</th>
               <th>QR / app ticket</th>
             </>
           ) : (
@@ -50,12 +49,9 @@ const isGate = type === "gate";
             <strong>{system.country}</strong>
             {system.region && <small>{system.region}</small>}
           </td>
-          <td class="location-cell">
-            <strong>{system.city}</strong>
-          </td>
           <th class="system-cell" scope="row">
+            <strong>{system.city}</strong>
             <a href={`systems/${system.id}/`}>{system.system}</a>
-            <small>{system.modes.join(" / ")}</small>
           </th>
           {
             isGate ? (
@@ -63,16 +59,14 @@ const isGate = type === "gate";
                 <td>
                   <MatrixValue
                     items={[
-                      { label: "Transit card", method: system.payment.gate_entry.local_transit_card },
-                      { label: "Paper ticket or token", method: system.payment.gate_entry.paper_or_token },
-                      { label: "Visitor pass", method: system.payment.gate_entry.tourist_pass },
+                      { label: "Contactless bank card", method: system.payment.gate_entry.contactless_bank_card },
                     ]}
                   />
                 </td>
                 <td>
                   <MatrixValue
                     items={[
-                      { label: "Contactless bank card", method: system.payment.gate_entry.contactless_bank_card },
+                      { label: "Mobile wallet", method: system.payment.gate_entry.mobile_wallet },
                     ]}
                   />
                 </td>

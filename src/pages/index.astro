@@ -3,8 +3,8 @@ import PaymentMatrix from "@components/PaymentMatrix.astro";
 import SeoHead from "@components/SeoHead.astro";
 import { loadSystems } from "@lib/data";
 import {
-  HOME_DESCRIPTION,
   HOME_TITLE,
+  homeDescription,
   siteUrl,
   systemModifiedDate,
 } from "@lib/seo";
@@ -12,6 +12,7 @@ import {
 const systems = loadSystems();
 const homePath = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const countries = new Set(systems.map((system) => system.country)).size;
+const description = homeDescription(systems.length, countries);
 const openLoop = systems.filter(
   (system) => system.interoperability.open_loop === "yes",
 ).length;
@@ -41,18 +42,26 @@ const homeJsonLd = {
       "@type": "WebSite",
       "@id": `${siteUrl("/").href}#website`,
       name: "Open Transit Payment Atlas",
+      alternateName: "Transit Payment Atlas",
       url: siteUrl("/").href,
-      description: HOME_DESCRIPTION,
+      description,
       inLanguage: "en",
+      sameAs: "https://github.com/chenw23/open-transit-payment-atlas",
     },
     {
       "@type": "Dataset",
       "@id": `${siteUrl("/").href}#dataset`,
       name: "Open Transit Payment Atlas",
-      description: HOME_DESCRIPTION,
+      description,
       url: siteUrl("/").href,
       inLanguage: "en",
       isAccessibleForFree: true,
+      creator: {
+        "@type": "Organization",
+        name: "Open Transit Payment Atlas",
+        url: siteUrl("/").href,
+      },
+      sameAs: "https://github.com/chenw23/open-transit-payment-atlas",
       spatialCoverage: "Worldwide, excluding mainland China",
       dateModified: latestModified,
       keywords: [
@@ -89,7 +98,7 @@ function joinValues(values: string[]): string {
   <head>
     <SeoHead
       title={HOME_TITLE}
-      description={HOME_DESCRIPTION}
+      description={description}
       path="/"
       jsonLd={homeJsonLd}
     />
@@ -259,7 +268,7 @@ function joinValues(values: string[]): string {
           <dl class="scope-list">
             <div>
               <dt>Passing Gate</dt>
-              <dd>Fare cards and tickets, contactless bank cards, and QR or app tickets are shown as distinct gate-entry media.</dd>
+              <dd>The overview focuses on differentiating channels: bank cards, phones or watches, and QR or app tickets.</dd>
             </div>
             <div>
               <dt>Tickets</dt>
@@ -267,7 +276,7 @@ function joinValues(values: string[]): string {
             </div>
             <div>
               <dt>Details</dt>
-              <dd>Select a rail system for mobile-wallet support, the full channel breakdown, restrictions, sources, and verification dates.</dd>
+              <dd>Common fare cards and paper tickets remain in each system's full breakdown with restrictions and sources.</dd>
             </div>
           </dl>
         </article>

@@ -32,6 +32,7 @@ const detailJsonLd = {
       url: pageUrl,
       inLanguage: "en",
       dateModified: systemModifiedDate(system),
+      citation: system.sources.map((source) => source.url),
       isPartOf: {
         "@id": `${siteUrl("/").href}#website`,
       },

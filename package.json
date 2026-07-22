@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "validate": "tsx scripts/validate.ts",
     "audit:seo": "tsx scripts/audit-seo.ts",
+    "submit:indexnow": "tsx scripts/submit-indexnow.ts",
     "export:csv": "tsx scripts/export-csv.ts"
   },
   "dependencies": {
