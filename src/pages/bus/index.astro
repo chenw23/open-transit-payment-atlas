@@ -169,12 +169,25 @@ const busJsonLd = {
           </label>
           <select id="bus-filter" aria-label="Filter bus payment support">
             <option value="all">All networks</option>
-            <option value="bank-card">Contactless bank card</option>
-            <option value="mobile-wallet">Mobile wallet</option>
+            <option value="bank-card">Physical contactless bank card</option>
+            <option value="mobile-payment">Mobile payment</option>
             <option value="cash">Cash accepted</option>
             <option value="tap-off">Tap off required</option>
           </select>
         </div>
+
+        <aside class="matrix-guidance" aria-label="Bus payment category definitions">
+          <p>
+            <strong>Bank card</strong> means tapping a physical contactless debit
+            or credit card directly.
+          </p>
+          <p>
+            <strong>Mobile payment</strong> means presenting a phone or wearable,
+            whether it uses a wallet, digital transit card, operator app, QR code,
+            or barcode. NFC and QR are validation technologies, not separate
+            passenger-facing categories here.
+          </p>
+        </aside>
 
         <BusPaymentMatrix systems={systems} />
       </section>
@@ -191,7 +204,7 @@ const busJsonLd = {
         </article>
         <article class="reference-panel">
           <p class="eyebrow">How to read the matrix</p>
-          <h2>Tap off</h2>
+          <h2>Validation rules</h2>
           <dl class="status-list">
             <div><dt><span class="dot dot-no"></span>Required</dt><dd>Validate again when leaving the bus</dd></div>
             <div><dt><span class="dot dot-yes"></span>No</dt><dd>Only validate or pay when boarding</dd></div>
@@ -214,7 +227,7 @@ const busJsonLd = {
           const matchesMode =
             mode === "all" ||
             (mode === "bank-card" && row.dataset.bankCard === "yes") ||
-            (mode === "mobile-wallet" && row.dataset.mobileWallet === "yes") ||
+            (mode === "mobile-payment" && row.dataset.mobilePayment === "yes") ||
             (mode === "cash" && row.dataset.cash === "yes") ||
             (mode === "tap-off" && row.dataset.tapOff === "required");
           row.hidden = !(matchesQuery && matchesMode);

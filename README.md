@@ -88,6 +88,12 @@ Each record distinguishes:
 - interoperability, fare capping, and open-loop status;
 - official sources.
 
+The bus overview groups mobile wallets, digital transit cards, QR or barcode
+tickets, and official ticketing apps under **Mobile payment** because the rider
+presents a phone or wearable in each case. The source data keeps these methods
+separate so that the supported app, credential, and validation technology can
+still be verified precisely.
+
 Status values:
 
 - `yes`

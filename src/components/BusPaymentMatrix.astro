@@ -1,6 +1,6 @@
 ---
 import MatrixValue from "@components/MatrixValue.astro";
-import type { BusSystem } from "@lib/schema";
+import type { BusSystem, PaymentStatus } from "@lib/schema";
 
 interface Props {
   systems: BusSystem[];
@@ -13,6 +13,24 @@ const exitLabels: Record<BusSystem["exit_validation"], string> = {
   not_required: "No",
   route_dependent: "Depends",
 };
+
+const statusPriority: PaymentStatus[] = [
+  "yes",
+  "partial",
+  "planned",
+  "unknown",
+  "deprecated",
+  "no",
+];
+
+const mobilePaymentStatus = (system: BusSystem) =>
+  statusPriority.find((status) =>
+    [
+      system.payment.mobile_wallet,
+      system.payment.qr_code,
+      system.payment.official_app,
+    ].some((method) => method.status === status),
+  ) ?? "unknown";
 ---
 
 <div class="table-wrap" data-matrix="bus">
@@ -22,9 +40,9 @@ const exitLabels: Record<BusSystem["exit_validation"], string> = {
         <th class="location-column">Country / Region</th>
         <th class="system-column">City / bus network</th>
         <th>Cash</th>
-        <th>Transit / fare card</th>
-        <th>Bank card / device</th>
-        <th>QR / app</th>
+        <th>Transit card / ticket</th>
+        <th>Bank card</th>
+        <th>Mobile payment</th>
         <th>Tap off</th>
       </tr>
     </thead>
@@ -34,7 +52,7 @@ const exitLabels: Record<BusSystem["exit_validation"], string> = {
           data-system
           data-search={`${system.network} ${system.city} ${system.country}`.toLowerCase()}
           data-bank-card={system.payment.contactless_bank_card.status}
-          data-mobile-wallet={system.payment.mobile_wallet.status}
+          data-mobile-payment={mobilePaymentStatus(system)}
           data-cash={system.payment.cash.status}
           data-tap-off={system.exit_validation}
         >
@@ -62,13 +80,13 @@ const exitLabels: Record<BusSystem["exit_validation"], string> = {
             <MatrixValue
               items={[
                 { label: "Contactless bank card", method: system.payment.contactless_bank_card },
-                { label: "Mobile wallet", method: system.payment.mobile_wallet },
               ]}
             />
           </td>
           <td>
             <MatrixValue
               items={[
+                { label: "Mobile wallet or digital transit card", method: system.payment.mobile_wallet },
                 { label: "QR code", method: system.payment.qr_code },
                 { label: "Official app", method: system.payment.official_app },
               ]}

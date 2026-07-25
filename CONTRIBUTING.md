@@ -22,6 +22,17 @@ Check whether the claim is about:
 
 Do not combine these into one vague claim.
 
+For bus records, keep the source fields precise even though the website overview
+uses broader passenger-facing categories:
+
+- `contactless_bank_card` means a physical debit or credit card presented
+  directly to the onboard reader;
+- `mobile_wallet` covers a phone or wearable wallet or digital transit card;
+- `qr_code` covers a QR or barcode fare credential presented from a device;
+- `official_app` records whether an operator or authority app itself provides
+  the fare credential, not merely journey planning, account management, or
+  top-up.
+
 ## Evidence Rules
 
 Preferred sources:

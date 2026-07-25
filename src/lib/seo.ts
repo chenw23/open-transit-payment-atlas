@@ -44,7 +44,7 @@ export function busSystemTitle(system: BusSystem): string {
 }
 
 export function busSystemDescription(system: BusSystem): string {
-  return `Bus payment methods for ${system.network} in ${system.city}: cash, transit cards, contactless bank cards, mobile wallets, QR or app tickets, and tap-off rules.`;
+  return `Bus payment methods for ${system.network} in ${system.city}: cash, transit cards, physical contactless bank cards, mobile payments, and tap-off rules.`;
 }
 
 export function busSystemModifiedDate(system: BusSystem): string {

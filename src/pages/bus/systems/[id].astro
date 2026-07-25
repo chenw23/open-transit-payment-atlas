@@ -169,19 +169,19 @@ const jsonLd = {
       <section class="detail-grid">
         <article class="detail-panel">
           <p class="eyebrow">Boarding payment</p>
-          <h2>Ways to pay</h2>
+          <h2>Cards, cash and tickets</h2>
           <BusPaymentCell label="Cash" method={system.payment.cash} system={system} />
           <BusPaymentCell label="Transit or fare card" method={system.payment.transit_card} system={system} />
           <BusPaymentCell label="Contactless bank card" method={system.payment.contactless_bank_card} system={system} />
-          <BusPaymentCell label="Mobile wallet" method={system.payment.mobile_wallet} system={system} />
-        </article>
-        <article class="detail-panel">
-          <p class="eyebrow">Tickets and apps</p>
-          <h2>Digital and visitor products</h2>
-          <BusPaymentCell label="QR code" method={system.payment.qr_code} system={system} />
-          <BusPaymentCell label="Official app" method={system.payment.official_app} system={system} />
           <BusPaymentCell label="Paper ticket" method={system.payment.paper_ticket} system={system} />
           <BusPaymentCell label="Visitor pass" method={system.payment.tourist_pass} system={system} />
+        </article>
+        <article class="detail-panel">
+          <p class="eyebrow">Phone or wearable</p>
+          <h2>Mobile payment</h2>
+          <BusPaymentCell label="Mobile wallet or digital transit card" method={system.payment.mobile_wallet} system={system} />
+          <BusPaymentCell label="Official app" method={system.payment.official_app} system={system} />
+          <BusPaymentCell label="QR or barcode ticket" method={system.payment.qr_code} system={system} />
         </article>
         <article class="detail-panel">
           <p class="eyebrow">Evidence</p>
