@@ -624,23 +624,23 @@
   operator: Mwasalat
   modes: [city bus]
   official_website: https://tickets.mwasalat.om/mtbp/en-gb/other/help
-  last_verified: "2026-07-22"
+  last_verified: "2026-07-25"
   boarding_validation: mixed
   exit_validation: required
   payment:
     cash:
-      status: partial
-      notes: Cash can purchase tickets at Mwasalat points of sale, but it is not documented as direct validator payment and Muscat city-bus cash acceptance is being phased out; do not rely on onboard cash.
-      source: Mwasalat help
+      status: deprecated
+      notes: Cash remains accepted on Muscat city buses through 31 July 2026. Mwasalat announced that onboard cash payment in Muscat and Salalah will end on 1 August 2026.
+      source: Oman Daily cashless notice
     transit_card:
       status: yes
       methods: [Sayir eWallet]
       notes: Sayir stores credit for city travel and is funded through the Mwasalat app or web portal.
       source: Mwasalat Sayir
     contactless_bank_card:
-      status: no
-      notes: Debit and credit cards fund Sayir or buy tickets; the official sources do not document tapping an ordinary bank card directly on the bus validator.
-      source: Mwasalat help
+      status: yes
+      notes: Mwasalat announced in February 2026 that card payment is available on board all buses. The July cashless notice identifies Visa and Mastercard among the approved payment options; it does not specify whether every card transaction is contactless or whether a bank card must be presented again when alighting.
+      source: Oman Observer onboard card payment
     mobile_wallet:
       status: yes
       methods: [Sayir eWallet in Mwasalat app]
@@ -666,7 +666,7 @@
     fare_capping: unknown
     regional_card: yes
     national_card: yes
-    notes: Sayir is the Mwasalat public-transport eWallet. The official portal instructs riders to tap in and tap out using the account QR code.
+    notes: Sayir is the Mwasalat public-transport eWallet, and the official portal instructs riders to scan its account QR code on entry and exit. The available bank-card notices do not state whether the same exit-validation rule applies to cards.
   sources:
     - title: Mwasalat Sayir
       url: https://tickets.mwasalat.om/mtbp/en-gb/ewallet
@@ -677,6 +677,15 @@
     - title: Mwasalat app
       url: https://apps.apple.com/om/app/mwasalat/id1562970593
       accessed: "2026-07-22"
+    - title: Oman Observer onboard card payment
+      url: https://www.omanobserver.om/article/1184627/oman/transport/mwasalat-buses-to-accept-card-payments
+      accessed: "2026-07-25"
+    - title: Oman Daily cashless notice
+      url: https://www.omandaily.om/الاقتصادية/na/مواصلات-توقف-الدفع-النقدي-في-حافلات-النقل-العام-بمسقط-وصلالة
+      accessed: "2026-07-25"
+    - title: Muscat Daily approved payment methods
+      url: https://www.muscatdaily.com/2026/07/05/mwasalat-to-end-cash-payments-on-city-buses-from-august-2026/
+      accessed: "2026-07-25"
 
 - id: bangkok-bmta-buses
   country: Thailand
