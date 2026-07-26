@@ -624,7 +624,7 @@
   operator: Mwasalat
   modes: [city bus]
   official_website: https://tickets.mwasalat.om/mtbp/en-gb/other/help
-  last_verified: "2026-07-25"
+  last_verified: "2026-07-26"
   boarding_validation: mixed
   exit_validation: required
   payment:
@@ -639,12 +639,14 @@
       source: Mwasalat Sayir
     contactless_bank_card:
       status: yes
-      notes: Mwasalat announced in February 2026 that card payment is available on board all buses. The July cashless notice identifies Visa and Mastercard among the approved payment options; it does not specify whether every card transaction is contactless or whether a bank card must be presented again when alighting.
-      source: Oman Observer onboard card payment
+      schemes: [Visa, Mastercard]
+      notes: Onboard acceptance signage photographed on a Mwasalat city bus in Muscat on 26 July 2026 shows the contactless symbol and lists Visa and Mastercard. This confirms direct contactless card payment on the bus; whether a bank card must be presented again when alighting is not documented.
+      source: Muscat Daily approved payment methods
     mobile_wallet:
       status: yes
-      methods: [Sayir eWallet in Mwasalat app]
-      source: Mwasalat Sayir
+      methods: [Apple Pay, Samsung Pay]
+      notes: The same onboard acceptance sign lists Apple Pay and Samsung Pay alongside Visa and Mastercard, with no other wallet logo displayed. Mwasalat's July cashless notice independently lists both wallets. Sayir app QR validation is recorded separately below.
+      source: Muscat Daily approved payment methods
     qr_code:
       status: yes
       methods: [Sayir account QR]
@@ -685,7 +687,7 @@
       accessed: "2026-07-25"
     - title: Muscat Daily approved payment methods
       url: https://www.muscatdaily.com/2026/07/05/mwasalat-to-end-cash-payments-on-city-buses-from-august-2026/
-      accessed: "2026-07-25"
+      accessed: "2026-07-26"
 
 - id: bangkok-bmta-buses
   country: Thailand
