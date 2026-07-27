@@ -131,7 +131,7 @@
   operator: Bangkok Mass Transit System
   modes: [metro]
   official_website: https://www.bts.co.th/eng/tickets/ticket-machine.html
-  last_verified: "2026-07-22"
+  last_verified: "2026-07-27"
   payment:
     gate_entry:
       local_transit_card:
@@ -140,18 +140,22 @@
         source: BTS fare system
       contactless_bank_card:
         status: no
-        notes: Bank cards are not documented as a general direct BTS gate-entry medium.
+        notes: BTS gates do not accept direct EMV bank-card entry. A bank card can fund a linked Rabbit LINE Pay account, but the passenger still presents the physical Rabbit Card at the gate.
+        source: KTC EMV comparison
       mobile_wallet:
         status: no
-        notes: Mobile wallets can pay at selected ticket machines via QR but are not the fare medium at the gate.
+        notes: LINE Pay, WeChat Pay, Alipay and Thai mobile-banking apps can pay a vending-machine QR to buy a physical Single Journey Card; the phone is not presented at the gate.
+        source: BTS ticket machine
       qr_code:
         status: no
         notes: The machine payment QR buys a single-journey card; it is not scanned at the gate.
+        source: BTS ticket machine
       official_app:
         status: no
+        notes: BTS does not document an official app credential for direct gate entry.
       paper_or_token:
         status: yes
-        methods: [Single Journey Ticket]
+        methods: [Single Journey Card]
         source: BTS fare system
       tourist_pass:
         status: yes
@@ -164,8 +168,11 @@
       bank_card:
         status: no
         notes: BTS documents coins, banknotes and QR payment depending on machine, not bank-card insertion or tapping.
+        source: BTS ticket machine
       contactless_card:
         status: no
+        notes: A physical bank card is not accepted directly at the BTS vending machine or fare gate; Rabbit Card is a separate transit credential.
+        source: KTC EMV comparison
       mobile_wallet:
         status: yes
         methods: [LINE Pay, WeChat Pay, Alipay, Thai mobile banking]
@@ -186,7 +193,86 @@
       accessed: "2026-07-22"
     - title: BTS ticket machine
       url: https://www.bts.co.th/eng/tickets/ticket-machine.html
-      accessed: "2026-07-22"
+      accessed: "2026-07-27"
+    - title: KTC EMV comparison
+      url: https://www.ktc.co.th/article/knowledge/tips/emv-contactless
+      accessed: "2026-07-27"
+
+- id: bangkok-mrt-blue-purple
+  country: Thailand
+  city: Bangkok
+  region: Bangkok metropolitan area
+  system: MRT Blue and Purple Lines
+  operator: Bangkok Expressway and Metro under the Mass Rapid Transit Authority of Thailand
+  modes: [metro]
+  official_website: https://metro.bemplc.co.th/EMV-Contactless?lang=en
+  last_verified: "2026-07-27"
+  payment:
+    gate_entry:
+      local_transit_card:
+        status: yes
+        methods: [MRT EMV Card, Mangmoom EMV Card]
+        notes: Both are prepaid EMV transit cards. Mangmoom EMV is also accepted by other participating Bangkok-region transit systems.
+        source: MRTA Mangmoom EMV
+      contactless_bank_card:
+        status: yes
+        schemes: [Visa, Mastercard, UnionPay]
+        notes: Tap the same eligible EMV contactless card at entry and exit. International Visa and Mastercard credit cards are accepted; UnionPay and Thai-issued debit-card eligibility is more restricted.
+        source: BEM EMV contactless
+      mobile_wallet:
+        status: no
+        notes: BEM documents presenting an eligible physical EMV contactless card; Apple Pay, Google Pay and other phone wallets are not listed for gate entry.
+      qr_code:
+        status: no
+        notes: QR gate entry is not documented for the Blue and Purple Lines.
+      official_app:
+        status: no
+        notes: The BEM MRT app provides journey information rather than a gate-entry fare credential.
+      paper_or_token:
+        status: yes
+        methods: [Single Journey Token]
+        source: BEM ticket types
+      tourist_pass:
+        status: no
+        notes: BEM does not list a dedicated tourist pass among current Blue and Purple Line ticket types.
+    ticket_machine:
+      cash:
+        status: yes
+        methods: [Thai baht coins and banknotes]
+        source: BEM issuing tickets
+      bank_card:
+        status: no
+        notes: Ticket vending machines issue Single Journey Tokens and document payment by Thai baht coins or banknotes; bank cards are used directly at compatible fare gates instead.
+        source: BEM issuing tickets
+      contactless_card:
+        status: no
+        notes: EMV contactless cards are tapped at fare gates rather than used to buy a token from a vending machine.
+        source: BEM EMV contactless
+      mobile_wallet:
+        status: no
+        notes: Mobile-wallet payment is not documented at Blue or Purple Line ticket vending machines.
+      qr_payment:
+        status: no
+        notes: QR payment is not documented at Blue or Purple Line ticket vending machines.
+  interoperability:
+    open_loop: yes
+    fare_capping: no
+    regional_card: yes
+    national_card: no
+    notes: EMV contactless media work across the Blue and Purple Lines and other participating Bangkok-region transit systems, but Bangkok rail operators still have different accepted fare media.
+  sources:
+    - title: BEM EMV contactless
+      url: https://metro.bemplc.co.th/EMV-Contactless?lang=en
+      accessed: "2026-07-27"
+    - title: BEM ticket types
+      url: https://metro.bemplc.co.th/Ticket-Type?lang=en
+      accessed: "2026-07-27"
+    - title: BEM issuing tickets
+      url: https://metro.bemplc.co.th/Metro-Issue-Ticket?lang=en
+      accessed: "2026-07-27"
+    - title: MRTA Mangmoom EMV
+      url: https://mrta-eservice.mrta.co.th/hc/th/articles/14000384803599-%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%A3%E0%B9%81%E0%B8%A1%E0%B8%87%E0%B8%A1%E0%B8%B8%E0%B8%A1-%E0%B8%AD%E0%B8%B5%E0%B9%80%E0%B8%AD%E0%B8%A1%E0%B8%A7%E0%B8%B5-MANGMOOM-EMV
+      accessed: "2026-07-27"
 
 - id: kuala-lumpur-rapid-rail
   country: Malaysia

@@ -697,7 +697,7 @@
   operator: Bangkok Mass Transit Authority
   modes: [city bus]
   official_website: https://www.bmta.co.th/
-  last_verified: "2026-07-22"
+  last_verified: "2026-07-27"
   boarding_validation: mixed
   exit_validation: not_required
   payment:
@@ -705,22 +705,29 @@
       status: yes
       notes: Cash remains the generally available fare method on BMTA buses; fares vary by bus type and route.
     transit_card:
-      status: partial
-      methods: [Thai State Welfare Card]
-      notes: Government welfare cards are accepted through BMTA e-ticket equipment for eligible cardholders; this is not a general visitor transit card.
-      source: Thai Government BMTA e-ticket
+      status: yes
+      methods: [BMTA electronic fare card, BMTA electronic prepaid pass]
+      notes: BMTA electronic single-fare and prepaid passes are accepted through conductor-held EDC equipment. Eligible riders can also use a Thai State Welfare Card.
+      source: BMTA cashless launch
     contactless_bank_card:
-      status: unknown
-      notes: Available official evidence does not establish ordinary Visa or Mastercard contactless payment across the entire BMTA fleet.
+      status: yes
+      schemes: [Visa, Mastercard]
+      notes: BMTA's cashless launch covered contactless debit and credit cards on all BMTA routes, and KTC's current EMV guide continues to list all BMTA bus routes. Payment depends on the conductor's working EDC terminal, so carrying cash remains prudent.
+      source: KTC EMV guide
     mobile_wallet:
-      status: unknown
-      notes: Mobile-wallet fare payment may exist on selected equipment, but network-wide support is not established by the available official sources.
+      status: partial
+      methods: [TrueMoney, Paotang]
+      notes: BMTA management identified TrueMoney and Paotang among current payment channels in 2025. These are local app-based methods and may depend on the conductor's payment device; Apple Pay, Google Pay, Alipay and WeChat Pay are not established as general BMTA fare methods.
+      source: BMTA payment channels interview
     qr_code:
-      status: unknown
-      notes: QR boarding payment is not established as a fleet-wide BMTA method by the available official sources.
+      status: yes
+      methods: [Krungthai NEXT, Thai mobile banking QR]
+      notes: BMTA's network-wide cashless launch documents QR fare payment through Krungthai NEXT or participating Thai mobile-banking apps. An earlier proposal to add Alipay and WeChat Pay was not found to have launched, so neither is listed as supported.
+      source: BMTA cashless launch
     official_app:
       status: no
-      notes: BMTA information services are not documented as a general app-based fare credential.
+      notes: The official BMTA BUS app provides routes, stops and live-bus information; it is not documented as a fare credential.
+      source: BMTA BUS app
     paper_ticket:
       status: yes
       methods: [Onboard fare ticket]
@@ -736,7 +743,19 @@
   sources:
     - title: BMTA
       url: https://www.bmta.co.th/
-      accessed: "2026-07-22"
+      accessed: "2026-07-27"
+    - title: BMTA cashless launch
+      url: https://www.banmuang.co.th/mobile/news/finance/164935
+      accessed: "2026-07-27"
+    - title: KTC EMV guide
+      url: https://www.ktc.co.th/article/knowledge/tips/emv-contactless
+      accessed: "2026-07-27"
+    - title: BMTA payment channels interview
+      url: https://www.isranews.org/article/isranews-news/137563-transport-bus-bmta-app.html
+      accessed: "2026-07-27"
+    - title: BMTA BUS app
+      url: https://apps.apple.com/app/bmta-bus/id6738836757
+      accessed: "2026-07-27"
     - title: Thai Government BMTA e-ticket
       url: https://www.thaigov.go.th/uploads/document/159/2017/09/pdf/%E0%B8%9D%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%87.pdf
       accessed: "2026-07-22"
